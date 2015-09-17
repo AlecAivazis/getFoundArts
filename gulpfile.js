@@ -104,7 +104,7 @@ gulp.task('update_dependencies', function() {
 
 
 // execute necessary commands to initialize  project locally
-gulp.task('update_project', ['update-dependencies'], shell.task([
+gulp.task('update_project', ['update_dependencies'], shell.task([
     // update database
     './manage.py migrate',
     // collect static files

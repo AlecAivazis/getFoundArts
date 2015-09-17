@@ -25,6 +25,7 @@
     "gulp-install": "^0.4.0",
     "gulp-shell": "^0.4.2",
     "gulp-ssh": "^0.4.0",
+    "gulp-webpack": "^1.5.0",
     "http": "0.0.0",
     "jquery": "^2.1.4",
     "karma": "",

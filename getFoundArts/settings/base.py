@@ -27,7 +27,7 @@ STATIC_DIR = os.path.join(BASE, 'static')
 UPLOADS = os.path.join(STATIC_DIR, 'uploads')
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1255sdasdf32q5543254sdfasdfasdfasdf' 
+SECRET_KEY = '1255sdasdf32q5543254sdfasdfasdfasdf'
 
 # WSGI_APPLICATION = 'apache.wsgi.application'
 
@@ -58,6 +58,7 @@ django_apps = (
 )
 
 third_party_apps = (
+    'django_extensions',
     'compressor',
     'react',
  )
