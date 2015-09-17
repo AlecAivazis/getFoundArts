@@ -1,0 +1,8 @@
+{% load staticfiles %}
+
+<html>
+    <body>
+        {{component | safe}}
+        <script src="{% static 'build/root.js' %}"> </script>
+    </body>
+</html>
