@@ -1,0 +1,27 @@
+# the start up script for the getFoundArts application server
+
+description "getFoundArts daemon for Django project"
+
+start on (local-filesystems and net-device-up IFACE=eth0)
+stop on runlevel [!12345]
+
+# If the process quits unexpectadly trigger a respawn
+respawn
+
+# set the user and group of the process to the user matching the project
+setuid getFoundArts
+setgid getFoundArts
+
+# navigate to the directory with the project
+chdir /home/projects/getFoundArts
+
+# start the server
+exec gunicorn \
+    --name=getFoundArts \
+    --pythonpath=repository \
+    --bind=127.0.0.1:9000 \
+    conf.wsgi
+    #--config /etc/gunicorn.d/gunicorn.py \
+
+
+# end of file
