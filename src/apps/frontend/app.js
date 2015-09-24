@@ -11,6 +11,10 @@ import routes from './routes'
 // create the express app
 let app = express()
 
+// use jade as the templating engine
+app.set('view engine', 'jade')
+app.set('views', __dirname+'/templates')
+
 // any url that hits this app 
 app.all('*', (req, res) => {
     // figure out the location from the url
@@ -23,8 +27,12 @@ app.all('*', (req, res) => {
             res.status(500).send(error.message)
         } else if (renderProps === null) {
             res.status(404).send('Not found')
+        // otherwise the component was found
         } else {
-            res.send(renderToString(<RoutingContext {...renderProps} />))
+            // render the jade template with the component mounted
+            res.render('index.jade', {
+                renderedComponent: renderToString(<RoutingContext {...renderProps} />)
+            })
         }
     })
 })

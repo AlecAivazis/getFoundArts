@@ -30,6 +30,7 @@ module.exports = {
     source_dir: source_dir,
     apps_dir: apps_dir,
     build_dir: build_dir,
+    asset_dir: path.join(source_dir, 'assets'),
     // entry points
     client_entry: path.join(entries_dir, 'client.js'),
     server_entry: path.join(entries_dir, 'server.js'),

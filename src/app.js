@@ -17,6 +17,7 @@ import express from 'express'
 
 // local imports
 import frontend from './apps/frontend'
+import {build_dir, asset_dir} from '../config/project_paths'
 
 // top level express application instance
 const app = express()
@@ -27,6 +28,8 @@ const port = 8000
 
 
 /* Configure Routes */
+app.use('/static', express.static(build_dir))
+app.use('/static', express.static(asset_dir))
 app.use('/', frontend)
 
 
