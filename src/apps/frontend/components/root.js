@@ -47,8 +47,8 @@ const styles = {
         minHeight: '100%',
         overflow: 'hidden',
         backgroundColor: 'red',
-        textAlign: 'center',
         maxWidth: 1024,
+        margin: '0 auto',
     },
 }
 

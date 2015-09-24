@@ -44,7 +44,7 @@ class Splash extends React.Component {
 const styles = {
     container_style: {
         textAlign: 'left',
-    }
+    },
 }
 
 
