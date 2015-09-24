@@ -1,5 +1,6 @@
 // react imports
 import React from 'react'
+import ReactDOM from 'react-dom'
 import {Router} from 'react-router'
 // local imports
 import routes from 'apps/frontend/routes'
@@ -12,4 +13,4 @@ import normalize from 'normalize.css'
 
 
 // render the routed application
-React.render(<Router routes={routes} />, document.body)
+ReactDOM.render(<Router routes={routes} />, document.getElementById('app'))

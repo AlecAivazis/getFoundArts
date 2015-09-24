@@ -4,7 +4,7 @@ import Radium from 'radium'
 
 
 @Radium
-class RootComponent extends React.Component {
+class Splash extends React.Component {
 
     static propTypes = {}
 
@@ -34,26 +34,21 @@ class RootComponent extends React.Component {
         const {...unused_props} = this.props
         // render the component
         return (
-            <div style={styles.root_container} {...unused_props}>
-                {this.props.children}
+            <div style={styles.container_style} {...unused_props}>
+                foo bar
             </div>
         )
     }
 }
 
 const styles = {
-    root_container: {
-        position: 'relative',
-        minHeight: '100%',
-        overflow: 'hidden',
-        backgroundColor: 'red',
-        textAlign: 'center',
-        maxWidth: 1024,
-    },
+    container_style: {
+        textAlign: 'left',
+    }
 }
 
 
-export default RootComponent
+export default Splash
 
 
 // end of file
