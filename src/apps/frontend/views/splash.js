@@ -2,7 +2,7 @@
 import React from 'react'
 import Radium from 'radium'
 // local imports
-import SplashCategory from '../components/splashCategory'
+import SplashCategory from '../components/splash/splashCategory'
 
 
 @Radium
@@ -45,9 +45,8 @@ class Splash extends React.Component {
                 'Establish lasting relationships in the Art and Music world in both the artist and audience sphere',
                 'Team with other local for joint exhibitions in art galleries and concert venues. ',
                 'Relax knowing a professional, like-minded creative is handling your visual representation while you can devote your energy to recording and touring',
-            ]
-        }
-
+            ],
+        },
     ]
 
 
@@ -80,7 +79,7 @@ class Splash extends React.Component {
                                            text={category.text}
                                            bullets={category.bullets}
                                            image={category.image}
-                                           index={index}
+                                           index={index + 1}
                                            key={index} />
                     )
                 })}
