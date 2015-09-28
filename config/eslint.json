@@ -52,7 +52,6 @@
     "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
     "jsx-quotes": [2, "prefer-single"],
     "linebreak-style": [1, "unix"],
-    "new-cap": 2,
     "new-parens": 2,
     "no-alert": 2,
     "no-array-constructor": 2,

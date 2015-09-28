@@ -27,6 +27,7 @@
     "express": "^4.13.3",
     "glob": "^5.0.14",
     "history": "^1.11.0",
+    "immutable": "^3.7.5",
     "jade": "^1.11.0",
     "normalize.css": "^3.0.3",
     "radium": "^0.14.1",

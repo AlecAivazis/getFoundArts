@@ -1,7 +1,3 @@
-body {
-    height: 100%;
-}
-
-#app {
+html, body, #app {
     height: 100%;
 }

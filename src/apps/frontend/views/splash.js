@@ -25,7 +25,12 @@ class Splash extends React.Component {
                 'Logo Design (Blank Logo)',
 
             ],
-            image: 'bar',
+            images: [
+                '/static/images/icons/record.png',
+                '/static/images/icons/shirt.png',
+                '/static/images/icons/camera.png',
+                '/static/images/icons/logo.png',
+            ],
         },
         {
             header: 'Get Heard: Authenticate Your Brand',
@@ -36,7 +41,7 @@ class Splash extends React.Component {
                 'Gain an audience in the video field with attention-grabbing music videos (YouTube, Vimeo)',
                 'Bring more viewers to your website and social platforms with additional visual content and marketing opportunities',
             ],
-            image: 'foo',
+            images: ['foo'],
         },
         {
             header: 'Get Found: Take Your Band (and Brand) Full-throttle',
@@ -50,22 +55,6 @@ class Splash extends React.Component {
     ]
 
 
-    constructor(props) {
-        // instantiate this
-        super(props)
-        // set the initial state
-        this.state = {}
-    }
-
-
-    // called when the component is first mounted
-    componentDidMount() {}
-
-
-    // called before the component is removed from the dom
-    componentWillUnmount() {}
-
-
     // render the component
     render() {
         // pull out the used properties
@@ -74,13 +63,18 @@ class Splash extends React.Component {
         return (
             <div style={styles.container_style} {...unused_props}>
                 {this.categories.map((category, index) => {
+                    const categoryIndex = index + 1
+                    // the alignment of the category
+                    const orientation = categoryIndex % 2 ? 'left' : 'right'
+                    // render a category component
                     return (
                         <SplashCategory header={category.header}
-                                           text={category.text}
-                                           bullets={category.bullets}
-                                           image={category.image}
-                                           index={index + 1}
-                                           key={index} />
+                                        text={category.text}
+                                        bullets={category.bullets}
+                                        image={category.image}
+                                        index={categoryIndex}
+                                        orientation={orientation}
+                                        key={index} />
                     )
                 })}
             </div>
