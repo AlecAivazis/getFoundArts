@@ -26,10 +26,10 @@ class Splash extends React.Component {
 
             ],
             icons: [
-                {name: 'record', color: 'yellow'},
-                {name: 'shirt', color: 'yellow'},
-                {name: 'camera', color: 'yellow'},
-                {name: 'logo', color: 'yellow'},
+                {name: 'record', color: '#4B63B0'},
+                {name: 'shirt', color: '#E6E000'},
+                {name: 'camera', color: '#D37530'},
+                {name: 'logo', color: '#6B9B42'},
             ],
         },
         {
@@ -42,10 +42,10 @@ class Splash extends React.Component {
                 'Bring more viewers to your website and social platforms with additional visual content and marketing opportunities',
             ],
             icons: [
-                {name: 'spotify', color: 'yellow'},
-                {name: 'itunes', color: 'yellow'},
-                {name: 'soundcloud', color: 'yellow'},
-                {name: 'vimeo', color: 'yellow'},
+                {name: 'spotify', color: '#6B9B42'},
+                {name: 'itunes', color: '#D37530'},
+                {name: 'soundcloud', color: '#E6E000'},
+                {name: 'vimeo', color: '#4B63B0'},
             ],
         },
         {
