@@ -48,6 +48,7 @@ const styles = {
         height: 120,
         backgroundImage: 'url("/static/images/splashIndexBackground.png")',
         display: 'flex',
+        flexShrink: 0,
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 40,

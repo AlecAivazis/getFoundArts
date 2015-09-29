@@ -61,16 +61,18 @@ class SplashCategory extends React.Component {
                     })}
                 </aside>
                 <article style={styles.content}>
-                    <div style={styles.header}>
+                    <div style={styles.banner}>
                         <IndexContainer style={styles.index} number={index}/>
-                        <span style={styles.title}>
-                            {title}
-                        </span>
+                        <div style={styles.header}>
+                            <span style={styles.title}>
+                                {title}
+                            </span>
+                            <div style={styles.subtitle}>
+                                {subtitle}
+                            </div>
+                        </div>
                     </div>
-                    <div style={styles.subtitle}>
-                        {subtitle}
-                    </div>
-                    <ul >
+                    <ul style={styles.list_container}>
                         {
                             bullets.map((bullet, list_index) => {
                                 return (
@@ -110,9 +112,13 @@ const styles = {
     index: {
         marginRight: 5,
     },
-    header: {
+    banner: {
         display: 'flex',
         alignItems: 'center',
+    },
+    header: {
+        display: 'flex',
+        flexDirection: 'column',
     },
     title: {
         fontSize: 26,
@@ -120,7 +126,11 @@ const styles = {
     },
     subtitle: {
         backgroundColor: 'grey',
-        paddingLeft: 115,
+        marginTop: 10,
+    },
+    list_container: {
+        paddingLeft: 105/2 - 17, // yay styles in javascript
+        marginTop: 10,
     },
     list_element: {
         position: 'relative',
