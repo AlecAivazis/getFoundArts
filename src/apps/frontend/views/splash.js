@@ -18,12 +18,11 @@ class Splash extends React.Component {
             title: 'Get Seen: Visualize Your Music',
             subtitle: 'Connect with visual artists to build your band’s visual aesthetic and create',
             bullets: [
-                'Album Art (CD/LP/mp3 covers)',
-                'Tour Merchandise (t-shirt, poster, bag, button, etc.)',
-                'Band Photography (Camera)',
-                'Music Videos (Video Camera)',
-                'Logo Design (Blank Logo)',
-
+                'Album Art',
+                'Tour Merchandise',
+                'Band Photography',
+                'Music Videos',
+                'Logo Design',
             ],
             icons: [
                 {name: 'record', color: '#4B63B0'},
@@ -37,8 +36,8 @@ class Splash extends React.Component {
             subtitle: 'With cohesive visual identification and branding you will:',
             bullets: [
                 'Sell more records and merchandise',
-                'Generate more plays and downloads (Spotify, Soundcloud, iTunes)',
-                'Gain an audience in the video field with attention-grabbing music videos (YouTube, Vimeo)',
+                'Generate more plays and downloads',
+                'Gain an audience in the video field with attention-grabbing music videos',
                 'Bring more viewers to your website and social platforms with additional visual content and marketing opportunities',
             ],
             icons: [
@@ -65,18 +64,18 @@ class Splash extends React.Component {
         const {...unused_props} = this.props
         // render the component
         return (
-            <div style={styles.container_style} {...unused_props}>
+            <div style={styles.container} {...unused_props}>
                 {this.categories.map((category, index) => {
-                    const categoryIndex = index + 1
+                    const category_index = index + 1
                     // the alignment of the category
-                    const orientation = categoryIndex % 2 ? 'right' : 'left'
+                    const orientation = category_index % 2 ? 'left' : 'right'
                     // render a category component
                     return (
                         <SplashCategory title={category.title}
                                         subtitle={category.subtitle}
                                         bullets={category.bullets}
                                         icons={category.icons}
-                                        index={categoryIndex}
+                                        index={category_index}
                                         orientation={orientation}
                                         key={index} />
                     )
@@ -87,8 +86,7 @@ class Splash extends React.Component {
 }
 
 const styles = {
-    container_style: {
-        textAlign: 'left',
+    container: {
     },
 }
 

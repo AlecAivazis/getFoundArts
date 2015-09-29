@@ -9,7 +9,7 @@ import Icon from '../misc/icon'
 class SplashCategory extends React.Component {
 
     static propTypes = {
-        header: React.PropTypes.string,
+        title: React.PropTypes.string,
         subtitle: React.PropTypes.string,
         bullets: React.PropTypes.arrayOf(React.PropTypes.string),
         icons: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -41,17 +41,23 @@ class SplashCategory extends React.Component {
         let container_style
         // if the content needs to be aligned left
         if (orientation === 'left') {
-            container_style = {...styles.container, ...styles.alignLeft}
+            container_style = {
+                ...styles.container,
+                ...styles.alignLeft,
+            }
         // otherwise the content need to be aligned right
         } else {
-            container_style = {...styles.container, ...styles.alignRight}
+            container_style = {
+                ...styles.container,
+                ...styles.alignRight,
+            }
         }
 
         // render the component
         return (
             <div style={container_style} {...unused_props}>
                 <aside style={styles.icon_container}>
-                    { icons.map(({name, color}, icon_index) => {
+                    {icons.map(({name, color}, icon_index) => {
                         return (
                             <Icon name={name}
                                   style={styles.icon}
@@ -73,16 +79,14 @@ class SplashCategory extends React.Component {
                         </div>
                     </div>
                     <ul style={styles.list_container}>
-                        {
-                            bullets.map((bullet, list_index) => {
-                                return (
-                                    <li key={list_index} style={styles.list_element}>
-                                        <Icon name='record' list_style={true} />
-                                        {bullet}
-                                    </li>
-                                )
-                            })
-                        }
+                        {bullets.map((bullet, list_index) => {
+                            return (
+                                <li key={list_index} style={styles.list_element}>
+                                    <Icon name='record' list_style={true} />
+                                    {bullet}
+                                </li>
+                            )
+                        })}
                     </ul>
                 </article>
             </div>
@@ -96,7 +100,7 @@ const styles = {
         backgroundColor: '#FFFFFF',
         borderBottom: '1px solid #E1E5E6',
         display: 'flex',
-        color: '#333'
+        color: '#333',
     },
     content: {
         display: 'flex',
