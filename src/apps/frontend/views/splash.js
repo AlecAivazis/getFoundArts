@@ -50,7 +50,6 @@ class Splash extends React.Component {
         },
         {
             title: 'Get Found: Take Your Band (and Brand) Full-throttle',
-            subtitle: 'foo bar',
             bullets: [
                 'Establish lasting relationships in the Art and Music world in both the artist and audience sphere',
                 'Team with other local for joint exhibitions in art galleries and concert venues. ',
@@ -70,7 +69,7 @@ class Splash extends React.Component {
                 {this.categories.map((category, index) => {
                     const categoryIndex = index + 1
                     // the alignment of the category
-                    const orientation = categoryIndex % 2 ? 'left' : 'right'
+                    const orientation = categoryIndex % 2 ? 'right' : 'left'
                     // render a category component
                     return (
                         <SplashCategory title={category.title}

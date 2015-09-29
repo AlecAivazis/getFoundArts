@@ -38,29 +38,39 @@ class SplashCategory extends React.Component {
         } = this.props
 
         // the style of the category content
-        let content_style
+        let container_style
         // if the content needs to be aligned left
         if (orientation === 'left') {
-            content_style = {...styles.content, ...styles.alignLeft}
+            container_style = {...styles.container, ...styles.alignLeft}
         // otherwise the content need to be aligned right
         } else {
-            content_style = {...styles.content, ...styles.alignRight}
+            container_style = {...styles.container, ...styles.alignRight}
         }
 
         // render the component
         return (
-            <div style={styles.container} {...unused_props}>
-                <div style={styles.header}>
-                    <IndexContainer style={styles.index} number={index}/>
-                    <span style={styles.title}>
-                        {title}
-                    </span>
-                </div>
-                <div style={styles.subtitle}>
-                    {subtitle}
-                </div>
-                <div style={content_style}>
-                    <ul style={styles.list}>
+            <div style={container_style} {...unused_props}>
+                <aside style={styles.icon_container}>
+                    { icons.map(({name, color}, icon_index) => {
+                        return (
+                            <Icon name={name}
+                                  style={styles.icon}
+                                  key={icon_index}
+                                  color={color} />
+                        )
+                    })}
+                </aside>
+                <article style={styles.content}>
+                    <div style={styles.header}>
+                        <IndexContainer style={styles.index} number={index}/>
+                        <span style={styles.title}>
+                            {title}
+                        </span>
+                    </div>
+                    <div style={styles.subtitle}>
+                        {subtitle}
+                    </div>
+                    <ul >
                         {
                             bullets.map((bullet, list_index) => {
                                 return (
@@ -72,17 +82,7 @@ class SplashCategory extends React.Component {
                             })
                         }
                     </ul>
-                    <aside style={styles.icon_container}>
-                        { icons.map(({name, color}, icon_index) => {
-                            return (
-                                <Icon name={name}
-                                      style={styles.icon}
-                                      key={icon_index}
-                                      color={color} />
-                            )
-                        })}
-                    </aside>
-                </div>
+                </article>
             </div>
         )
     }
@@ -93,9 +93,13 @@ const styles = {
         padding: 50,
         backgroundColor: 'blue',
         borderBottom: '1px solid yellow',
+        display: 'flex',
     },
     content: {
         display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'green',
+        width: '60%',
     },
     alignLeft: {
         flexDirection: 'row',
@@ -116,10 +120,7 @@ const styles = {
     },
     subtitle: {
         backgroundColor: 'grey',
-    },
-    list: {
-        backgroundColor: 'green',
-        width: '60%',
+        paddingLeft: 115,
     },
     list_element: {
         position: 'relative',
