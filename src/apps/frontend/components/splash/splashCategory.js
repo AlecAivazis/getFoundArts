@@ -64,7 +64,8 @@ class SplashCategory extends React.Component {
                         {
                             bullets.map((bullet, list_index) => {
                                 return (
-                                    <li key={list_index}>
+                                    <li key={list_index} style={styles.list_element}>
+                                        <Icon name='record' list_style={true} />
                                         {bullet}
                                     </li>
                                 )
@@ -73,7 +74,6 @@ class SplashCategory extends React.Component {
                     </ul>
                     <aside style={styles.icon_container}>
                         { icons.map(({name, color}, icon_index) => {
-                            console.log(color)
                             return (
                                 <Icon name={name}
                                       style={styles.icon}
@@ -117,6 +117,10 @@ const styles = {
     list: {
         backgroundColor: 'green',
         width: '60%',
+    },
+    list_element: {
+        position: 'relative',
+        marginLeft: '2.14286em', // magic...
     },
     icon_container: {
         display: 'flex',

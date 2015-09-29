@@ -13,6 +13,7 @@ class Icon extends React.Component {
             onClick,
             size,
             name,
+            list_style,
         ...unused_props} = this.props
 
         // build the icon style dynamically
@@ -40,6 +41,10 @@ class Icon extends React.Component {
         if (size) {
             // add the sizing option to the icon
             iconName += ` ${prefix}-${size}`
+        }
+        // if the icon is to be used as a list style
+        if (list_style) {
+            iconName += ` ${prefix}-li`
         }
 
         // render the icon
