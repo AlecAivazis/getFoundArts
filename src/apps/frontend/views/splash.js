@@ -25,11 +25,11 @@ class Splash extends React.Component {
                 'Logo Design (Blank Logo)',
 
             ],
-            images: [
-                '/static/images/icons/record.png',
-                '/static/images/icons/shirt.png',
-                '/static/images/icons/camera.png',
-                '/static/images/icons/logo.png',
+            icons: [
+                {name: 'record', color: 'yellow'},
+                {name: 'shirt', color: 'yellow'},
+                {name: 'camera', color: 'yellow'},
+                {name: 'logo', color: 'yellow'},
             ],
         },
         {
@@ -41,7 +41,12 @@ class Splash extends React.Component {
                 'Gain an audience in the video field with attention-grabbing music videos (YouTube, Vimeo)',
                 'Bring more viewers to your website and social platforms with additional visual content and marketing opportunities',
             ],
-            images: ['foo'],
+            icons: [
+                {name: 'spotify', color: 'yellow'},
+                {name: 'itunes', color: 'yellow'},
+                {name: 'soundcloud', color: 'yellow'},
+                {name: 'vimeo', color: 'yellow'},
+            ],
         },
         {
             header: 'Get Found: Take Your Band (and Brand) Full-throttle',
@@ -71,7 +76,7 @@ class Splash extends React.Component {
                         <SplashCategory header={category.header}
                                         text={category.text}
                                         bullets={category.bullets}
-                                        image={category.image}
+                                        icons={category.icons}
                                         index={categoryIndex}
                                         orientation={orientation}
                                         key={index} />

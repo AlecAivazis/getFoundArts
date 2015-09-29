@@ -3,6 +3,7 @@ import React from 'react'
 import radium from 'radium'
 // local imports
 import IndexContainer from './indexContainer'
+import Icon from '../misc/icon'
 
 @radium
 class SplashCategory extends React.Component {
@@ -11,9 +12,16 @@ class SplashCategory extends React.Component {
         header: React.PropTypes.string,
         text: React.PropTypes.string,
         bullets: React.PropTypes.arrayOf(React.PropTypes.string),
-        images: React.PropTypes.arrayOf(React.PropTypes.string),
+        icons: React.PropTypes.arrayOf(React.PropTypes.shape({
+            name: React.PropTypes.string,
+            color: React.PropTypes.string,
+        })),
         index: React.PropTypes.number,
         orientation: React.PropTypes.oneOf(['left', 'right']),
+    }
+
+    static defaultProps = {
+        icons: [],
     }
 
     // render the component
@@ -23,7 +31,7 @@ class SplashCategory extends React.Component {
             header,
             text,
             bullets,
-            image,
+            icons,
             index,
             orientation,
             ...unused_props,
@@ -63,6 +71,17 @@ class SplashCategory extends React.Component {
                             })
                         }
                     </ul>
+                    <aside style={styles.icon_container}>
+                        { icons.map(({name, color}, icon_index) => {
+                            console.log(color)
+                            return (
+                                <Icon name={name}
+                                      style={styles.icon}
+                                      key={icon_index}
+                                      color={color} />
+                            )
+                        })}
+                    </aside>
                 </div>
             </div>
         )
@@ -98,6 +117,16 @@ const styles = {
     list: {
         backgroundColor: 'green',
         width: '60%',
+    },
+    icon_container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '40%',
+    },
+    icon: {
+        textAlign: 'center',
+        fontSize: 125,
+        width: '50%',
     },
 }
 
