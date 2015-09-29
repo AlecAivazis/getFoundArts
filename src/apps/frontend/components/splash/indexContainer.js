@@ -30,10 +30,12 @@ class IndexContainer extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {number, ...unused_props} = this.props
+        const {number, style, ...unused_props} = this.props
+        // the style of the container
+        const container_style = {...style, ...styles.container}
         // render the component
         return (
-            <span style={styles.container} {...unused_props}>
+            <span style={container_style} {...unused_props}>
                 {number}
             </span>
         )
@@ -42,7 +44,13 @@ class IndexContainer extends React.Component {
 
 const styles = {
     container: {
-        background: 'blue',
+        width: 105,
+        height: 120,
+        backgroundImage: 'url("/static/images/splashIndexBackground.png")',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 40,
     },
 }
 

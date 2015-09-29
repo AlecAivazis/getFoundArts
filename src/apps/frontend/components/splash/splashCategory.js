@@ -10,7 +10,7 @@ class SplashCategory extends React.Component {
 
     static propTypes = {
         header: React.PropTypes.string,
-        text: React.PropTypes.string,
+        subtitle: React.PropTypes.string,
         bullets: React.PropTypes.arrayOf(React.PropTypes.string),
         icons: React.PropTypes.arrayOf(React.PropTypes.shape({
             name: React.PropTypes.string,
@@ -28,8 +28,8 @@ class SplashCategory extends React.Component {
     render() {
         // pull out the used properties
         const {
-            header,
-            text,
+            title,
+            subtitle,
             bullets,
             icons,
             index,
@@ -50,14 +50,14 @@ class SplashCategory extends React.Component {
         // render the component
         return (
             <div style={styles.container} {...unused_props}>
-                <div>
+                <div style={styles.header}>
                     <IndexContainer style={styles.index} number={index}/>
-                    <span style={styles.header}>
-                        {header}
+                    <span style={styles.title}>
+                        {title}
                     </span>
-                    <div style={styles.subheader}>
-                        {text}
-                    </div>
+                </div>
+                <div style={styles.subtitle}>
+                    {subtitle}
                 </div>
                 <div style={content_style}>
                     <ul style={styles.list}>
@@ -104,14 +104,17 @@ const styles = {
         flexDirection: 'row-reverse',
     },
     index: {
-        marginRight: 10,
+        marginRight: 5,
     },
     header: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    title: {
         fontSize: 26,
         backgroundColor: 'purple',
     },
-    subheader: {
-        marginLeft: 20,
+    subtitle: {
         backgroundColor: 'grey',
     },
     list: {

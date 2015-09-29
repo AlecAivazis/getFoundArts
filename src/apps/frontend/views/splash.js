@@ -15,8 +15,8 @@ class Splash extends React.Component {
 
     categories = [
         {
-            header: 'Get Seen: Visualize Your Music',
-            text: 'Connect with visual artists to build your band’s visual aesthetic and create',
+            title: 'Get Seen: Visualize Your Music',
+            subtitle: 'Connect with visual artists to build your band’s visual aesthetic and create',
             bullets: [
                 'Album Art (CD/LP/mp3 covers)',
                 'Tour Merchandise (t-shirt, poster, bag, button, etc.)',
@@ -33,8 +33,8 @@ class Splash extends React.Component {
             ],
         },
         {
-            header: 'Get Heard: Authenticate Your Brand',
-            text: 'With cohesive visual identification and branding you will:',
+            title: 'Get Heard: Authenticate Your Brand',
+            subtitle: 'With cohesive visual identification and branding you will:',
             bullets: [
                 'Sell more records and merchandise',
                 'Generate more plays and downloads (Spotify, Soundcloud, iTunes)',
@@ -49,8 +49,8 @@ class Splash extends React.Component {
             ],
         },
         {
-            header: 'Get Found: Take Your Band (and Brand) Full-throttle',
-            text: '',
+            title: 'Get Found: Take Your Band (and Brand) Full-throttle',
+            subtitle: 'foo bar',
             bullets: [
                 'Establish lasting relationships in the Art and Music world in both the artist and audience sphere',
                 'Team with other local for joint exhibitions in art galleries and concert venues. ',
@@ -73,8 +73,8 @@ class Splash extends React.Component {
                     const orientation = categoryIndex % 2 ? 'left' : 'right'
                     // render a category component
                     return (
-                        <SplashCategory header={category.header}
-                                        text={category.text}
+                        <SplashCategory title={category.title}
+                                        subtitle={category.subtitle}
                                         bullets={category.bullets}
                                         icons={category.icons}
                                         index={categoryIndex}
