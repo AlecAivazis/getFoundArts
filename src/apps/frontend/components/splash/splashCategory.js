@@ -109,7 +109,7 @@ const styles = {
         backgroundColor: '#FFFFFF',
         borderBottom: '1px solid #E1E5E6',
         display: 'flex',
-        color: '#333',
+        color: '#212428',
     },
     content: {
         display: 'flex',
