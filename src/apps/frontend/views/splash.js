@@ -68,7 +68,7 @@ class Splash extends React.Component {
                 {this.categories.map((category, index) => {
                     const category_index = index + 1
                     // the alignment of the category
-                    const orientation = category_index % 2 ? 'left' : 'right'
+                    const orientation = category_index % 2 ? 'right' : 'left'
                     // render a category component
                     return (
                         <SplashCategory title={category.title}

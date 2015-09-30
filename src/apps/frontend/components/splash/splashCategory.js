@@ -96,7 +96,7 @@ class SplashCategory extends React.Component {
 
 const styles = {
     container: {
-        padding: 50,
+        padding: 100,
         backgroundColor: '#FFFFFF',
         borderBottom: '1px solid #E1E5E6',
         display: 'flex',
@@ -119,20 +119,28 @@ const styles = {
     banner: {
         display: 'flex',
         alignItems: 'center',
+        marginBottom: 20,
     },
     header: {
         display: 'flex',
         flexDirection: 'column',
     },
     title: {
-        fontSize: 26,
+        fontSize: 32,
+        lineHeight: '36px',
+        fontWeight: 'bold',
     },
     subtitle: {
         marginTop: 10,
+        fontSize: 24,
+        lineHeight: '26px',
     },
     list_container: {
         paddingLeft: 105 / 2 - 17, // yay styles in javascript
         marginTop: 10,
+        textAlign: 'left',
+        fontSize: 20,
+        lineHeight: '26px',
     },
     list_element: {
         position: 'relative',
