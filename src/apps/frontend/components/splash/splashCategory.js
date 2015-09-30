@@ -39,11 +39,16 @@ class SplashCategory extends React.Component {
 
         // the style of the category content
         let container_style
+        let icon_container_style
         // if the content needs to be aligned left
         if (orientation === 'left') {
             container_style = {
                 ...styles.container,
                 ...styles.alignLeft,
+            }
+            icon_container_style = {
+                ...styles.icon_container,
+                ...{paddingRight: 50},
             }
         // otherwise the content need to be aligned right
         } else {
@@ -51,12 +56,16 @@ class SplashCategory extends React.Component {
                 ...styles.container,
                 ...styles.alignRight,
             }
+            icon_container_style = {
+                ...styles.icon_container,
+                ...{paddingLeft: 50},
+            }
         }
 
         // render the component
         return (
             <div style={container_style} {...unused_props}>
-                <aside style={styles.icon_container}>
+                <aside style={icon_container_style}>
                     {icons.map(({name, color}, icon_index) => {
                         return (
                             <Icon name={name}

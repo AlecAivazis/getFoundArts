@@ -65,6 +65,9 @@ class Splash extends React.Component {
         // render the component
         return (
             <div style={styles.container} {...unused_props}>
+                <div id="header" style={styles.header}>
+                    <img src="/static/images/logo.png"/>
+                </div>
                 {this.categories.map((category, index) => {
                     const category_index = index + 1
                     // the alignment of the category
@@ -86,7 +89,12 @@ class Splash extends React.Component {
 }
 
 const styles = {
-    container: {
+    header: {
+        height: 400,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0,
     },
 }
 

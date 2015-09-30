@@ -7,3 +7,14 @@ body {
     font-family: 'Catamaran', sans-serif;
     font-weight: 300;
 }
+
+#header {
+    background: #fcfcfc; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #fcfcfc 0%, #6e6868 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#fcfcfc), color-stop(100%,#6e6868)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, #fcfcfc 0%,#6e6868 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, #fcfcfc 0%,#6e6868 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, #fcfcfc 0%,#6e6868 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, #fcfcfc 0%,#6e6868 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#6e6868',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
