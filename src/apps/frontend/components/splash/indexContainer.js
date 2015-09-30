@@ -1,6 +1,8 @@
 // third party imports
 import React from 'react'
 import radium from 'radium'
+// third party imports
+import Icon from '../misc/icon'
 
 @radium
 class IndexContainer extends React.Component {
@@ -35,9 +37,10 @@ class IndexContainer extends React.Component {
         const container_style = {...style, ...styles.container}
         // render the component
         return (
-            <span style={container_style} {...unused_props}>
-                {number}
-            </span>
+            // <span style={container_style} {...unused_props}>
+            //     {number}
+            // </span>
+            <Icon name="data-usage" style={container_style}/>
         )
     }
 }
@@ -46,12 +49,12 @@ const styles = {
     container: {
         width: 105,
         height: 120,
-        backgroundImage: 'url("/static/images/splashIndexBackground.png")',
+        // backgroundImage: 'url("/static/images/splashIndexBackground.png")',
         display: 'flex',
         flexShrink: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 40,
+        fontSize: 100,
     },
 }
 

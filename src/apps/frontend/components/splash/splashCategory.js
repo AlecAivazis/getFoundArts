@@ -2,7 +2,7 @@
 import React from 'react'
 import radium from 'radium'
 // local imports
-import IndexContainer from './indexContainer'
+// import IndexContainer from './indexContainer'
 import Icon from '../misc/icon'
 
 @radium
@@ -62,6 +62,9 @@ class SplashCategory extends React.Component {
             }
         }
 
+        // style the icons appropriatly if there is only 1
+        const icon_style = icons.length === 1 ? styles.single_icon : styles.icon
+
         // render the component
         return (
             <div style={container_style} {...unused_props}>
@@ -69,7 +72,7 @@ class SplashCategory extends React.Component {
                     {icons.map(({name, color}, icon_index) => {
                         return (
                             <Icon name={name}
-                                  style={styles.icon}
+                                  style={icon_style}
                                   key={icon_index}
                                   color={color} />
                         )
@@ -77,7 +80,7 @@ class SplashCategory extends React.Component {
                 </aside>
                 <article style={styles.content}>
                     <div style={styles.banner}>
-                        <IndexContainer style={styles.index} number={index}/>
+                        {/* <IndexContainer style={styles.index} number={index}/> */}
                         <div style={styles.header}>
                             <span style={styles.title}>
                                 {title}
@@ -107,7 +110,7 @@ const styles = {
     container: {
         padding: 100,
         backgroundColor: '#FFFFFF',
-        borderBottom: '1px solid #E1E5E6',
+        borderBottom: '1px solid #212428',
         display: 'flex',
         color: '#212428',
     },
@@ -145,7 +148,7 @@ const styles = {
         lineHeight: '26px',
     },
     list_container: {
-        paddingLeft: 105 / 2 - 17, // yay styles in javascript
+        // paddingLeft: 105,
         marginTop: 10,
         textAlign: 'left',
         fontSize: 20,
@@ -164,6 +167,12 @@ const styles = {
         textAlign: 'center',
         fontSize: 125,
         width: '50%',
+    },
+    single_icon: {
+        textAlign: 'center',
+        fontSize: 160,
+        width: '100%',
+        marginTop: 60,
     },
 }
 

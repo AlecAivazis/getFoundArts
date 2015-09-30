@@ -54,6 +54,9 @@ class Splash extends React.Component {
                 'Team with other local for joint exhibitions in art galleries and concert venues. ',
                 'Relax knowing a professional, like-minded creative is handling your visual representation while you can devote your energy to recording and touring',
             ],
+            icons: [
+                {name: 'growth', color: '#4B63B0'},
+            ],
         },
     ]
 
@@ -65,6 +68,9 @@ class Splash extends React.Component {
         // render the component
         return (
             <div style={styles.container} {...unused_props}>
+                <div style={styles.nav}>
+                    Get Found Arts
+                </div>
                 <div id='header' style={styles.header}>
                     <img src='/static/images/logo-charcoal.png'/>
                 </div>
@@ -95,6 +101,12 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         flexShrink: 0,
+    },
+    nav: {
+        backgroundColor: 'white',
+        padding: 10,
+        paddingLeft: 20,
+        fontSize: '24px',
     },
 }
 
