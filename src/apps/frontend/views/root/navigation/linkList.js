@@ -2,7 +2,7 @@
 import React from 'react'
 import radium from 'radium'
 // local imports
-import Icon from '../misc/icon'
+import Icon from '../../../components/misc/icon'
 
 
 @radium

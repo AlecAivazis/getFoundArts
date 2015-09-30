@@ -27,7 +27,6 @@
   "dependencies": {
     "express": "^4.13.3",
     "glob": "^5.0.14",
-    "gulp-env": "^0.2.0",
     "history": "^1.11.0",
     "jade": "^1.11.0",
     "normalize.css": "^3.0.3",
