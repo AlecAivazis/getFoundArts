@@ -104,8 +104,7 @@ const styles = {
     },
     nav: {
         backgroundColor: 'white',
-        padding: 10,
-        paddingLeft: 20,
+        padding: '10px 10px 10px 20px',
         fontSize: '24px',
     },
 }
