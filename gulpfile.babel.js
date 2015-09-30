@@ -1,13 +1,14 @@
 // gulp imports
-var gulp = require('gulp')
-var del = require('del')
-var webpack = require('webpack-stream')
-var named = require('vinyl-named')
-var shell = require('gulp-shell')
+import gulp from 'gulp'
+import del from 'del'
+import webpack from 'webpack-stream'
+import named from 'vinyl-named'
+import shell from 'gulp-shell'
+import env from 'gulp-env'
 // misc third party imports
-var assign = require('lodash/object/assign')
+import assign from 'lodash/object/assign'
 // local imports
-var project_paths = require('./config/project_paths')
+import project_paths from './config/project_paths'
 
 
 /**
@@ -19,7 +20,7 @@ gulp.task('runserver', shell.task('nodemon ' + project_paths.server_entry))
 /**
  * Build client entry point.
  */
-gulp.task('build-client', ['clean'], function() {
+gulp.task('build-client', ['clean'], () => {
     return gulp.src(project_paths.client_entry)
                .pipe(named())
                .pipe(webpack(require(project_paths.webpack_client_config)))
@@ -30,7 +31,7 @@ gulp.task('build-client', ['clean'], function() {
 /**
  * Build client entry point.
  */
-gulp.task('watch-client', ['clean'], function() {
+gulp.task('watch-client', ['clean'], () => {
     var config = assign({}, require(project_paths.webpack_client_config), {
         watch: true,
     })
@@ -43,9 +44,27 @@ gulp.task('watch-client', ['clean'], function() {
 
 
 /**
+ * Build the client entry point for live
+ */
+gulp.task('build-client-live', ['clean'], () => {
+    // set the environment variable
+    env({
+        vars: {
+            NODE_ENV: 'production'
+        }
+    })
+    // build the client
+    return gulp.src(project_paths.client_entry)
+               .pipe(named())
+               .pipe(webpack(require(project_paths.webpack_client_config)))
+               .pipe(gulp.dest(project_paths.build_dir))
+})
+
+
+/**
  * Remove all ouptut files from previous frontend builds.
  */
-gulp.task('clean', function() {
+gulp.task('clean', () => {
     del.sync(project_paths.build_dir)
 })
 
