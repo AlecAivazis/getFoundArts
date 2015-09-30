@@ -2,8 +2,8 @@
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
 // local imports
-import RootComponent from './components/Root'
-import SplashPage from './components/splash'
+import RootComponent from './views/root'
+import SplashPage from './views/splash'
 
 
 export default (

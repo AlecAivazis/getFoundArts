@@ -2,8 +2,8 @@
 import React from 'react'
 import Radium from 'radium'
 // local imports
-import Navigation from './navigation'
-import Footer from './footer'
+import Navigation from '../components/navigation'
+import Footer from '../components/footer'
 
 
 @Radium
