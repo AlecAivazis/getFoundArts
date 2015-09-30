@@ -2,7 +2,7 @@
 import React from 'react'
 import Radium from 'radium'
 // local imports
-import SplashCategory from '../components/splash/splashCategory'
+import SplashCategory from './splashCategory'
 
 
 @Radium

@@ -1,6 +1,9 @@
 // third party imports
 import React from 'react'
 import Radium from 'radium'
+// local imports
+import Navigation from './navigation'
+import Footer from './footer'
 
 
 @Radium
@@ -32,25 +35,22 @@ class RootComponent extends React.Component {
     render() {
         // pull out the used properties
         const {...unused_props} = this.props
+
         // render the component
         return (
             <div style={styles.root_container} {...unused_props}>
-                <div style={styles.nav}>
-                    Get Found Arts
-                </div>
-                <div style={styles.main_content}>
+                <Navigation />
+                <article style={styles.main_content}>
                     {this.props.children}
-                </div>
-                <div style={styles.footer}>
-                    footer stuff
-                </div>
+                </article>
+                <Footer style={styles.footer} />
             </div>
         )
     }
 }
 
 // the height of the footer
-const footer_height = 100
+const footer_height = 50
 
 const styles = {
     root_container: {
@@ -69,11 +69,6 @@ const styles = {
         left: 0,
         right: 0,
         height: footer_height,
-    },
-    nav: {
-        backgroundColor: 'white',
-        padding: '10px 10px 10px 20px',
-        fontSize: '24px',
     },
 }
 
