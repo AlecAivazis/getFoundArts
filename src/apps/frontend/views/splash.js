@@ -68,9 +68,6 @@ class Splash extends React.Component {
         // render the component
         return (
             <div style={styles.container} {...unused_props}>
-                <div style={styles.nav}>
-                    Get Found Arts
-                </div>
                 <div id='header' style={styles.header}>
                     <img src='/static/images/logo-charcoal.png'/>
                 </div>
@@ -101,11 +98,6 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         flexShrink: 0,
-    },
-    nav: {
-        backgroundColor: 'white',
-        padding: '10px 10px 10px 20px',
-        fontSize: '24px',
     },
 }
 

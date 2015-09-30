@@ -35,6 +35,9 @@ class RootComponent extends React.Component {
         // render the component
         return (
             <div style={styles.root_container} {...unused_props}>
+                <div style={styles.nav}>
+                    Get Found Arts
+                </div>
                 <div style={styles.main_content}>
                     {this.props.children}
                 </div>
@@ -66,6 +69,11 @@ const styles = {
         left: 0,
         right: 0,
         height: footer_height,
+    },
+    nav: {
+        backgroundColor: 'white',
+        padding: '10px 10px 10px 20px',
+        fontSize: '24px',
     },
 }
 
