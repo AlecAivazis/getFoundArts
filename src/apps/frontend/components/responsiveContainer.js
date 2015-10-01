@@ -26,6 +26,8 @@ class ResponsiveContainer extends React.Component {
     componentDidMount() {
         // set the resize handler
         window.addEventListener('resize', this.state.resize_handler)
+        // set the initial state
+        store.dispatch(calculateResponsiveState())
     }
 
 
