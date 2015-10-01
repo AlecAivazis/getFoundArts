@@ -67,10 +67,10 @@ class Splash extends React.Component {
         const {...unused_props} = this.props
         // render the component
         return (
-            <div style={styles.container} {...unused_props}>
-                <div id='header' style={styles.header}>
+            <section style={styles.container} {...unused_props}>
+                <header id='header' style={styles.header}>
                     <img src='/static/images/logo-charcoal.png'/>
-                </div>
+                </header>
                 {this.categories.map((category, index) => {
                     const category_index = index + 1
                     // the alignment of the category
@@ -86,7 +86,7 @@ class Splash extends React.Component {
                                         key={index} />
                     )
                 })}
-            </div>
+            </section>
         )
     }
 }

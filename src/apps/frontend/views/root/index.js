@@ -2,7 +2,7 @@
 import React from 'react'
 import Radium from 'radium'
 // local imports
-import Navigation from './navigation'
+import Header from './header'
 import Footer from './footer'
 
 
@@ -39,10 +39,10 @@ class RootComponent extends React.Component {
         // render the component
         return (
             <div style={styles.root_container} {...unused_props}>
-                <Navigation />
-                <article style={styles.main_content}>
+                <Header />
+                <main style={styles.main_content}>
                     {this.props.children}
-                </article>
+                </main>
                 <Footer style={styles.footer} />
             </div>
         )

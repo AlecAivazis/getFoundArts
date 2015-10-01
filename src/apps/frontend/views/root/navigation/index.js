@@ -3,7 +3,6 @@ import React from 'react'
 import radium from 'radium'
 import omit from 'lodash/object/omit'
 // local imports
-import Branding from './branding'
 import LinkList from './linkList'
 
 
@@ -12,37 +11,20 @@ class Navigation extends React.Component {
 
     // render the component
     render() {
-        // pull out the used properties
-        const {style, ...unused_props} = this.props
-
-        // the style of the navigation element
-        const nav_style = {
-            ...style,
-            ...styles.nav,
-        }
+        // grab the used props
+        const {...unused_props} = this.props
 
         // render the component
         return (
-            <div style={nav_style} {...unused_props}>
-                <Branding />
+            <nav {...unused_props}>
                 <LinkList element_style={styles.links}
                           last_element_style={omit(styles.links, 'paddingRight')}/>
-            </div>
+            </nav>
         )
     }
 }
 
 const styles = {
-    nav: {
-        backgroundColor: 'white',
-        padding: '10px 20px',
-        fontSize: '24px',
-        display: 'flex',
-        width: '100%',
-        boxSizing: 'border-box',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
     links: {
         display: 'inline-block',
         fontSize: '18px',

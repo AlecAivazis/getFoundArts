@@ -67,7 +67,7 @@ class SplashCategory extends React.Component {
 
         // render the component
         return (
-            <div style={container_style} {...unused_props}>
+            <section style={container_style} {...unused_props}>
                 <aside style={icon_container_style}>
                     {icons.map(({name, color}, icon_index) => {
                         return (
@@ -79,17 +79,14 @@ class SplashCategory extends React.Component {
                     })}
                 </aside>
                 <article style={styles.content}>
-                    <div style={styles.banner}>
-                        {/* <IndexContainer style={styles.index} number={index}/> */}
-                        <div style={styles.header}>
-                            <span style={styles.title}>
-                                {title}
-                            </span>
-                            <div style={styles.subtitle}>
-                                {subtitle}
-                            </div>
-                        </div>
-                    </div>
+                    <header style={styles.header}>
+                        <h1 style={styles.title}>
+                            {title}
+                        </h1>
+                        <h2 style={styles.subtitle}>
+                            {subtitle}
+                        </h2>
+                    </header>
                     <ul style={styles.list_container}>
                         {bullets.map((bullet, list_index) => {
                             return (
@@ -101,7 +98,7 @@ class SplashCategory extends React.Component {
                         })}
                     </ul>
                 </article>
-            </div>
+            </section>
         )
     }
 }
@@ -141,6 +138,7 @@ const styles = {
         fontSize: 32,
         lineHeight: '36px',
         fontWeight: 'bold',
+        marginBottom: 0,
     },
     subtitle: {
         marginTop: 10,

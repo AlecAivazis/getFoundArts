@@ -21,10 +21,10 @@ class Footer extends React.Component {
 
         // render the component
         return (
-            <div style={container_style} {...unused_props}>
+            <footer style={container_style} {...unused_props}>
                 <Icon name='copyright' style={styles.copyright_icon}/>
                 2015 Get Found Arts All Right Reserved
-            </div>
+            </footer>
         )
     }
 }

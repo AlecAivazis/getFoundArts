@@ -2,7 +2,7 @@
 import React from 'react'
 import radium from 'radium'
 // local
-import Link from './link'
+import Link from './navigation/link'
 
 @radium
 class Branding extends React.Component {
@@ -21,11 +21,11 @@ class Branding extends React.Component {
 
         // render the component
         return (
-            <div style={branding_style} {...unused_props}>
+            <span style={branding_style} {...unused_props}>
                 <Link to='/'>
                     Get Found Arts
                 </Link>
-            </div>
+            </span>
         )
     }
 }
