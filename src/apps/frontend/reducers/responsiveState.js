@@ -47,9 +47,9 @@ function get_current_media_type() {
     // loop over the keys of the media query
     const current_media = keys(media_queries).reduce((final_type, current_type) => {
         // grab the corresponding query string
-        const query_string = this.media_queries[current_type]
+        const query_string = media_queries[current_type]
         // barf if there's no window
-        if (!window) {
+        if (typeof window === 'undefined') {
             // return the default
             return default_breakpoint
         }
@@ -67,9 +67,8 @@ function get_current_media_type() {
 }
 
 function computeResponsiveState() {
-    console.log(`window: ${window}`)
     // if there is a window to use
-    const browser_width = window ? window.width : breakpoints[default_breakpoint]
+    const browser_width = typeof window !== 'undefined' ? window.width : breakpoints[default_breakpoint]
     // compute the new responsive state
     return {
         width: browser_width,
@@ -79,7 +78,7 @@ function computeResponsiveState() {
     }
 }
 
-export default function(state = {}, action) {
+export default function(state = computeResponsiveState(), action) {
     // if we were told to recalculate the state
     if (action.type === CALCULATE_RESPONSIVE_STATE) {
         // do so
