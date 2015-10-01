@@ -8,6 +8,7 @@ import {Provider} from 'react-redux'
 import createLocation from 'history/lib/createLocation'
 // local imports
 import routes from './routes'
+import {createStore} from './store'
 
 // create the express app
 let app = express()
@@ -30,14 +31,22 @@ app.all('*', (req, res) => {
             res.status(404).send('Not found')
         // otherwise the component was found
         } else {
+
+            // the initial store
+            const initialStore = createStore()
+            const intialState = JSON.stringify(initialStore.getState())
+
+            // the initial component to render
+            const initialComponent = (
+                <Provider store={initialStore}>
+                    <RoutingContext {...renderProps} />
+                </Provider>
+            )
+
             // render the jade template with the component mounted
             res.render('index.jade', {
-                renderedComponent: renderToString(
-                    <Provider store={}>
-                        <RoutingContext {...renderProps} />
-                    </Provider>
-
-                )
+                renderedComponent: renderToString(initialComponent),
+                initialState: intialState,
             })
         }
     })

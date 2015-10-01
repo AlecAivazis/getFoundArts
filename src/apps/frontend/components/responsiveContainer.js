@@ -1,6 +1,6 @@
 // third party imports
 import React from 'react'
-import {throttle} from 'lodash/function/throttle'
+import throttle from 'lodash/function/throttle'
 // local imports
 import calculateResponsiveState from '../actions/calculateResponsiveState'
 import store from '../store'
@@ -15,7 +15,7 @@ class ResponsiveContainer extends React.Component {
         this.state = {
             resize_handler: throttle(() => {
                 // tell the store to recalculate the responsive state
-                // store.dispatch(calculateResponsiveState())
+                store.dispatch(calculateResponsiveState())
                 console.log('calculating width')
             }, 100),
         }

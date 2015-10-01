@@ -4,6 +4,8 @@ html
         link(rel="stylesheet", href="/static/styles/gfa.css")
         link(href="https://fonts.googleapis.com/css?family=Catamaran:100", rel="stylesheet", type="text/css")
         script(src="https://use.fonticons.com/0a535eb1.js")
+        script(type="application/javascript").
+            window.__INITIAL_STATE__ = !{initialState};
     body
         #app !{renderedComponent}
         script(src="/static/client.js", type="text/javascript")

@@ -79,10 +79,12 @@ function computeResponsiveState() {
     }
 }
 
-export default function(state = computeResponsiveState(), action) {
+export default function(state = {}, action) {
     // if we were told to recalculate the state
     if (action.type === CALCULATE_RESPONSIVE_STATE) {
         // do so
         return computeResponsiveState()
     }
+    // return the default state
+    return state
 }
