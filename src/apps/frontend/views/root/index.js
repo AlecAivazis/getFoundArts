@@ -4,6 +4,7 @@ import Radium from 'radium'
 // local imports
 import Header from './header'
 import Footer from './footer'
+import ResponsiveContainer from '../../components/responsiveContainer'
 
 
 @Radium
@@ -38,13 +39,13 @@ class RootComponent extends React.Component {
 
         // render the component
         return (
-            <div style={styles.root_container} {...unused_props}>
+            <ResponsiveContainer style={styles.root_container} {...unused_props}>
                 <Header />
                 <main style={styles.main_content}>
                     {this.props.children}
                 </main>
                 <Footer style={styles.footer} />
-            </div>
+            </ResponsiveContainer>
         )
     }
 }

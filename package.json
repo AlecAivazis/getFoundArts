@@ -25,14 +25,18 @@
     "webpack-stream": "^2.1.0"
   },
   "dependencies": {
+    "babel-plugin-react-autoprefix": "^0.2.6",
     "express": "^4.13.3",
     "glob": "^5.0.14",
     "history": "^1.11.0",
     "jade": "^1.11.0",
+    "mediaquery": "0.0.3",
     "normalize.css": "^3.0.3",
     "radium": "^0.14.1",
     "react": "^0.14.0-rc1",
     "react-dom": "^0.14.0-rc1",
-    "react-router": "^1.0.0-rc1"
+    "react-redux": "^3.0.1",
+    "react-router": "^1.0.0-rc1",
+    "redux": "^3.0.2"
   }
 }

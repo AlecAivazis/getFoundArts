@@ -25,8 +25,11 @@ module.exports = {
                 loaders: ['style', 'css'],
             }, {
                 test: /\.js$/,
-                loader: 'babel?stage=0',
+                loader: 'babel',
                 include: project_paths.source_dir,
+                query: {
+                    stage: 0,
+                }
             },
         ],
     },

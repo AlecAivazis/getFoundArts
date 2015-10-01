@@ -1,10 +1,9 @@
 // third party imports
-import React from 'react/addons'
+import React from 'react'
 import radium from 'radium'
 // local imports
 import Branding from './branding'
 import Navigation from './navigation'
-
 
 @radium
 class Header extends React.Component {
