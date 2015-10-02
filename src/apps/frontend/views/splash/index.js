@@ -100,7 +100,7 @@ class Splash extends React.Component {
         // render the component
         return (
             <section style={styles.container} {...unused_props}>
-                <header id='header' style={styles.header}>
+                <header style={styles.header}>
                     <img src='/static/images/logo-charcoal.png'/>
                 </header>
                 {categories.map((category, index) => {
@@ -144,6 +144,7 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         flexShrink: 0,
+        background: 'radial-gradient(ellipse at center, #fcfcfc 0%,#6e6868 100%) #fcfcfc',
     },
     categoryBorder: {
         borderBottom: '1px solid #C8C7C7',
