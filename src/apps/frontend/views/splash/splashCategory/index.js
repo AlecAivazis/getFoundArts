@@ -2,7 +2,9 @@
 import React from 'react'
 import radium from 'radium'
 // local imports
-import Icon from '../../components/misc/icon'
+import IconGroup from './iconGroup'
+import CategoryHeader from './categoryHeader'
+import BulletList from './bulletList'
 
 
 @radium
@@ -62,41 +64,16 @@ class SplashCategory extends React.Component {
             }
         }
 
-        // style the icons appropriatly if there is only 1
-        const icon_style = icons.length === 1 ? styles.single_icon : styles.icon
 
         // render the component
         return (
             <section style={container_style} {...unused_props}>
                 <aside style={icon_container_style}>
-                    {icons.map(({name, color}, icon_index) => {
-                        return (
-                            <Icon name={name}
-                                  style={icon_style}
-                                  key={icon_index}
-                                  color={color} />
-                        )
-                    })}
+                    <IconGroup icons={icons}/>
                 </aside>
                 <article style={styles.content}>
-                    <header style={styles.header}>
-                        <h1 style={styles.title}>
-                            {title}
-                        </h1>
-                        <h2 style={styles.subtitle}>
-                            {subtitle}
-                        </h2>
-                    </header>
-                    <ul style={styles.list_container}>
-                        {bullets.map((bullet, list_index) => {
-                            return (
-                                <li key={list_index} style={styles.list_element}>
-                                    <Icon name='record' list_style={true} />
-                                    {bullet}
-                                </li>
-                            )
-                        })}
-                    </ul>
+                    <CategoryHeader title={title} subtitle={subtitle} style={styles.header}/>
+                    <BulletList bullets={bullets} style={styles.list_container}/>
                 </article>
             </section>
         )
@@ -107,7 +84,7 @@ const styles = {
     container: {
         padding: 100,
         backgroundColor: '#FFFFFF',
-        borderBottom: '1px solid #212428',
+        borderBottom: '1px solid #C8C7C7',
         display: 'flex',
         color: '#212428',
     },
@@ -122,55 +99,21 @@ const styles = {
     alignRight: {
         flexDirection: 'row-reverse',
     },
-    index: {
-        marginRight: 20,
-    },
-    banner: {
-        display: 'flex',
-        alignItems: 'center',
-        marginBottom: 20,
-    },
     header: {
         display: 'flex',
         flexDirection: 'column',
     },
-    title: {
-        fontSize: 32,
-        lineHeight: '36px',
-        fontWeight: 'bold',
-        marginBottom: 0,
-    },
-    subtitle: {
-        marginTop: 10,
-        fontSize: 24,
-        lineHeight: '26px',
-    },
     list_container: {
-        // paddingLeft: 105,
         marginTop: 10,
-        textAlign: 'left',
         fontSize: 20,
         lineHeight: '26px',
-    },
-    list_element: {
-        position: 'relative',
-        marginLeft: '2.14286em', // magic...
     },
     icon_container: {
         display: 'flex',
         flexWrap: 'wrap',
         width: '40%',
-    },
-    icon: {
-        textAlign: 'center',
-        fontSize: 125,
-        width: '50%',
-    },
-    single_icon: {
-        textAlign: 'center',
-        fontSize: 160,
-        width: '100%',
-        marginTop: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 }
 

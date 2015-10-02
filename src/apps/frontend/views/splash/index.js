@@ -13,6 +13,7 @@ class Splash extends React.Component {
 
     static defaultProps = {}
 
+
     categories = [
         {
             title: 'Get Seen: Visualize Your Music',
@@ -50,9 +51,9 @@ class Splash extends React.Component {
         {
             title: 'Get Found: Take Your Band (and Brand) Full-throttle',
             bullets: [
-                'Establish lasting relationships in the Art and Music world in both the artist and audience sphere',
-                'Team with other local for joint exhibitions in art galleries and concert venues. ',
-                'Relax knowing a professional, like-minded creative is handling your visual representation while you can devote your energy to recording and touring',
+                'Establish lasting relationships in the Art and Music world.',
+                'Team with local artists for joint showcases in art galleries and concert venues.',
+                'Focus on your music while like-minded creatives handle aspects of your visual representation.',
             ],
             icons: [
                 {name: 'growth', color: '#4B63B0'},
@@ -64,7 +65,7 @@ class Splash extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {...unused_props} = this.props
+        const {browser, ...unused_props} = this.props
         // render the component
         return (
             <section style={styles.container} {...unused_props}>
@@ -90,6 +91,7 @@ class Splash extends React.Component {
         )
     }
 }
+
 
 const styles = {
     header: {
