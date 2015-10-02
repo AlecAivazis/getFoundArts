@@ -26,7 +26,7 @@ class Splash extends React.Component {
                 'Logo Design',
             ],
             icons: [
-                {name: 'record', color: '#4B63B0'},
+                {name: 'vinyl', color: '#4B63B0'},
                 {name: 'shirt', color: '#E6E000'},
                 {name: 'camera', color: '#D37530'},
                 {name: 'logo', color: '#6B9B42'},
