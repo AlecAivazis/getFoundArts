@@ -3,6 +3,7 @@ import React from 'react'
 import Radium from 'radium'
 // local imports
 import SplashCategory from './splashCategory'
+import SignUpForm from './signupForm'
 
 
 @Radium
@@ -62,20 +63,55 @@ class Splash extends React.Component {
     ]
 
 
+    constructor() {
+        // instantiate this
+        super()
+        // the initial state
+        this.state = {
+            form_visible: false,
+        }
+        // bind various functions
+        this.show_form = this.show_form.bind(this)
+    }
+
+
+    show_form() {
+        // if the form is not showing
+        if (!this.state.form_visible) {
+            // toggle the form
+            this.setState({
+                form_visible: true,
+            }, () => {
+                // focus the first input
+                this.refs.form.focus()
+            })
+        }
+    }
+
+
     // render the component
     render() {
         // pull out the used properties
         const {browser, ...unused_props} = this.props
+        // the list of categories
+        const {categories} = this
+        // the style of the form toggle button
+        const form_toggle_style = !this.state.form_visible ? styles.form_toggle_open : {}
         // render the component
         return (
             <section style={styles.container} {...unused_props}>
                 <header id='header' style={styles.header}>
                     <img src='/static/images/logo-charcoal.png'/>
                 </header>
-                {this.categories.map((category, index) => {
+                {categories.map((category, index) => {
                     const category_index = index + 1
                     // the alignment of the category
                     const orientation = category_index % 2 ? 'right' : 'left'
+                    // if we are not rendering the last category
+                    if (index !== categories.length - 1) {
+                        // apply the category style
+                        var category_style = styles.categoryBorder
+                    }
                     // render a category component
                     return (
                         <SplashCategory title={category.title}
@@ -84,9 +120,17 @@ class Splash extends React.Component {
                                         icons={category.icons}
                                         index={category_index}
                                         orientation={orientation}
-                                        key={index} />
+                                        key={index}
+                                        style={category_style}/>
                     )
                 })}
+                <section onClick={this.show_form}
+                         style={[styles.form_container, form_toggle_style]} >
+                    <div>
+                        Get Started Now
+                    </div>
+                    { this.state.form_visible ? <SignUpForm ref='form'/> : '' }
+                </section>
             </section>
         )
     }
@@ -100,6 +144,20 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         flexShrink: 0,
+    },
+    categoryBorder: {
+        borderBottom: '1px solid #C8C7C7',
+    },
+    form_toggle_open: {
+        cursor: 'pointer',
+    },
+    form_container: {
+        backgroundColor: '#E8EDF3',
+        borderTop: '1px solid #CBD0D7',
+        textAlign: 'center',
+        fontSize: '24px',
+        color: '#898989',
+        padding: 50,
     },
 }
 

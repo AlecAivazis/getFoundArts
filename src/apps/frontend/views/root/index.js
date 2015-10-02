@@ -58,7 +58,7 @@ const styles = {
         position: 'relative',
         minHeight: '100%',
         overflow: 'hidden',
-        paddingBottom: footer_height + 20,
+        paddingBottom: footer_height + 30,
     },
     main_content: {
         width: '100%',
