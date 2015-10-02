@@ -10,7 +10,10 @@ class IconGroup extends React.Component {
 
 
     static propTypes = {
-        icons: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+        icons: React.PropTypes.arrayOf(React.PropTypes.shape({
+            name: React.PropTypes.string,
+            color: React.PropTypes.string,
+        })).isRequired,
     }
 
 
