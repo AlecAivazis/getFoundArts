@@ -2,8 +2,8 @@
 import React from 'react'
 import radium from 'radium'
 // local imports
-// import IndexContainer from './indexContainer'
 import Icon from '../../components/misc/icon'
+
 
 @radium
 class SplashCategory extends React.Component {
