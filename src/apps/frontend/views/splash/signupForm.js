@@ -2,16 +2,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import radium from 'radium'
-
+// form test imports
+import SignUpForm from '../../../../forms/signupForm'
+import MoonluxForm from '../../../../forms/FormComponent'
 
 @radium
-class SignUpForm extends React.Component {
-
-
-    static propTypes = {}
-
-
-    static defaultProps = {}
+class FormComponent extends React.Component {
 
     constructor() {
         // instantiate this
@@ -23,47 +19,21 @@ class SignUpForm extends React.Component {
 
     // focus on the contact menu
     focus() {
-        ReactDOM.findDOMNode(this.refs.first_input).focus()
+        this.refs.form.focus()
     }
 
 
     // render the component
     render() {
         // pull out the used properties
-        const {...unused_props} = this.props
-        // render the component
+        const {style, ...unused_props} = this.props
+        // render the new component
         return (
-            <form style={styles.form} {...unused_props}>
-                <div style={styles.input_container}>
-                    <label htmlFor='name' style={styles.label}>
-                        name:
-                    </label>
-                    <input type='text' id='name' style={styles.input} ref='first_input'/>
-                </div>
-                <div style={styles.input_container}>
-                    <label htmlFor='email' style={styles.label}>
-                        e-mail:
-                    </label>
-                    <input type='text' id='email' style={styles.input}/>
-                </div>
-                <div style={styles.input_container}>
-                    <label htmlFor='link' style={styles.label}>
-                        link:
-                    </label>
-                    <input type='text' id='link' style={styles.input}/>
-                </div>
-                <div style={styles.input_container}>
-                    <label htmlFor='message' style={styles.label}>
-                        message (optional):
-                    </label>
-                    <textarea type='text' id='message' style={[styles.input, styles.textarea]}/>
-                </div>
-                <div style={styles.submit_container}>
-                    <span style={styles.submit_button}>
-                        send
-                    </span>
-                </div>
-            </form>
+            <MoonluxForm form={SignUpForm} ref='form' {...unused_props}
+                         fieldStyle={styles.input_container}
+                         labelStyle={styles.label}
+                         inputStyle={styles.input}
+                         style={{...styles.form, ...style}} />
         )
     }
 }
@@ -94,29 +64,13 @@ const styles = {
         border: '1px solid #C1C1C1',
         boxSizing: 'border-box',
         padding: 10,
-    },
-    textarea: {
         resize: 'vertical',
         minHeight: 55,
-    },
-    submit_container: {
-        textAlign: 'right',
-        marginTop: 30,
-    },
-    submit_button: {
-        backgroundColor: '#2F5EBC',
-        padding: 20,
-        width: 150,
-        display: 'inline-block',
-        textAlign: 'center',
-        color: 'white',
-        cursor: 'pointer',
-        textTransform: 'capitalize',
     },
 }
 
 
-export default SignUpForm
-
+export default FormComponent
+FormComponent
 
 // end of file

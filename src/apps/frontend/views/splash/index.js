@@ -127,7 +127,7 @@ class Splash extends React.Component {
                 <section onClick={this.show_form}
                          style={[styles.form_container, form_toggle_style]} >
                     <div>
-                        Get Started Now
+                        Get Started
                     </div>
                     { this.state.form_visible ? <SignUpForm ref='form'/> : '' }
                 </section>

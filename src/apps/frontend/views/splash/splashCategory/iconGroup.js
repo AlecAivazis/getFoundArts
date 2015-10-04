@@ -66,6 +66,7 @@ const styles = {
         textAlign: 'center',
         fontSize: '10vw',
         width: '50%',
+        marginBottom: 30,
     },
     single_icon: {
         fontSize: 160,
