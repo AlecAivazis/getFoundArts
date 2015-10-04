@@ -1,5 +1,6 @@
 // third party imports
 import React from 'react'
+import ReactDOM from 'react-dom'
 import radium from 'radium'
 
 
@@ -22,7 +23,7 @@ class SignUpForm extends React.Component {
 
     // focus on the contact menu
     focus() {
-        console.log('focusing on menu')
+        ReactDOM.findDOMNode(this.refs.first_input).focus()
     }
 
 
@@ -37,7 +38,7 @@ class SignUpForm extends React.Component {
                     <label htmlFor='name' style={styles.label}>
                         name:
                     </label>
-                    <input type='text' id='name' style={styles.input}/>
+                    <input type='text' id='name' style={styles.input} ref='first_input'/>
                 </div>
                 <div style={styles.input_container}>
                     <label htmlFor='email' style={styles.label}>
@@ -110,6 +111,7 @@ const styles = {
         textAlign: 'center',
         color: 'white',
         cursor: 'pointer',
+        textTransform: 'capitalize',
     },
 }
 

@@ -14,6 +14,7 @@ class Icon extends React.Component {
             size,
             name,
             list_style,
+            fontSize,
         ...unused_props} = this.props
 
         // build the icon style dynamically
@@ -31,6 +32,11 @@ class Icon extends React.Component {
         // if they specified a color
         if (color) {
             icon_style.color = color
+        }
+
+        // if a particular size was specified for the icon
+        if (fontSize) {
+            icon_style.fontSize = fontSize
         }
 
         // the base icon class

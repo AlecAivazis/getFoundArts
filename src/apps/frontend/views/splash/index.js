@@ -27,10 +27,10 @@ class Splash extends React.Component {
                 'Logo Design',
             ],
             icons: [
-                {name: 'vinyl', color: '#4B63B0'},
-                {name: 'shirt', color: '#E6E000'},
-                {name: 'camera', color: '#D37530'},
-                {name: 'logo', color: '#6B9B42'},
+                {name: 'logo', color: '#418CDB', fontSize: '12vw'},
+                {name: 'camera', color: '#e72154'},
+                {name: 'vinyl', color: '#475F6F'},
+                {name: 'shirt', color: '#54CF3C'},
             ],
         },
         {
@@ -43,10 +43,10 @@ class Splash extends React.Component {
                 'Bring more viewers to your website and social platforms with additional visual content and marketing opportunities',
             ],
             icons: [
-                {name: 'spotify', color: '#6B9B42'},
-                {name: 'itunes', color: '#D37530'},
-                {name: 'soundcloud', color: '#E6E000'},
-                {name: 'vimeo', color: '#4B63B0'},
+                {name: 'vimeo', color: '#4B9FE7'},
+                {name: 'itunes', color: '#e72154', fontSize: '8.5vw'},
+                {name: 'soundcloud', color: '#F35D07'},
+                {name: 'spotify', color: '#56D34D', fontSize: '8.5vw'},
             ],
         },
         {
@@ -101,7 +101,7 @@ class Splash extends React.Component {
         return (
             <section style={styles.container} {...unused_props}>
                 <header style={styles.header}>
-                    <img src='/static/images/logo-charcoal.png'/>
+                    <img src='/static/images/logo-blue2.png'/>
                 </header>
                 {categories.map((category, index) => {
                     const category_index = index + 1
@@ -144,7 +144,7 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         flexShrink: 0,
-        background: 'radial-gradient(ellipse at center, #fcfcfc 0%,#6e6868 100%) #fcfcfc',
+        background: 'radial-gradient(ellipse at center, #fcfcfc 0%,#A8ACB2 100%) #fcfcfc',
     },
     categoryBorder: {
         borderBottom: '1px solid #C8C7C7',

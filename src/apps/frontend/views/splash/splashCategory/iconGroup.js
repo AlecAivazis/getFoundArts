@@ -47,12 +47,13 @@ class IconGroup extends React.Component {
         // render the component
         return (
             <div {...unused_props}>
-                {icons.map(({name, color}, icon_index) => {
+                {icons.map(({name, color, fontSize}, icon_index) => {
                     return (
                         <Icon name={name}
                               style={icon_style}
                               key={icon_index}
-                              color={color} />
+                              color={color}
+                              fontSize={fontSize}/>
                     )
                 })}
             </div>
