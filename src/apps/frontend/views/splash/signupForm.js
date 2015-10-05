@@ -1,7 +1,7 @@
 // third party imports
 import React from 'react'
-import ReactDOM from 'react-dom'
 import radium from 'radium'
+import fetch from 'isomorphic-fetch'
 // form test imports
 import SignUpForm from '../../../../forms/signupForm'
 import MoonluxForm from '../../../../forms/FormComponent'
@@ -14,12 +14,33 @@ class FormComponent extends React.Component {
         super()
         // bind various functions
         this.focus = this.focus.bind(this)
+        this.submitForm = this.submitForm.bind(this)
     }
 
 
     // focus on the contact menu
     focus() {
         this.refs.form.focus()
+    }
+
+
+    submitForm(formData) {
+        // post to the correct url
+        fetch('/signup', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: formData,
+        // if the request was made
+        }).then((response) => {
+            // use the response as text
+            return response.text()
+        // handle the response
+        }).then((text) => {
+            console.log(text)
+        })
     }
 
 
@@ -30,6 +51,7 @@ class FormComponent extends React.Component {
         // render the new component
         return (
             <MoonluxForm form={SignUpForm} ref='form' {...unused_props}
+                         onSubmit={this.submitForm}
                          fieldStyle={styles.input_container}
                          labelStyle={styles.label}
                          inputStyle={styles.input}

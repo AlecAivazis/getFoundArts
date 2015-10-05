@@ -1,6 +1,6 @@
 // express imports
 import express from 'express'
-// import body_parser from 'body-parser'
+import body_parser from 'body-parser'
 // import multer from 'multer'
 // import compression from 'compression'
 // import cookie_session from 'cookie-session'
@@ -18,11 +18,16 @@ import express from 'express'
 // local imports
 import frontend from './apps/frontend'
 import {build_dir, asset_dir} from '../config/project_paths'
+import SignUpForm from './forms/signupForm'
 
 // top level express application instance
 const app = express()
 // server port to listen on
 const port = 8000
+
+
+// parse the json body
+const jsonParser = body_parser.json()
 
 /* Configure Middleware */
 
@@ -30,8 +35,24 @@ const port = 8000
 /* Configure Routes */
 app.use('/static', express.static(build_dir))
 app.use('/static', express.static(asset_dir))
-app.use('/', frontend)
 
+// the url the user will POST to in order to sign up
+app.post('/signup', jsonParser, (req, res) => {
+    // load the form with the data
+    const form = new SignUpForm(req.body)
+    // if the form is valid
+    if (form.is_valid()){
+        // respond a success
+        res.send('success')
+    // otherwise the form is not valid
+    } else {
+        // respond with an erro
+        res.status(400).send('failure')
+    }
+})
+
+// the root client entry point
+app.use('/', frontend)
 
 /* eslint-disable no-console */
 // have server listen on port 8000
