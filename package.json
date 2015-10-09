@@ -1,7 +1,7 @@
 {
   "name": "getFoundArts",
   "version": "0.0.0",
-  "description": "An online space for musicians and artists to come together for sonic and visual collaboration. ",
+  "description": "An online space for musicians and artists to come together for sonic and visual collaboration.",
   "private": true,
   "devDependencies": {
     "babel": "^5.8.23",
@@ -35,8 +35,8 @@
     "mediaquery": "0.0.3",
     "normalize.css": "^3.0.3",
     "radium": "^0.14.1",
-    "react": "^0.14.0-rc1",
-    "react-dom": "^0.14.0-rc1",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
     "react-redux": "^3.0.1",
     "react-router": "^1.0.0-rc1",
     "redux": "^3.0.2"
