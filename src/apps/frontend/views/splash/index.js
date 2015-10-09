@@ -101,7 +101,7 @@ class Splash extends React.Component {
         return (
             <section style={styles.container} {...unused_props}>
                 <header style={styles.header}>
-                    <img src='/static/images/logo-blue2.png'/>
+                    <img src='/static/images/logo-charcoal.png'/>
                 </header>
                 {categories.map((category, index) => {
                     const category_index = index + 1
