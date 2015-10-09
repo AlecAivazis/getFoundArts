@@ -13,7 +13,7 @@ import body_parser from 'body-parser'
 // import vhost from 'vhost'
 // import csrf from 'csurf'
 // import directory from 'serve-index'
-// import static from 'serve-static'
+import serve_static from 'serve-static'
 
 // local imports
 import frontend from './apps/frontend'
@@ -33,8 +33,8 @@ const jsonParser = body_parser.json()
 
 
 /* Configure Routes */
-app.use('/static', express.static(build_dir))
-app.use('/static', express.static(asset_dir))
+app.use('/static', serve_static(build_dir))
+app.use('/static', serve_static(asset_dir))
 
 // the url the user will POST to in order to sign up
 app.post('/signup', jsonParser, (req, res) => {
