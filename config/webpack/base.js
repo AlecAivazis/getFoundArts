@@ -35,7 +35,11 @@ module.exports = {
     },
     resolve: {
         extensions: ['', '.js'],
-        root: [project_paths.source_dir, project_paths.root_dir]
+        root: [
+            project_paths.source_dir,
+            project_paths.root_dir,
+            project_paths.frontend_dir
+        ],
     },
     eslint: {
         configFile: project_paths.eslint_config,

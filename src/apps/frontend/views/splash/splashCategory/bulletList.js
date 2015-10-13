@@ -34,13 +34,17 @@ class BulletList extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {bullets, ...unused_props} = this.props
+        const {
+            bullets,
+            listItemStyle,
+            ...unused_props,
+        } = this.props
         // render the component
         return (
             <ul {...unused_props}>
                 {bullets.map((bullet, list_index) => {
                     return (
-                        <li key={list_index} style={styles.list_element}>
+                        <li key={list_index} style={listItemStyle}>
                             <Icon name='record' list_style={true} />
                             {bullet}
                         </li>
@@ -49,13 +53,6 @@ class BulletList extends React.Component {
             </ul>
         )
     }
-}
-
-const styles = {
-    list_element: {
-        position: 'relative',
-        marginLeft: '2.14286em', // magic...
-    },
 }
 
 

@@ -27,10 +27,10 @@ class Splash extends React.Component {
                 'Logo Design',
             ],
             icons: [
-                {name: 'logo', color: '#418CDB', fontSize: '12vw'},
-                {name: 'camera', color: '#e72154'},
                 {name: 'vinyl', color: '#475F6F'},
+                {name: 'logo', color: '#418CDB', fontSize: '12vw'},
                 {name: 'shirt', color: '#54CF3C'},
+                {name: 'camera', color: '#e72154'},
             ],
         },
         {
@@ -57,7 +57,7 @@ class Splash extends React.Component {
                 'Focus on your music while like-minded creatives handle aspects of your visual representation.',
             ],
             icons: [
-                {name: 'growth', color: '#4B63B0'},
+                {name: 'growth', color: '#4B63B0', fontSize: '12vw'},
             ],
         },
     ]
@@ -92,7 +92,7 @@ class Splash extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {browser, ...unused_props} = this.props
+        const {...unused_props} = this.props
         // the list of categories
         const {categories} = this
         // the style of the form toggle button
@@ -101,7 +101,10 @@ class Splash extends React.Component {
         return (
             <section style={styles.container} {...unused_props}>
                 <header style={styles.header}>
-                    <img src='/static/images/logo-charcoal.png'/>
+                    <img
+                        src='/static/images/logo-charcoal.png'
+                        style={styles.headerImage}
+                    />
                 </header>
                 {categories.map((category, index) => {
                     const category_index = index + 1
@@ -145,6 +148,10 @@ const styles = {
         justifyContent: 'center',
         flexShrink: 0,
         background: 'radial-gradient(ellipse at center, #fcfcfc 0%,#A8ACB2 100%) #fcfcfc',
+    },
+    headerImage: {
+        width: '60%',
+        maxWidth: 600,
     },
     categoryBorder: {
         borderBottom: '1px solid #C8C7C7',

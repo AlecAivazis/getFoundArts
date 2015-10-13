@@ -31,6 +31,7 @@ module.exports = {
     apps_dir: apps_dir,
     build_dir: build_dir,
     asset_dir: path.join(source_dir, 'assets'),
+    frontend_dir: path.join(apps_dir, 'frontend'),
     // entry points
     client_entry: path.join(entries_dir, 'client.js'),
     server_entry: path.join(entries_dir, 'server.js'),

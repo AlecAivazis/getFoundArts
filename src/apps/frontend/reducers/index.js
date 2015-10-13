@@ -1,10 +1,9 @@
 // third party imports
 import {combineReducers} from 'redux'
-// local imports
-import browser from './browser'
+import {responsiveStateReducer} from 'redux-responsive'
 
 
 // export the reducers
 export default combineReducers({
-    browser,
+    browser: responsiveStateReducer,
 })

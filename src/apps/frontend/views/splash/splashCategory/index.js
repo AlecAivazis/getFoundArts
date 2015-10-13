@@ -1,12 +1,15 @@
 // third party imports
 import React from 'react'
 import radium from 'radium'
+import {connect} from 'react-redux'
 // local imports
-import IconGroup from './iconGroup'
 import CategoryHeader from './categoryHeader'
 import BulletList from './bulletList'
+import UList from '../../../components/UList'
+import Icon from '../../../components/misc/icon'
 
 
+@connect(({browser}) => ({browser}))
 @radium
 class SplashCategory extends React.Component {
 
@@ -30,6 +33,7 @@ class SplashCategory extends React.Component {
     render() {
         // pull out the used properties
         const {
+            browser,
             title,
             subtitle,
             bullets,
@@ -37,85 +41,222 @@ class SplashCategory extends React.Component {
             index,
             orientation,
             style,
-            ...unused_props,
+            ...unusedProps,
         } = this.props
 
-        // the style of the category content
-        let container_style
-        let icon_container_style
-        // if the content needs to be aligned left
-        if (orientation === 'left') {
-            container_style = {
-                ...style,
-                ...styles.container,
-                ...styles.alignLeft,
-            }
-            icon_container_style = {
-                ...styles.icon_container,
-                ...{paddingRight: 50},
-            }
-        // otherwise the content need to be aligned right
+        let containerStyle
+        let iconContainerStyle
+        let iconListItemStyle
+        let iconStyle
+        let contentStyle
+        let bulletListStyle
+        let headerStyle
+        let iconListStyle
+        if (browser.lessThan.medium) {
+            // use smaller screen styling
+            containerStyle = styles.containerMedium
+            iconContainerStyle = styles.iconContainerMedium
+            iconListItemStyle = styles.iconListItemMedium
+            iconStyle = styles.iconMedium
+            contentStyle = styles.contentMedium
+            bulletListStyle = styles.bulletListMedium
+            headerStyle = styles.headerMedium
+            iconListStyle = styles.iconListMedium
         } else {
-            container_style = {
-                ...style,
-                ...styles.container,
-                ...styles.alignRight,
-            }
-            icon_container_style = {
-                ...styles.icon_container,
-                ...{paddingLeft: 50},
+            // use larger screen styling
+            iconListItemStyle = styles.iconListItemLarge
+            iconStyle = styles.iconLarge
+            contentStyle = styles.contentLarge
+            bulletListStyle = styles.bulletListLarge
+            headerStyle = styles.headerLarge
+            iconListStyle = styles.iconListLarge
+
+            if (orientation === 'left') {
+                // use left styling
+                iconContainerStyle = styles.iconContainerLeft
+                containerStyle = styles.containerLeft
+            } else {
+                // use right styling
+                iconContainerStyle = styles.iconContainerRight
+                containerStyle = styles.containerRight
             }
         }
 
 
         // render the component
         return (
-            <section style={container_style} {...unused_props}>
-                <aside style={icon_container_style}>
-                    <IconGroup icons={icons}/>
+            <section style={[containerStyle, style]} {...unusedProps}>
+                <aside style={iconContainerStyle}>
+                    <UList
+                        style={iconListStyle}
+                        listItemStyle={iconListItemStyle}
+                    >
+                        {icons.map(({name, color, fontSize}, key) => (
+                            <Icon
+                                name={name}
+                                style={iconStyle}
+                                key={key}
+                                color={color}
+                                fontSize={fontSize}
+                            />
+                        ))}
+                    </UList>
                 </aside>
-                <article style={styles.content}>
-                    <CategoryHeader title={title} subtitle={subtitle} style={styles.header}/>
-                    <BulletList bullets={bullets} style={styles.list_container}/>
+                <article style={contentStyle}>
+                    <CategoryHeader
+                        title={title}
+                        subtitle={subtitle}
+                        style={headerStyle}
+                    />
+                    <BulletList
+                        bullets={bullets}
+                        style={bulletListStyle}
+                        listItemStyle={styles.bulletListItem}
+                    />
                 </article>
             </section>
         )
     }
 }
 
+
+const containerBase = {
+    boxSizing: 'border-box',
+    backgroundColor: '#FFFFFF',
+    color: '#212428',
+    display: 'flex',
+}
+
+const containerLargeBase = {
+    ...containerBase,
+    padding: 100,
+}
+
+const iconContainerBase = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}
+
+const iconContainerLargeBase = {
+    ...iconContainerBase,
+    width: '40%',
+}
+
+const iconListItemBase = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}
+
+const iconBase = {
+    textAlign: 'center',
+    marginBottom: 30,
+}
+
+const contentBase = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+}
+
+const bulletListBase = {
+    boxSizing: 'border-box',
+    marginTop: 10,
+    fontSize: 20,
+    lineHeight: '26px',
+    width: '100%',
+}
+
+const headerBase = {
+    display: 'flex',
+    flexDirection: 'column',
+}
+
+const iconListBase = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '100%',
+    justifyContent: 'center',
+}
+
+
 const styles = {
-    container: {
-        padding: 100,
-        backgroundColor: '#FFFFFF',
-        display: 'flex',
-        color: '#212428',
-    },
-    content: {
-        display: 'flex',
-        flexDirection: 'column',
-        width: '60%',
-    },
-    alignLeft: {
+    containerLeft: {
+        ...containerLargeBase,
         flexDirection: 'row',
     },
-    alignRight: {
+    containerRight: {
+        ...containerLargeBase,
         flexDirection: 'row-reverse',
     },
-    header: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    list_container: {
-        marginTop: 10,
-        fontSize: 20,
-        lineHeight: '26px',
-    },
-    icon_container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        width: '40%',
+    containerMedium: {
+        ...containerBase,
+        padding: '80px 0',
         justifyContent: 'center',
-        alignItems: 'center',
+        flexDirection: 'column-reverse',
+        width: '100%',
+    },
+    iconContainerLeft: {
+        ...iconContainerLargeBase,
+        paddingRight: 50,
+    },
+    iconContainerRight: {
+        ...iconContainerLargeBase,
+        paddingLeft: 50,
+    },
+    iconContainerMedium: {
+        ...iconContainerBase,
+    },
+    iconListItemLarge: {
+        ...iconListItemBase,
+        width: '50%',
+    },
+    iconListItemMedium: {
+        ...iconListItemBase,
+        width: '25%',
+    },
+    iconLarge: {
+        ...iconBase,
+        fontSize: '10vw',
+    },
+    iconMedium: {
+        ...iconBase,
+        fontSize: '10vw',
+    },
+    contentLarge: {
+        ...contentBase,
+        width: '60%',
+    },
+    contentMedium: {
+        ...contentBase,
+        marginBottom: 40,
+    },
+    iconListLarge: {
+        ...iconListBase,
+    },
+    iconListMedium: {
+        ...iconListBase,
+        padding: '0 10%',
+    },
+    headerLarge: {
+        ...headerBase,
+        width: '100%',
+    },
+    headerMedium: {
+        ...headerBase,
+        width: '70%',
+    },
+    bulletListLarge: {
+        ...bulletListBase,
+    },
+    bulletListMedium: {
+        ...bulletListBase,
+        padding: '0 14%',
+    },
+    bulletListItem: {
+        position: 'relative',
+        marginLeft: '2.14286em', // magic...
     },
 }
 
