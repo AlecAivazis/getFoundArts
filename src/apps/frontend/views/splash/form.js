@@ -1,7 +1,7 @@
 // third party imports
 import React from 'react'
 
-class Form extends React.Component {
+class UniversalForm extends React.Component {
 
 
     static propTypes = {}
@@ -85,7 +85,7 @@ class Form extends React.Component {
         // render the component
         return (
             <form {...unused_props} ref='form'>
-                {this.state.form.get_fields().map(({name, label, widget}) => {
+                {this.state.form.fields.map(({name, label, widget}) => {
                     // the input widget
                     const input_widget = React.cloneElement(this.getElementForWidget(widget), {
                         id: name,
@@ -127,7 +127,7 @@ const styles = {
     },
 }
 
-export default Form
+export default UniversalForm
 
 
 // end of file

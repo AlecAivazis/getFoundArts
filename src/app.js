@@ -17,8 +17,9 @@ import serve_static from 'serve-static'
 
 // local imports
 import frontend from './apps/frontend'
+import auth from './apps/auth'
 import {build_dir, asset_dir} from '../config/project_paths'
-import SignUpForm from './forms/signupForm'
+import SignUpForm from './apps/auth/forms/signupForm'
 
 // top level express application instance
 const app = express()
@@ -32,6 +33,10 @@ const jsonParser = body_parser.json()
 /* Configure Middleware */
 
 
+/* configure the database */
+
+
+
 /* Configure Routes */
 app.use('/static', serve_static(build_dir))
 app.use('/static', serve_static(asset_dir))
@@ -41,7 +46,7 @@ app.post('/signup', jsonParser, (req, res) => {
     // load the form with the data
     const form = new SignUpForm(req.body)
     // if the form is valid
-    if (form.is_valid()){
+    if (form.is_valid){
         // respond a success
         res.send('success')
     // otherwise the form is not valid
@@ -51,8 +56,10 @@ app.post('/signup', jsonParser, (req, res) => {
     }
 })
 
+
 // the root client entry point
 app.use('/', frontend)
+
 
 /* eslint-disable no-console */
 // have server listen on port 8000

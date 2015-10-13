@@ -2,16 +2,18 @@
 import React from 'react'
 import radium from 'radium'
 import fetch from 'isomorphic-fetch'
+// import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
+import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 // form test imports
-import SignUpForm from '../../../../forms/signupForm'
-import MoonluxForm from '../../../../forms/FormComponent'
+import SignUpForm from '../../../../apps/auth/forms/signupForm'
+
 
 @radium
 class FormComponent extends React.Component {
 
-    constructor() {
+    constructor(...args) {
         // instantiate this
-        super()
+        super(...args)
         // bind various functions
         this.focus = this.focus.bind(this)
         this.submitForm = this.submitForm.bind(this)
@@ -93,6 +95,5 @@ const styles = {
 
 
 export default FormComponent
-FormComponent
 
 // end of file
