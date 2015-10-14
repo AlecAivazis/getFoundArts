@@ -14,7 +14,6 @@ app.set('view engine', 'jade')
 app.set('views', path.join(__dirname, 'templates'))
 
 
-
 // parse the json body
 const jsonParser = body_parser.json()
 

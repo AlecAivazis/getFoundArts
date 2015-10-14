@@ -30,6 +30,8 @@
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "glob": "^5.0.14",
+    "graphql": "^0.4.7",
+    "graphql-sequelize": "^0.11.4",
     "history": "^1.11.0",
     "isomorphic-fetch": "^2.1.1",
     "jade": "^1.11.0",
