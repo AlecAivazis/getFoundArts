@@ -18,8 +18,8 @@ import serveStatic from 'serve-static'
 
 // local imports
 import {buildDir, assetsDir} from '../config/projectPaths'
-import frontend from './apps/frontend'
-import auth from './apps/auth/app'
+import {api, auth, frontend} from './apps'
+
 
 // top level express application instance
 const app = express()
@@ -34,6 +34,7 @@ const port = 8000
 app.use('/static', serveStatic(buildDir), serveStatic(assetsDir))
 app.use('/', auth)
 app.use('/', frontend)
+app.use('/', api)
 
 
 /* eslint-disable no-console */
