@@ -1,8 +1,9 @@
 // third party imports
 import unviersalForms from 'universal-forms'
 
-const Form = unviersalForms.Form
-const {TextField, EmailField} = unviersalForms.fields
+// grab the used objects from universal-forms
+const {Form, fields} = unviersalForms
+const {TextField, EmailField} = fields
 
 // the form to handle user signups
 export default class SignupForm extends Form {
