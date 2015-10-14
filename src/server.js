@@ -1,3 +1,5 @@
+// fix node land
+import 'babel-core/polyfill'
 // express imports
 import express from 'express'
 // import multer from 'multer'
@@ -12,10 +14,10 @@ import express from 'express'
 // import vhost from 'vhost'
 // import csrf from 'csurf'
 // import directory from 'serve-index'
-import serve_static from 'serve-static'
+import serveStatic from 'serve-static'
 
 // local imports
-import {build_dir, asset_dir} from '../config/project_paths'
+import {buildDir, assetsDir} from '../config/projectPaths'
 import frontend from './apps/frontend'
 import auth from './apps/auth/app'
 
@@ -29,8 +31,7 @@ const port = 8000
 
 
 /* Configure Routes */
-app.use('/static', serve_static(build_dir))
-app.use('/static', serve_static(asset_dir))
+app.use('/static', serveStatic(buildDir), serveStatic(assetsDir))
 app.use('/', auth)
 app.use('/', frontend)
 
@@ -43,3 +44,4 @@ app.listen(port, () => console.log(`listening on ${port}`))
 
 // export application instance
 export default app
+

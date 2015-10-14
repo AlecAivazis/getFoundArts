@@ -1,4 +1,7 @@
-// react imports
+// fix browser land
+import 'babel-core/polyfill'
+import 'normalize.css'
+// third party imports imports
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router} from 'react-router'
@@ -9,17 +12,12 @@ import routes from 'apps/frontend/routes'
 import {createStore} from 'apps/frontend/store'
 
 
-/* eslint-disable no-unused-vars */
-// normalize css
-import normalize from 'normalize.css'
-/* eslint-enable no-unused-vars */
-
-// use the browsers native history
+// use the browser's native history
 const history = createBrowserHistory()
 
-// grab the initial store state
+// grab the initial application state passed from the server
 const initialState = window.__INITIAL_STATE__
-// and instantiate it
+// instantiate frontend store with initial application state
 const store = createStore(initialState)
 
 // render the routed application

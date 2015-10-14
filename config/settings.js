@@ -1,13 +1,13 @@
 // third party imports
-var path = require('path')
+import path from 'path'
 // local imports
-import projectPaths from './project_paths'
+import projectPaths from './projectPaths'
 
 
 // the database configuration settings
 export const database = {
     engine: "sqlite",
-    file: path.join(projectPaths.database_dir, 'db.sqlite3'),
+    file: path.join(projectPaths.databaseDir, 'db.sqlite3'),
     name: "",
     username: "",
     password: "",

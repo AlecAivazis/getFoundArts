@@ -6,10 +6,12 @@ import reducers from './reducers'
 
 
 // create a store out of the reducers and some initial data
-export function createStore(initial_data) {
+export function createStore(initialData) {
     // pass the initial data to the store factory
-    // also, add the handlers to keep the responsive state up to date
-    return addResponsiveHandlers(create_store(reducers, initial_data))
+    // also, add the handlers for responsive state updates
+    return addResponsiveHandlers(create_store(reducers, initialData))
 }
 
+
+// export a store with no initial data
 export default createStore()

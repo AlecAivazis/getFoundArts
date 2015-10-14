@@ -4,10 +4,10 @@ import express from 'express'
 import body_parser from 'body-parser'
 // local imports
 import SignUpForm from './forms/signupForm'
-import User from '../auth/models/User'
+import User from './models/User'
 
 // create the express app
-let app = express()
+const app = express()
 
 // use jade as the templating engine
 app.set('view engine', 'jade')
@@ -22,7 +22,7 @@ app.post('/signup', jsonParser, (req, res) => {
     // load the form with the data
     const form = new SignUpForm(req.body)
     // if the form is valid
-    if (form.is_valid){
+    if (form.is_valid) {
         // get a connection to the database
         User.sync().then(() => {
             // create a user out of the form data

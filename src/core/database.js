@@ -10,7 +10,7 @@ const {name, username, password, host, engine, file, ...unusedSetting} = databas
 const database = new Sequelize(name, username, password, {
     host: host,
     dialect: engine,
-    storage: file
+    storage: file,
 })
 
 // export the database
