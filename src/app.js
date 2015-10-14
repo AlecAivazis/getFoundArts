@@ -20,6 +20,7 @@ import frontend from './apps/frontend'
 import auth from './apps/auth'
 import {build_dir, asset_dir} from '../config/project_paths'
 import SignUpForm from './apps/auth/forms/signupForm'
+import User from './apps/auth/models/User'
 
 // top level express application instance
 const app = express()
@@ -47,12 +48,19 @@ app.post('/signup', jsonParser, (req, res) => {
     const form = new SignUpForm(req.body)
     // if the form is valid
     if (form.is_valid){
-        // respond a success
-        res.send('success')
+        // get a connection to the database
+        User.sync().then(() => {
+            // create a user out of the form data
+            User.create(form.values)
+                // if it exceeds
+                .then(() => res.send('success'))
+                // if it fails
+                .error(() => res.status(400).send('problem creating user'))
+        })
     // otherwise the form is not valid
     } else {
-        // respond with an erro
-        res.status(400).send('failure')
+        // respond with an error
+        res.status(400).send('form was not valid')
     }
 })
 

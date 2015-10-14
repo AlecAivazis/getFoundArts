@@ -35,6 +35,7 @@ module.exports = {
     // entry points
     client_entry: path.join(entries_dir, 'client.js'),
     server_entry: path.join(entries_dir, 'server.js'),
+    database_dir: path.join(rute, 'db'),
     // configuration files
     eslint_config: path.join(config_dir, 'eslint.json'),
     karma_config: path.join(config_dir, 'karma.js'),

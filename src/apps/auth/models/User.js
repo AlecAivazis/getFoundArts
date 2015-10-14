@@ -1,10 +1,21 @@
 // import the core database
-import {database} from '../../../core/database'
+import database from '../../../core/database'
 // import the string and date types
-import {STRING, DATE} from 'sequelize'
+import {STRING, TEXT} from 'sequelize'
 
 // export the user model
 export default database.define('User', {
-    firstName: STRING,
-    lastName: STRING,
+    name: {
+        type: STRING,
+    },
+    email: {
+        type: STRING,
+    },
+    link: {
+        type: STRING,
+    },
+    message: {
+        type: TEXT,
+        allowNull: true,
+    },
 })
