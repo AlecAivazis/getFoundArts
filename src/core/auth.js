@@ -6,25 +6,24 @@ import User from '../apps/auth/models/User'
 
 
 // define the strategy used by the auth backend
-passport.use('local-login', new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password',
-    passReqToCallback: true,
-}, (req, username, password, done) => {
+passport.use('local-signup', new LocalStrategy((username, password, done) => {
+    console.log('inside strategy')
+    console.log(username, password)
     // syncronize with the database
     User.sync().then(() => {
         // figure out if there is a user matching the username
-        User.findOne({
+        return User.findOne({
             where: {
                 username: username,
             },
-        }).then((user) => {
-            // if the users password matches
-            if (user.password === password) {
-                // return the user that passed
-                return done(null, user)
-            }
         })
+    })
+    .then((user) => {
+        // if the users password matches
+        if (user.password === password) {
+            // return the user that passed
+            return done(null, user)
+        }
     })
 }))
 

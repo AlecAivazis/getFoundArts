@@ -17,6 +17,26 @@ class FormComponent extends React.Component {
     }
 
 
+    submitForm(formData) {
+        // post to the correct url
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: formData,
+        // if the request was made
+        }).then((response) => {
+            // use the response as text
+            return response.text()
+        // handle the response
+        }).then((text) => {
+            console.log(text)
+        })
+    }
+
+
 
     // render the component
     render() {
@@ -38,7 +58,7 @@ class FormComponent extends React.Component {
                 <MoonluxForm
                     form={LoginForm} ref='form' {...unused_props}
                     style={styles.form}
-                    action='/login'
+                    onSubmit={this.submitForm}
                     fieldStyle={styles.inputContainer}
                     labelStyle={styles.label}
                     inputStyle={styles.input}

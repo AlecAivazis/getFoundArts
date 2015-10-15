@@ -27,6 +27,7 @@ class FormComponent extends React.Component {
 
 
     submitForm(formData) {
+        console.log('submitting form')
         // post to the correct url
         fetch('/signup', {
             method: 'POST',

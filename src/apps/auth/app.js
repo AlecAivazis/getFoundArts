@@ -24,27 +24,31 @@ app.use(auth.session())
 
 // parse the json body
 const jsonParser = bodyParser.json()
+const urlEncodedParser = bodyParser.raw()
+
+app.use(jsonParser)
+app.use(urlEncodedParser)
 
 // the token to create
 
 // the url the user will POST to in order to sign up
-app.post('/signup', jsonParser, (req, res) => {
+app.post('/signup', (req, res) => {
     // load the form with the data
     const form = new SignUpForm(req.body)
     // if the form is valid
     if (form.is_valid) {
         // get a connection to the database
-        User.sync().then(() => {
+        User.sync().then(
             // create a user out of the form data
-            User.create(form.values)
-                // if it exceeds
-                .then((user) => {
-                    console.log(`created user ${user.name}`)
-                    res.send('success')
-                })
-                // if it fails
-                .error(() => res.status(400).send('problem creating user'))
+            () => User.create(form.values)
+        )
+        // if it exceeds
+        .then((user) => {
+            console.log(`created user ${user.name}`)
+            res.send('success')
         })
+        // if it fails
+        .catch(() => res.status(400).send('problem creating user'))
     // otherwise the form is not valid
     } else {
         // respond with an error
@@ -55,9 +59,9 @@ app.post('/signup', jsonParser, (req, res) => {
 
 // the public login point
 app.post('/login', (req, res, next) => {
-    console.log('trying to log in')
+    console.log(req.body)
     // authenticate the request
-    auth.authenticate('local-login', (authError, user) => {
+    auth.authenticate('local-signup', (authError, user) => {
         console.log(user)
         // if there was an error while logging in
         if (authError) {
