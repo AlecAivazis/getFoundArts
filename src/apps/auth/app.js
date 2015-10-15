@@ -38,7 +38,10 @@ app.post('/signup', jsonParser, (req, res) => {
             // create a user out of the form data
             User.create(form.values)
                 // if it exceeds
-                .then(() => res.send('success'))
+                .then((user) => {
+                    console.log(`created user ${user.name}`)
+                    res.send('success')
+                })
                 // if it fails
                 .error(() => res.status(400).send('problem creating user'))
         })
@@ -52,8 +55,10 @@ app.post('/signup', jsonParser, (req, res) => {
 
 // the public login point
 app.post('/login', (req, res, next) => {
+    console.log('trying to log in')
     // authenticate the request
-    auth.authenticate('local-login', (authError, user, info) => {
+    auth.authenticate('local-login', (authError, user) => {
+        console.log(user)
         // if there was an error while logging in
         if (authError) {
             // pass the error on
@@ -61,6 +66,7 @@ app.post('/login', (req, res, next) => {
         }
         // if there was no user
         if (!user) {
+            console.log('redirecting back')
             // redirect to the login page
             return res.redirect('/login')
         }
@@ -68,6 +74,12 @@ app.post('/login', (req, res, next) => {
 
         // create the users session
         req.logIn(user, (loginError) => {
+            // if there was an error logging in
+            if (loginError) {
+                // pass it on
+                next(loginError)
+            }
+
             console.log('you were logged in')
             return res.send('hello')
         })
