@@ -28,6 +28,7 @@ class FormComponent extends React.Component {
             ...styles.container,
         }
 
+
         // render the new component
         return (
             <div style={container_style} {...unused_props}>
@@ -37,7 +38,7 @@ class FormComponent extends React.Component {
                 <MoonluxForm
                     form={LoginForm} ref='form' {...unused_props}
                     style={styles.form}
-                    action='foo'
+                    action='/login'
                     fieldStyle={styles.inputContainer}
                     labelStyle={styles.label}
                     inputStyle={styles.input}

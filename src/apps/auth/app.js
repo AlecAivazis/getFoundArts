@@ -25,6 +25,8 @@ app.use(auth.session())
 // parse the json body
 const jsonParser = bodyParser.json()
 
+// the token to create
+
 // the url the user will POST to in order to sign up
 app.post('/signup', jsonParser, (req, res) => {
     // load the form with the data
@@ -48,10 +50,30 @@ app.post('/signup', jsonParser, (req, res) => {
 })
 
 
-app.post('/login', auth.authenticate('local-login', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-}))
+// the public login point
+app.post('/login', (req, res, next) => {
+    // authenticate the request
+    auth.authenticate('local-login', (authError, user, info) => {
+        // if there was an error while logging in
+        if (authError) {
+            // pass the error on
+            return next(authError)
+        }
+        // if there was no user
+        if (!user) {
+            // redirect to the login page
+            return res.redirect('/login')
+        }
+        // the user was authenticated
+
+        // create the users session
+        req.logIn(user, (loginError) => {
+            console.log('you were logged in')
+            return res.send('hello')
+        })
+    })(req, res, next)
+
+})
 
 // export the application
 export default app

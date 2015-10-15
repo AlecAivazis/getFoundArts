@@ -27,6 +27,7 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'eslint',
                 include: [
+                    projectPaths.configDir,
                     projectPaths.sourceDir,
                 ],
             },

@@ -6,10 +6,10 @@ import projectPaths from './projectPaths'
 
 // the database configuration settings
 export const database = {
-    engine: "sqlite",
+    engine: 'sqlite',
     file: path.join(projectPaths.databaseDir, 'db.sqlite3'),
-    name: "",
-    username: "",
-    password: "",
-    host: "",
+    name: '',
+    username: '',
+    password: '',
+    host: '',
 }
