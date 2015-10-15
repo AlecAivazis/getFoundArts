@@ -8,6 +8,10 @@ export default database.define('User', {
     name: {
         type: STRING,
     },
+    password: {
+        type: STRING,
+        defaultValue: 'password',
+    },
     email: {
         type: STRING,
     },
