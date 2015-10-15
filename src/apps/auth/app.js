@@ -1,10 +1,13 @@
 // third part imports
 import path from 'path'
 import express from 'express'
-import body_parser from 'body-parser'
+import bodyParser from 'body-parser'
+import session from 'express-session'
+import cookieParser from 'cookie-parser'
 // local imports
 import SignUpForm from './forms/signupForm'
 import User from './models/User'
+import auth from '../../core/auth'
 
 // create the express app
 const app = express()
@@ -13,9 +16,14 @@ const app = express()
 app.set('view engine', 'jade')
 app.set('views', path.join(__dirname, 'templates'))
 
+// configure middlewares
+app.use(cookieParser('secretString1'))
+app.use(session({secret: 'secretString2'}))
+app.use(auth.initialize())
+app.use(auth.session())
 
 // parse the json body
-const jsonParser = body_parser.json()
+const jsonParser = bodyParser.json()
 
 // the url the user will POST to in order to sign up
 app.post('/signup', jsonParser, (req, res) => {
@@ -38,6 +46,12 @@ app.post('/signup', jsonParser, (req, res) => {
         res.status(400).send('form was not valid')
     }
 })
+
+
+app.post('/login', auth.authenticate('local-login', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+}))
 
 // export the application
 export default app

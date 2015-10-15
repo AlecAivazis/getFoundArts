@@ -5,9 +5,7 @@ import express from 'express'
 // import multer from 'multer'
 // import compression from 'compression'
 // import cookie_session from 'cookie-session'
-// import cookie_parser from 'cookie-parser'
-// import logger from 'morgan'
-// import session from 'express-session'
+import logger from 'morgan'
 // import favicon from 'serve-favicon'
 // import responseTime from 'response-time'
 // import errorHandler from 'errorhandler'
@@ -28,13 +26,15 @@ const port = 8000
 
 
 /* Configure Middleware */
+app.use(logger('dev'))
+
 
 
 /* Configure Routes */
 app.use('/static', serveStatic(buildDir), serveStatic(assetsDir))
 app.use('/', auth)
-app.use('/', frontend)
 app.use('/', api)
+app.use('/', frontend) // this needs to be last
 
 
 /* eslint-disable no-console */

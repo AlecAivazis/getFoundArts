@@ -38,9 +38,9 @@ class RootComponent extends React.Component {
 
         // render the component
         return (
-            <div style={styles.root_container} {...unused_props}>
+            <div style={styles.rootContainer} {...unused_props}>
                 <Header />
-                <main style={styles.main_content}>
+                <main style={styles.mainContent}>
                     {this.props.children}
                 </main>
                 <Footer style={styles.footer} />
@@ -53,22 +53,23 @@ class RootComponent extends React.Component {
 const footer_height = 50
 
 const styles = {
-    root_container: {
+    rootContainer: {
         position: 'relative',
-        minHeight: '100%',
+        minHeight: '90%',
         overflow: 'hidden',
-        paddingBottom: footer_height + 30,
     },
-    main_content: {
+    mainContent: {
         width: '100%',
     },
     footer: {
         backgroundColor: '#212428',
         position: 'absolute',
+        float: 'left',
         bottom: 0,
         left: 0,
         right: 0,
         height: footer_height,
+        paddingTop: 30,
     },
 }
 

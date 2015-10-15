@@ -166,6 +166,7 @@ const styles = {
         fontSize: '24px',
         color: '#898989',
         padding: 50,
+        marginBottom: 100,
     },
 }
 
