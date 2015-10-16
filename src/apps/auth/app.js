@@ -4,13 +4,18 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
+import connectRedis from 'connect-redis'
+import {createClient} from 'redis'
 // local imports
+import auth from '../../core/auth'
 import SignUpForm from './forms/signupForm'
 import User from './models/User'
-import auth from '../../core/auth'
 
 // create the express app
 const app = express()
+
+// the redis store object
+const RedisStore = connectRedis(session)
 
 // use jade as the templating engine
 app.set('view engine', 'jade')
@@ -18,9 +23,16 @@ app.set('views', path.join(__dirname, 'templates'))
 
 // configure middlewares
 app.use(cookieParser('secretString1'))
-app.use(session({secret: 'secretString2'}))
-app.use(auth.initialize())
-app.use(auth.session())
+app.use(session({
+    store: new RedisStore({
+        client: createClient(),
+        host: 'localhost',
+        port: 6379,
+    }),
+    secret: 'secretString2',
+    resave: false,
+    saveUninitialized: false,
+}))
 
 // parse the json body
 const jsonParser = bodyParser.json()
@@ -28,6 +40,9 @@ const urlEncodedParser = bodyParser.raw()
 
 app.use(jsonParser)
 app.use(urlEncodedParser)
+
+app.use(auth.initialize())
+app.use(auth.session())
 
 // the token to create
 
@@ -37,18 +52,17 @@ app.post('/signup', (req, res) => {
     const form = new SignUpForm(req.body)
     // if the form is valid
     if (form.is_valid) {
-        // get a connection to the database
-        User.sync().then(
-            // create a user out of the form data
-            () => User.create(form.values)
-        )
-        // if it exceeds
-        .then((user) => {
-            console.log(`created user ${user.name}`)
-            res.send('success')
+        // create a new user model
+        const newUser = new User(form.values)
+        // save it to the database
+        newUser.save((err, user) => {
+            // if there is an error
+            if (err || !newUser) {
+                return res.status(400).send('there was a problem creating the user')
+            }
+            // otherwise there was no error creating the user
+            console.log(`created user ${newUser.email}`)
         })
-        // if it fails
-        .catch(() => res.status(400).send('problem creating user'))
     // otherwise the form is not valid
     } else {
         // respond with an error
@@ -56,12 +70,19 @@ app.post('/signup', (req, res) => {
     }
 })
 
+app.get('/test',
+    (req, res, next) => {
+        console.log(req.session)
+        console.log(`user at /test: ${req.user}`)
+        res.send(req.user)
+    }
+)
 
 // the public login point
 app.post('/login', (req, res, next) => {
-    console.log(req.body)
     // authenticate the request
-    auth.authenticate('local-signup', (authError, user) => {
+    // note: this is done as a custom callback in order to support ajax redirects
+    auth.authenticate('local-login', (authError, user) => {
         console.log(user)
         // if there was an error while logging in
         if (authError) {
@@ -70,22 +91,28 @@ app.post('/login', (req, res, next) => {
         }
         // if there was no user
         if (!user) {
-            console.log('redirecting back')
-            // redirect to the login page
-            return res.redirect('/login')
+            // redirect the request to the login page
+            return res.send(JSON.stringify({
+                redirect: '/login',
+            }))
         }
         // the user was authenticated
 
         // create the users session
-        req.logIn(user, (loginError) => {
+        req.login(user, (loginError) => {
             // if there was an error logging in
             if (loginError) {
                 // pass it on
                 next(loginError)
             }
 
-            console.log('you were logged in')
-            return res.send('hello')
+            console.log(`logged in: ${user.id}`)
+            console.log(`req user: ${req.user}`)
+            req.session.foo = 'bar'
+            // redirect the user to the homepage
+            return res.send(JSON.stringify({
+                redirect: '/test',
+            }))
         })
     })(req, res, next)
 

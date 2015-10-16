@@ -28,11 +28,12 @@ class FormComponent extends React.Component {
             body: formData,
         // if the request was made
         }).then((response) => {
-            // use the response as text
-            return response.text()
+            // interpret the response as json
+            return response.json()
         // handle the response
-        }).then((text) => {
-            console.log(text)
+        }).then(({redirect, ...unusedResponseData}) => {
+            // if the response is a redirect
+            window.location = redirect
         })
     }
 

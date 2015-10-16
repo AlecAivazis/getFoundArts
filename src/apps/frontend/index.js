@@ -8,6 +8,7 @@ import {Provider} from 'react-redux'
 import {templatesDir} from 'config/projectPaths'
 import routes from './routes'
 import store from './store'
+import auth from '../../core/auth'
 
 
 // create the express app
@@ -19,34 +20,36 @@ app.set('view engine', 'jade')
 app.set('views', templatesDir)
 
 // any url that hits this app
-app.all('*', (req, res) => {
-    // figure out the appropriate route
-    match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
-        if (redirectLocation) {
-            res.redirect(301, redirectLocation.pathname + redirectLocation.search)
-        } else if (error) {
-            res.status(500).send(error.message)
-        } else if (renderProps === null) {
-            res.status(404).send('Not found')
-        // otherwise the component was found
-        } else {
-            // initial application state
-            const initialState = JSON.stringify(store.getState())
-            // initial component to render
-            const initialComponent = (
-                <Provider store={store}>
-                    <RoutingContext {...renderProps} />
-                </Provider>
-            )
+app.all('*',
+    (req, res) => {
+        // figure out the appropriate route
+        match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
+            if (redirectLocation) {
+                res.redirect(301, redirectLocation.pathname + redirectLocation.search)
+            } else if (error) {
+                res.status(500).send(error.message)
+            } else if (renderProps === null) {
+                res.status(404).send('Not found')
+            // otherwise the component was found
+            } else {
+                // initial application state
+                const initialState = JSON.stringify(store.getState())
+                // initial component to render
+                const initialComponent = (
+                    <Provider store={store}>
+                        <RoutingContext {...renderProps} />
+                    </Provider>
+                )
 
-            // render the jade template with the component mounted
-            res.render('index.jade', {
-                initialState,
-                renderedComponent: renderToString(initialComponent),
-            })
-        }
-    })
-})
+                // render the jade template with the component mounted
+                res.render('index.jade', {
+                    initialState,
+                    renderedComponent: renderToString(initialComponent),
+                })
+            }
+        })
+    }
+)
 
 
 // export the application

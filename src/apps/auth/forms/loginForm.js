@@ -8,7 +8,9 @@ const {TextField, EmailField} = fields
 // the form to handle user signups
 export default class SignupForm extends Form {
     static fields = [
-        TextField('username'),
+        TextField('email', {
+            label: 'e-mail',
+        }),
         EmailField('password'),
     ]
 }
