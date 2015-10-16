@@ -34,6 +34,8 @@ class FormComponent extends React.Component {
         }).then(({redirect, ...unusedResponseData}) => {
             // if the response is a redirect
             window.location = redirect
+        }).catch((error) => {
+            console.log(`error: ${error}`)
         })
     }
 

@@ -15,7 +15,7 @@ import logger from 'morgan'
 import serveStatic from 'serve-static'
 
 // local imports
-import {buildDir, assetsDir} from '../config/projectPaths'
+import {buildDir, assetsDir} from 'config/projectPaths'
 import {api, auth, frontend} from './apps'
 
 

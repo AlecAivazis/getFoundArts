@@ -1,5 +1,5 @@
 // import the core database
-import database from '../../../core/database'
+import database from 'core/database'
 import {Schema} from 'mongoose'
 // import the string and date types
 // import {STRING, TEXT} from 'sequelize'

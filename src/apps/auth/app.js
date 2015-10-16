@@ -2,47 +2,25 @@
 import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
-import session from 'express-session'
 import cookieParser from 'cookie-parser'
-import connectRedis from 'connect-redis'
-import {createClient} from 'redis'
+import session from 'express-session'
 // local imports
-import auth from '../../core/auth'
+import {secretKey} from 'config/settings'
+import auth from 'core/auth'
 import SignUpForm from './forms/signupForm'
-import User from './models/User'
+import User from 'core/auth/models/User'
 
 // create the express app
 const app = express()
 
-// the redis store object
-const RedisStore = connectRedis(session)
 
 // use jade as the templating engine
 app.set('view engine', 'jade')
 app.set('views', path.join(__dirname, 'templates'))
 
-// configure middlewares
-app.use(cookieParser('secretString1'))
-app.use(session({
-    store: new RedisStore({
-        client: createClient(),
-        host: 'localhost',
-        port: 6379,
-    }),
-    secret: 'secretString2',
-    resave: false,
-    saveUninitialized: false,
-}))
-
-// parse the json body
-const jsonParser = bodyParser.json()
-const urlEncodedParser = bodyParser.raw()
-
-app.use(jsonParser)
-app.use(urlEncodedParser)
-
-app.use(auth.initialize())
-app.use(auth.session())
+app.use(bodyParser.json())
+app.use(cookieParser(secretKey))
+app.use(bodyParser.urlencoded({extended: true}))
 
 // the token to create
 
@@ -70,6 +48,7 @@ app.post('/signup', (req, res) => {
     }
 })
 
+
 app.get('/test',
     (req, res, next) => {
         console.log(req.session)
@@ -78,45 +57,33 @@ app.get('/test',
     }
 )
 
+
 // the public login point
 app.post('/login', (req, res, next) => {
-    // authenticate the request
-    // note: this is done as a custom callback in order to support ajax redirects
-    auth.authenticate('local-login', (authError, user) => {
-        console.log(user)
-        // if there was an error while logging in
-        if (authError) {
-            // pass the error on
-            return next(authError)
-        }
-        // if there was no user
-        if (!user) {
-            // redirect the request to the login page
-            return res.send(JSON.stringify({
-                redirect: '/login',
-            }))
-        }
-        // the user was authenticated
-
-        // create the users session
-        req.login(user, (loginError) => {
-            // if there was an error logging in
-            if (loginError) {
-                // pass it on
-                next(loginError)
-            }
-
-            console.log(`logged in: ${user.id}`)
-            console.log(`req user: ${req.user}`)
-            req.session.foo = 'bar'
-            // redirect the user to the homepage
-            return res.send(JSON.stringify({
-                redirect: '/test',
-            }))
+    // grab the provided credentials from the request
+    // const {email, password} = req.body
+    // console.log(email, password)
+    const email = 'foo@foo.com'
+    const password = 'password'
+    // sign in the user with the credentials
+    auth.login(res, email, password)
+        .then((user) => {
+            console.log('logged in ' + user.id)
+            // res.send('hello')
+            res.redirect('/')
+            // res.send(JSON.stringify({
+            //     redirect: '/',
+            // }))
         })
-    })(req, res, next)
-
+        // if there was an error
+        .catch((err) => {
+            console.log(err)
+            // TODO: add flash message
+            // redirect back to the login page
+            res.redirect('/login')
+        })
 })
+
 
 // export the application
 export default app
