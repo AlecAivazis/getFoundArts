@@ -18,9 +18,9 @@ const app = express()
 app.set('view engine', 'jade')
 app.set('views', path.join(__dirname, 'templates'))
 
-app.use(bodyParser.json())
-app.use(cookieParser(secretKey))
+// app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+// app.use(cookieParser(secretKey))
 
 // the token to create
 
@@ -61,10 +61,10 @@ app.get('/test',
 // the public login point
 app.post('/login', (req, res, next) => {
     // grab the provided credentials from the request
-    // const {email, password} = req.body
-    // console.log(email, password)
-    const email = 'foo@foo.com'
-    const password = 'password'
+    const {email, password} = req.body
+    console.log(email, password)
+    // const email = 'foo@foo.com'
+    // const password = 'password'
     // sign in the user with the credentials
     auth.login(res, email, password)
         .then((user) => {

@@ -17,27 +17,27 @@ class FormComponent extends React.Component {
     }
 
 
-    submitForm(formData) {
-        // post to the correct url
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: formData,
-        // if the request was made
-        }).then((response) => {
-            // interpret the response as json
-            return response.json()
-        // handle the response
-        }).then(({redirect, ...unusedResponseData}) => {
-            // if the response is a redirect
-            window.location = redirect
-        }).catch((error) => {
-            console.log(`error: ${error}`)
-        })
-    }
+    // submitForm(formData) {
+    //     // post to the correct url
+    //     fetch('/login', {
+    //         method: 'POST',
+    //         headers: {
+    //             Accept: 'application/json',
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: formData,
+    //     // if the request was made
+    //     }).then((response) => {
+    //         // interpret the response as json
+    //         return response.json()
+    //     // handle the response
+    //     }).then(({redirect, ...unusedResponseData}) => {
+    //         // if the response is a redirect
+    //         window.location = redirect
+    //     }).catch((error) => {
+    //         console.log(`error: ${error}`)
+    //     })
+    // }
 
 
 
@@ -65,6 +65,7 @@ class FormComponent extends React.Component {
                     fieldStyle={styles.inputContainer}
                     labelStyle={styles.label}
                     inputStyle={styles.input}
+                    action='/login'
                     submitContainerStyle={styles.submitContainer}
                 />
             </div>

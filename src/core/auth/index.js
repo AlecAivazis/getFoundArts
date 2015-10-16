@@ -42,7 +42,9 @@ async function login(response, email, password) {
     var token = jwt.sign({userId: user.id, maxAge: '1d'}, secretKey)
     // var token = 'joe'
     // add the token to the request cookies
-    response.cookie('authToken', token)
+    response.cookie('authToken', token, {
+        signed: true,
+    })
 
     // pass the user onto the next guy
     return user
