@@ -4,7 +4,6 @@ import moment from 'moment'
 // local imports
 import {secretKey} from 'config/settings'
 import User from './models/User' // TODO: bring this to global configuration
-import setCookie from '../util/setCookie'
 
 
 /**
@@ -34,16 +33,15 @@ async function authenticate(email, password) {
 /**
  * Log the user into the current session store
  */
-async function login(response, email, password) {
+async function login(res, email, password) {
     // authenticate the credentials
     const user = await authenticate(email, password)
 
     // generate a jwt for the
     var token = jwt.sign({userId: user.id, maxAge: '1d'}, secretKey)
-    // var token = 'joe'
     // add the token to the request cookies
-    response.cookie('authToken', token, {
-        signed: true,
+    res.cookie('authToken', token, {
+        // signed: true,
     })
 
     // pass the user onto the next guy
@@ -51,8 +49,48 @@ async function login(response, email, password) {
 }
 
 
+/**
+ * Check that the request has the necessary authentication credentials and
+ * add the matching user to the request if they are valid.
+ */
+function requireAuthentication() {
+    // return the express middleware
+    return (req, res, next) => {
+        try {
+            // grab the auth token from the request cookies
+            const {authToken} = req.cookies
+            // check if the auth token was added to the request header
+            if (authToken) {
+                // verify and decode the token
+                const decoded = jwt.verify(authToken, secretKey)
+                // find the user with the matching id
+                User.findById(decoded.userId, (err, user) => {
+                    // if there was an error looking for the user
+                    if (err) {
+                        throw new Error(err)
+                    }
+                    // set the user of the request
+                    req.user = user
+                    // we're done here
+                    next()
+                })
+            } else {
+                throw new Error('AuthToken cannot be found')
+            }
+        // if the current session is not authenticated
+        } catch (error) {
+            // figure out the url we were supposed to go to
+            const targetRoute = req.url
+            // redirect the user to a login page that will pass them on
+            res.redirect(`/login?redirect_to=${targetRoute}`)
+        }
+    }
+}
+
+
 // module exports
 export default {
     authenticate,
     login,
+    requireAuthentication,
 }
