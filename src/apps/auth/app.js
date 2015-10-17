@@ -20,12 +20,11 @@ app.set('views', path.join(__dirname, 'templates'))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(cookieParser(secretKey))
+app.use(cookieParser())
 app.use(session({
     secret: secretKey,
 }))
 
-// the token to create
 
 // the url the user will POST to in order to sign up
 app.post('/signup', (req, res) => {
@@ -75,6 +74,8 @@ app.post('/login', (req, res, next) => {
         })
 })
 
+
+// make sure we store the query parameter to handle the redirect
 app.get('/login', (req, res, next) => {
     // grab the query parameters
     const {redirect_to} = req.query

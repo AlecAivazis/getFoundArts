@@ -8,6 +8,7 @@ import {Provider} from 'react-redux'
 import {templatesDir} from 'config/projectPaths'
 import routes from './routes'
 import store from './store'
+import auth from 'core/auth'
 
 
 // create the express app
