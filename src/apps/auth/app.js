@@ -21,6 +21,9 @@ app.set('views', path.join(__dirname, 'templates'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser(secretKey))
+app.use(session({
+    secret: secretKey,
+}))
 
 // the token to create
 
@@ -49,28 +52,20 @@ app.post('/signup', (req, res) => {
 })
 
 
-app.get('/test',
-    (req, res, next) => {
-        console.log(req.session)
-        console.log(`user at /test: ${req.user}`)
-        res.send(req.user)
-    }
-)
-
-
 // the public login point
 app.post('/login', (req, res, next) => {
     // grab the provided credentials from the request
     const {email, password} = req.body
+    // grab the used session values
+    const {redirect_to} = req.session
     // sign in the user with the credentials
-    console.log(req.query)
     auth.login(res, email, password)
         .then((user) => {
-            // res.send('hello')
-            // res.redirect('/')
-            // res.send(JSON.stringify({
-            //     redirect: '/',
-            // }))
+            // send a json redirect object
+            res.send(JSON.stringify({
+                // use the session value
+                redirect: redirect_to || '/',
+            }))
         })
         // if there was an error
         .catch((err) => {
@@ -78,6 +73,15 @@ app.post('/login', (req, res, next) => {
             // redirect back to the login page
             res.redirect('/login')
         })
+})
+
+app.get('/login', (req, res, next) => {
+    // grab the query parameters
+    const {redirect_to} = req.query
+    // store the redirect parameter in the session
+    req.session.redirect_to = redirect_to
+    // we are done here
+    next()
 })
 
 
