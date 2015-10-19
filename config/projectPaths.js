@@ -32,9 +32,9 @@ var webpackDir = path.join(configDir, 'webpack')
 // mongo db config file
 var mongoConfig = path.join(configDir, 'mongo.yaml')
 // database directory
-var dbDir =
+var dbDir
     // resolve full path from relative path
-    path.resolve(
+    = path.resolve(
         // parse mongo config from yaml into json, grab desired attribute
         yaml.safeLoad(fs.readFileSync(mongoConfig)).storage.dbPath
     )
