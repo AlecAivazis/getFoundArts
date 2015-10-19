@@ -1,6 +1,5 @@
 // third party imports
 import jwt from 'jsonwebtoken'
-import moment from 'moment'
 // local imports
 import {secretKey} from 'config/settings'
 import User from './models/User' // TODO: bring this to global configuration
@@ -13,7 +12,7 @@ async function authenticate(email, password) {
     // deal with possible errors
     try {
         // grab the user with the matching email
-        const user = await User.findOne({email: email})
+        const user = await User.findOne({email})
         // if the password matches
         if (user.password === password) {
             console.log('authenticated')
@@ -21,11 +20,11 @@ async function authenticate(email, password) {
             return user
         }
         // the passwords do not match
-        throw new Error("supplied passwords don't match")
+        throw new Error('Incorrect password')
     // if there was a problem retrieving the user
-    } catch (e) {
+    } catch (error) {
         // throw the error
-        throw new Error(`There was a problem retrieving the user: ${e.message}`)
+        throw new Error(`There was a problem retrieving the user: ${error.message}`)
     }
 }
 
@@ -82,7 +81,7 @@ function requireAuthentication() {
             // figure out the url we were supposed to go to
             const targetRoute = req.url
             // redirect the user to a login page that will pass them on
-            res.redirect(`/login?redirect_to=${targetRoute}`)
+            res.redirect(`/login?redirectTo=${targetRoute}`)
         }
     }
 }

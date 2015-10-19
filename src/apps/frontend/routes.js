@@ -10,6 +10,6 @@ import Login from './views/login'
 export default (
     <Route path='/' component={RootComponent}>
         <IndexRoute component={SplashPage} />
-        <Route path='/login' component={Login}/>
+        <Route path='login' component={Login} />
     </Route>
 )

@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch'
 // import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 // form test imports
-import LoginForm from '../../../../apps/auth/forms/loginForm'
+import LoginForm from 'apps/auth/forms/loginForm'
 
 
 @radium
@@ -32,7 +32,7 @@ class FormComponent extends React.Component {
             // interpret the response as json
             return response.json()
         // handle the response
-        }).then(({redirect, ...unusedResponseData}) => {
+        }).then(({redirect}) => {
             // if the response is a redirect
             window.location = redirect
         }).catch((error) => {
@@ -45,7 +45,7 @@ class FormComponent extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {style, ...unused_props} = this.props
+        const {style, ...unusedProps} = this.props
 
         const container_style = {
             ...style,
@@ -55,12 +55,12 @@ class FormComponent extends React.Component {
 
         // render the new component
         return (
-            <div style={container_style} {...unused_props}>
+            <div style={container_style} {...unusedProps}>
                 <h1 style={styles.header}>
-                    Please log-in to view that page.
+                    Please log in to view that page.
                 </h1>
                 <MoonluxForm
-                    form={LoginForm} ref='form' {...unused_props}
+                    form={LoginForm} ref='form' {...unusedProps}
                     style={styles.form}
                     onSubmit={this.submitForm}
                     fieldStyle={styles.inputContainer}

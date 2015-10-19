@@ -6,7 +6,7 @@ import colors from 'colors'
 import LoginForm from './loginForm'
 
 @Radium
-class Splash extends React.Component {
+class Login extends React.Component {
 
     static propTypes = {}
 
@@ -54,11 +54,11 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-    }
+    },
 }
 
 
-export default Splash
+export default Login
 
 
 // end of file
