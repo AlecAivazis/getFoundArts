@@ -1,15 +1,15 @@
 // third party imports
 import mongoose from 'mongoose'
 // local imports
-import {database as databaseSetting} from '../../config/settings'
+import {database as databaseSetting} from 'config/settings'
 // grab the used values of the database config
-const {name, username, password, host, engine, file, ...unusedSetting} = databaseSetting
+const {host, port, name} = databaseSetting
 
 // the url for the mongoose database
-const moongooseUrl = `mongodb://${host}/${name}`
+const mongoURI = `mongodb://${host}:${port}/${name}`
 
 // create the mongoose instance
-const database = mongoose.connect(host)
+const database = mongoose.connect(mongoURI)
 
 // third party imports
 // import Sequelize from 'sequelize'

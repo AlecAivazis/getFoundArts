@@ -1,7 +1,5 @@
-// third party imports
-import path from 'path'
 // local imports
-import projectPaths from './projectPaths'
+// import projectPaths from './projectPaths'
 
 export const secretKey = 'secret'
 
@@ -10,8 +8,7 @@ export const database = {
     engine: 'mongoose',
     name: 'getFoundArts',
     host: 'localhost',
-    // file: path.join(projectPaths.databaseDir, 'db.sqlite3'), // for sqlite only
-    // username: '',
-    // password: '',
-
+    port: '27017',
+    username: 'gfa',
+    password: 'catfluff666',
 }

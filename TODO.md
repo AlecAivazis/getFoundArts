@@ -1,6 +1,6 @@
 * radium is a bitch for universal (vendor prefixes)
 * DRY style
-* gzip static assets
+* add authentication to mongodb
 * form validation
 * deployment
     * nginx config
