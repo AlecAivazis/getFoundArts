@@ -41,6 +41,7 @@ async function login(res, email, password) {
     // add the token to the request cookies
     res.cookie('authToken', token, {
         // signed: true,
+        HttpOnly: true,
     })
 
     // pass the user onto the next guy
