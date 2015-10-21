@@ -30,14 +30,31 @@ async function authenticate(email, password) {
 
 
 /**
+ * Create a hash with the authentication information for the given user
+ */
+function profileForUser(user) {
+    return {
+        userId: user.id,
+        roles: user.roles || [],
+    }
+}
+
+
+/**
  * Log the user into the current session store
  */
 async function login(res, email, password) {
     // authenticate the credentials
     const user = await authenticate(email, password)
 
+    // the json object to tokenize
+    const jsonToken = {
+        ...profileForUser(user),
+        maxAge: '1d',
+    }
+
     // generate a jwt for the
-    var token = jwt.sign({userId: user.id, maxAge: '1d'}, secretKey)
+    var token = jwt.sign(jsonToken, secretKey)
     // add the token to the request cookies
     res.cookie('authToken', token, {
         // signed: true,
@@ -45,6 +62,19 @@ async function login(res, email, password) {
     })
 
     // pass the user onto the next guy
+    return user
+}
+
+
+/**
+ * Return the user corresponding to the given auth token.
+ */
+async function userByToken(token) {
+    // verify and decode the token
+    const decoded = jwt.verify(token)
+    // grab the user specified by the token
+    const user = await User.findById(decoded.userId)
+    // return the user
     return user
 }
 
@@ -93,4 +123,6 @@ export default {
     authenticate,
     login,
     requireAuthentication,
+    profileForUser,
+    userByToken,
 }
