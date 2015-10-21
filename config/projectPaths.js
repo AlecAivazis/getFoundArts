@@ -31,13 +31,11 @@ var webpackDir = path.join(configDir, 'webpack')
 
 // mongo db config file
 var mongoConfig = path.join(configDir, 'mongo.yaml')
-// database directory
-var dbDir
-    // resolve full path from relative path
-    = path.resolve(
-        // parse mongo config from yaml into json, grab desired attribute
-        yaml.safeLoad(fs.readFileSync(mongoConfig)).storage.dbPath
-    )
+// database directory (needs to be an absolute path)
+var databaseDir = path.resolve(
+    // parse mongo config from yaml into json, grab desired attribute
+    yaml.safeLoad(fs.readFileSync(mongoConfig)).storage.dbPath
+)
 
 
 // export the project paths|globs object
@@ -51,7 +49,7 @@ module.exports = {
     frontendDir: frontendDir,
     templatesDir: templatesDir,
     configDir: configDir,
-    dbDir: dbDir,
+    databaseDir: databaseDir,
     // entry points
     clientEntry: path.join(frontendDir, 'client.js'),
     serverEntry: path.join(sourceDir, 'server.js'),
