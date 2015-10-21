@@ -2,6 +2,7 @@
 import React from 'react'
 import radium from 'radium'
 import fetch from 'isomorphic-fetch'
+import cookies from 'browser-cookies'
 // import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 // form test imports
@@ -24,6 +25,7 @@ class FormComponent extends React.Component {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
+                'csrf-token': cookies.get('csrfToken'),
             },
             credentials: 'include',
             body: formData,
