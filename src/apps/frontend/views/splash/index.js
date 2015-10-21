@@ -68,19 +68,19 @@ class Splash extends React.Component {
         super()
         // the initial state
         this.state = {
-            form_visible: false,
+            formIsVisible: false,
         }
         // bind various functions
-        this.show_form = this.show_form.bind(this)
+        this.showForm = this.showForm.bind(this)
     }
 
 
-    show_form() {
+    showForm() {
         // if the form is not showing
-        if (!this.state.form_visible) {
+        if (!this.state.formIsVisible) {
             // toggle the form
             this.setState({
-                form_visible: true,
+                formIsVisible: true,
             }, () => {
                 // focus the first input
                 this.refs.form.focus()
@@ -92,14 +92,14 @@ class Splash extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {...unused_props} = this.props
+        const {...unusedProps} = this.props
         // the list of categories
         const {categories} = this
         // the style of the form toggle button
-        const form_toggle_style = !this.state.form_visible ? styles.form_toggle_open : {}
+        const formToggleStyle = !this.state.formIsVisible ? styles.formToggleOpen : {}
         // render the component
         return (
-            <section style={styles.container} {...unused_props}>
+            <section style={styles.container} {...unusedProps}>
                 <header style={styles.header}>
                     <img
                         src='/static/images/logo-charcoal.png'
@@ -107,13 +107,13 @@ class Splash extends React.Component {
                     />
                 </header>
                 {categories.map((category, index) => {
-                    const category_index = index + 1
+                    const categoryIndex = index + 1
                     // the alignment of the category
-                    const orientation = category_index % 2 ? 'right' : 'left'
+                    const orientation = categoryIndex % 2 ? 'right' : 'left'
                     // if we are not rendering the last category
                     if (index !== categories.length - 1) {
                         // apply the category style
-                        var category_style = styles.categoryBorder
+                        var categoryStyle = styles.categoryBorder
                     }
                     // render a category component
                     return (
@@ -121,18 +121,20 @@ class Splash extends React.Component {
                                         subtitle={category.subtitle}
                                         bullets={category.bullets}
                                         icons={category.icons}
-                                        index={category_index}
+                                        index={categoryIndex}
                                         orientation={orientation}
                                         key={index}
-                                        style={category_style}/>
+                                        style={categoryStyle}/>
                     )
                 })}
-                <section onClick={this.show_form}
-                         style={[styles.form_container, form_toggle_style]} >
+                <section
+                    onClick={this.showForm}
+                    style={[styles.formContainer, formToggleStyle]}
+                >
                     <div>
                         Get Started
                     </div>
-                    { this.state.form_visible ? <SignUpForm ref='form'/> : '' }
+                    { this.state.formIsVisible ? <SignUpForm ref='form' /> : '' }
                 </section>
             </section>
         )
@@ -156,10 +158,10 @@ const styles = {
     categoryBorder: {
         borderBottom: '1px solid #C8C7C7',
     },
-    form_toggle_open: {
+    formToggleOpen: {
         cursor: 'pointer',
     },
-    form_container: {
+    formContainer: {
         backgroundColor: '#E8EDF3',
         borderTop: '1px solid #CBD0D7',
         textAlign: 'center',

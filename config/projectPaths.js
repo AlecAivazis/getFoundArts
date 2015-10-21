@@ -5,6 +5,9 @@
 
 // node imports
 var path = require('path')
+var fs = require('fs')
+// third party imports
+var yaml = require('js-yaml')
 
 
 // project root directory
@@ -25,8 +28,14 @@ var frontendDir = path.join(appsDir, 'frontend')
 var templatesDir = path.join(frontendDir, 'templates')
 // webpack configuration directory
 var webpackDir = path.join(configDir, 'webpack')
-// the directory with the database file
-var databaseDir = path.join(rootDir, 'db')
+
+// mongo db config file
+var mongoConfig = path.join(configDir, 'mongo.yaml')
+// database directory (needs to be an absolute path)
+var databaseDir = path.resolve(
+    // parse mongo config from yaml into json, grab desired attribute
+    yaml.safeLoad(fs.readFileSync(mongoConfig)).storage.dbPath
+)
 
 
 // export the project paths|globs object
@@ -51,6 +60,7 @@ module.exports = {
     clientBuildGlob: path.join(buildDir, 'client', '*'),
     serverBuildGlob: path.join(buildDir, 'server', '*'),
     // configuration files
+    mongoConfig: mongoConfig,
     eslintConfig: path.join(configDir, 'eslint.json'),
     karmaConfig: path.join(configDir, 'karma.js'),
     webpackBaseConfig: path.join(webpackDir, 'base.js'),

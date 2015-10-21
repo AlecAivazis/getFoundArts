@@ -26,23 +26,25 @@ const port = 8000
 
 
 /* Configure Middleware */
+
 app.use(logger('dev'))
 
 
-
 /* Configure Routes */
+
+// ORDER IS IMPORTANT HERE!
+
 app.use('/static', serveStatic(buildDir), serveStatic(assetsDir))
 app.use('/', auth)
-app.use('/', api)
-app.use('/', frontend) // this needs to be last
+app.use('/api', api)
+app.use('/', frontend)
 
 
 /* eslint-disable no-console */
 // have server listen on port 8000
-app.listen(port, () => console.log(`listening on ${port}`))
+app.listen(port, () => console.log(`[${new Date()}] Now listening on port: ${port}`))
 /* eslint-enable no-console */
 
 
 // export application instance
 export default app
-

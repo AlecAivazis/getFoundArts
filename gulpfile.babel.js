@@ -14,6 +14,7 @@ import {
     serverBuildGlob,
     clientEntry,
     serverEntry,
+    mongoConfig,
     webpackClientConfig as webpackClientConfigPath,
     webpackServerConfig as webpackServerConfigPath,
     karmaConfig as karmaConfigPath,
@@ -22,11 +23,17 @@ const webpackClientConfig = require(webpackClientConfigPath)
 const webpackServerConfig = require(webpackServerConfigPath)
 
 
-console.log(serverBuild)
+/**
+ * Run the mongo database.
+ * Note: the db path must exist.  Mongo will not create it for you.
+ */
+gulp.task('rundb', shell.task(`mongod --config ${mongoConfig}`))
+
+
 /**
  * Run the development server.
  */
-gulp.task('runserver', shell.task('nodemon ' + serverBuild))
+gulp.task('runserver', shell.task(`nodemon ${serverBuild}`))
 
 
 /**

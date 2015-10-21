@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch'
 // import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 // form test imports
-import SignUpForm from '../../../../apps/auth/forms/signupForm'
+import SignUpForm from 'apps/auth/forms/signupForm'
 
 
 @radium
@@ -50,12 +50,12 @@ class FormComponent extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {style, ...unused_props} = this.props
+        const {style, ...unusedProps} = this.props
         // render the new component
         return (
-            <MoonluxForm form={SignUpForm} ref='form' {...unused_props}
+            <MoonluxForm form={SignUpForm} ref='form' {...unusedProps}
                          onSubmit={this.submitForm}
-                         fieldStyle={styles.input_container}
+                         fieldStyle={styles.inputContainer}
                          labelStyle={styles.label}
                          inputStyle={styles.input}
                          style={{...styles.form, ...style}} />
@@ -63,12 +63,13 @@ class FormComponent extends React.Component {
     }
 }
 
+
 const styles = {
     form: {
         marginTop: 50,
         textAlign: 'right',
     },
-    input_container: {
+    inputContainer: {
         marginBottom: 30,
         display: 'flex',
         alignItems: 'flex-start',
