@@ -13,6 +13,7 @@ import logger from 'morgan'
 // import csrf from 'csurf'
 // import directory from 'serve-index'
 import serveStatic from 'serve-static'
+import csrf from 'csurf'
 
 // local imports
 import {buildDir, assetsDir} from 'config/projectPaths'
@@ -34,9 +35,22 @@ app.use(logger('dev'))
 
 // ORDER IS IMPORTANT HERE!
 
+
+
 app.use('/static', serveStatic(buildDir), serveStatic(assetsDir))
 app.use('/', auth)
 app.use('/api', api)
+
+// enable csrf protection after the api does its thing with cookies/sessions
+app.use(csrf())
+// add a csurf token to every client as a cookie
+app.get('*', (req, res, next) => {
+    // add the csrf token to the requests cookie
+    res.cookie('csrfToken', req.csrfToken())
+    // we're done here
+    next()
+})
+
 app.use('/', frontend)
 
 
