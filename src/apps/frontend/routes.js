@@ -5,11 +5,13 @@ import {Route, IndexRoute} from 'react-router'
 import RootComponent from './views/root'
 import SplashPage from './views/splash'
 import Login from './views/login'
+import Users from './views/users'
 
 
 export default (
     <Route path='/' component={RootComponent}>
         <IndexRoute component={SplashPage} />
         <Route path='login' component={Login} />
+        <Route path='users' component={Users} />
     </Route>
 )

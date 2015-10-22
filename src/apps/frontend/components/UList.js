@@ -1,13 +1,11 @@
 // third party imports
 import React, {Component, PropTypes} from 'react'
-import radium from 'radium'
 
 
 /**
  * Minimal wrapper over native <ul> and <li> tags.
  */
-@radium
-export default class List extends Component {
+export default class UnorderedList extends Component {
     static propTypes = {
         style: PropTypes.object,
         listItemStyle: PropTypes.object,
@@ -16,10 +14,10 @@ export default class List extends Component {
 
     render() {
         // pull out the used props
-        const {style, listItemStyle, children} = this.props
+        const {listItemStyle, children, ...unusedProps} = this.props
 
         return (
-            <ul style={style}>
+            <ul {...unusedProps}>
                 {React.Children.map(children, (child, key) => (
                     <li
                         style={listItemStyle}

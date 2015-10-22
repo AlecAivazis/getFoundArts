@@ -24,7 +24,7 @@ app.post('/graphql', textBodyParser, (req, res) => {
 
 // provide authentication information for the user specified by a jwt
 app.post('authenticate', textBodyParser, (req, res) => {
-    // grab the corresponding user
+    // grab the user corresponding to the token that is sent by the request
     auth.userByToken(req.body)
         .then((user) => {
             // create a json response out of the users authentication profile
