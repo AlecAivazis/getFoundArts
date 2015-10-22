@@ -5,3 +5,4 @@
 * deployment
     * nginx config
     * upstart file
+* add error pages
