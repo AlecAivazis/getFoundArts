@@ -43,7 +43,6 @@ const styles = {
         backgroundColor: colors.lightBlue,
         display: 'flex',
         justifyContent: 'center',
-        alignItem: 'center',
         borderTop: `1px solid ${colors.grey}`,
     },
     loginForm: {

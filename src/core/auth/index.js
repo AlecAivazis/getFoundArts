@@ -33,6 +33,10 @@ async function authenticate(email, password) {
  * Create a hash with the authentication information for the given user
  */
 function profileForUser(user) {
+    if (!user) {
+        throw new Error('cannot ask for profile of falsey user')
+    }
+
     return {
         userId: user.id,
         roles: user.roles || [],

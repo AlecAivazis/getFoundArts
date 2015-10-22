@@ -7,7 +7,8 @@ import {Provider} from 'react-redux'
 // local imports
 import {templatesDir} from 'config/projectPaths'
 import routes from './routes'
-import store from './store'
+import {createStore} from './store'
+import auth from 'core/auth'
 
 
 // create the express app
@@ -20,39 +21,40 @@ app.set('views', templatesDir)
 
 
 // any url that hits this app
-app.all('*',
-    (req, res, next) => {
-        // figure out the appropriate route
-        match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
-            // if there was an error
-            if (error) {
-                res.status(500).send(error.message)
-            // if the location is a redirect
-            } else if (redirectLocation) {
-                res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-            // if the location was found and is not a redirect
-            } else if (renderProps) {
-                // initial application state
-                const initialState = JSON.stringify(store.getState())
-                // initial component to render
-                const initialComponent = (
-                    <Provider store={store}>
-                        <RoutingContext {...renderProps} />
-                    </Provider>
-                )
+app.all('*', (req, res) => {
+    // figure out the appropriate route
+    match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
+        // if there was an error
+        if (error) {
+            res.status(500).send(error.message)
+        // if the location is a redirect
+        } else if (redirectLocation) {
+            res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+        // if the location was found and is not a redirect
+        } else if (renderProps) {
+            const store = createStore({
+                auth: auth && req.user ? auth.profileForUser(req.user) : null,
+            })
+            // initial application state
+            const initialState = JSON.stringify(store.getState())
+            // initial component to render
+            const initialComponent = (
+                <Provider store={store}>
+                    <RoutingContext {...renderProps} />
+                </Provider>
+            )
 
-                // render the jade template with the component mounted
-                res.render('index.jade', {
-                    initialState,
-                    renderedComponent: renderToString(initialComponent),
-                })
-            // otherwise the location was not found
-            } else {
-                res.status(404).send('Not found')
-            }
-        })
-    }
-)
+            // render the jade template with the component mounted
+            res.render('index.jade', {
+                initialState,
+                renderedComponent: renderToString(initialComponent),
+            })
+        // otherwise the location was not found
+        } else {
+            res.status(404).send('Not found')
+        }
+    })
+})
 
 
 // export the application

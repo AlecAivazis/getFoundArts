@@ -1,9 +1,11 @@
 // third party imports
 import React from 'react'
 import radium from 'radium'
+import {Link} from 'react-router'
 // local imports
 import Branding from './branding'
 import Navigation from './navigation'
+
 
 @radium
 class Header extends React.Component {
@@ -21,6 +23,7 @@ class Header extends React.Component {
         // render the component
         return (
             <header style={header_style} {...unused_props}>
+                <Link to='/users'>Users</Link>
                 <Branding />
                 <Navigation/>
             </header>

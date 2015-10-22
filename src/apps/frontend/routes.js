@@ -17,9 +17,9 @@ export default (
             // list of roles that can access this route
             const roles = ['admin']
             // grab current user's authentication data off of redux store
-            const {auth} = window.moonluxStore.getState()
+            const {auth} = window.moonluxStore.getState() || {roles: []}
 
-            // if the user's authentication does not have one of the required roles
+            // if the user's auth does not have one of the required roles
             if (intersection(roles, auth.roles).length === 0) {
                 // redirect to the login page
                 replaceState({redirectTo: nextState.location.pathname}, '/login')
