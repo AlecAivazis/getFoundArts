@@ -20,6 +20,9 @@ const initialState = window.__INITIAL_STATE__
 // instantiate frontend store with initial application state
 const store = createStore(initialState)
 
+// expose the store on the window for the authentication to later access
+window.moonluxStore = store
+
 // render the routed application
 ReactDOM.render(
     <Provider store={store}>
