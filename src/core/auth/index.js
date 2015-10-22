@@ -73,13 +73,15 @@ async function login(res, email, password) {
 /**
  * Return the user corresponding to the given auth token.
  */
-async function userByToken(token) {
+function userByToken(token) {
+    // if the supplied token is falsey
+    if (!token) {
+        throw new Error('asking for profile of falsey user')
+    }
     // verify and decode the token
-    const decoded = jwt.verify(token)
-    // grab the user specified by the token
-    const user = await User.findById(decoded.userId)
-    // return the user
-    return user
+    const decoded = jwt.verify(token, secretKey)
+    // return the user specified by the token
+    return User.findById(decoded.userId)
 }
 
 

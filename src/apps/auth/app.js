@@ -13,8 +13,8 @@ import User from 'core/auth/models/User'
 // create the express app
 const app = express()
 
+const jsonParser = bodyParser.json()
 
-app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
 app.use(session({
@@ -25,7 +25,7 @@ app.use(session({
 
 
 // the url the user will POST to in order to sign up
-app.post('/signup', (req, res) => {
+app.post('/signup', jsonParser, (req, res) => {
     // load the form with the data
     const form = new SignUpForm(req.body)
     // if the form is valid
@@ -48,7 +48,7 @@ app.post('/signup', (req, res) => {
 
 
 // the public login point
-app.post('/login', (req, res) => {
+app.post('/login', jsonParser, (req, res) => {
     // grab the provided credentials from the request
     const {email, password} = req.body
     // grab the used session values
@@ -59,7 +59,7 @@ app.post('/login', (req, res) => {
             // send a json redirect object
             res.send(JSON.stringify({
                 // use the session value
-                redirect: redirectTo || '/',
+                redirectTo: redirectTo || '/',
             }))
         })
         // if there was an error

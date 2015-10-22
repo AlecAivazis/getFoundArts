@@ -23,13 +23,15 @@ app.post('/graphql', textBodyParser, (req, res) => {
 
 
 // provide authentication information for the user specified by a jwt
-app.post('authenticate', textBodyParser, (req, res) => {
-    // grab the user corresponding to the token that is sent by the request
-    auth.userByToken(req.body)
-        .then((user) => {
-            // create a json response out of the users authentication profile
-            res.send(JSON.stringify(auth.profileForUser(user)))
-        })
+app.post('/authenticate', textBodyParser, async function (req, res, next) {
+    try {
+        // grab the user corresponding to the request auth token cookie
+        const user = await auth.userByToken(req.cookies.authToken)
+        // create a json response out of the users authentication profile
+        res.send(JSON.stringify(auth.profileForUser(user)))
+    } catch (err) {
+        res.status(400).send(err.message)
+    }
 })
 
 

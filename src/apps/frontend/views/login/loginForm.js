@@ -34,9 +34,10 @@ class FormComponent extends React.Component {
             // interpret the response as json
             return response.json()
         // handle the response
-        }).then(({redirect}) => {
+        }).then(({redirectTo}) => {
+            // console.log(redirectTo)
             // if the response is a redirect
-            window.location = redirect
+            window.location = redirectTo
         }).catch((error) => {
             console.log(`error: ${error}`)
         })

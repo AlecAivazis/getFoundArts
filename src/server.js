@@ -36,7 +36,6 @@ app.use(logger('dev'))
 // ORDER IS IMPORTANT HERE!
 
 
-
 app.use('/static', serveStatic(buildDir), serveStatic(assetsDir))
 app.use('/', auth)
 app.use('/api', api)
