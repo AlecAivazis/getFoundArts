@@ -66,7 +66,10 @@ app.post('/login', jsonParser, (req, res) => {
         .catch(error => {
             // TODO: add flash message
             // redirect back to the login page
-            res.redirect('/login')
+            res.send(JSON.stringify({
+                // use the session value
+                redirectTo: '/login',
+            }))
         })
 })
 

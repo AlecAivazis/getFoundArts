@@ -13,9 +13,12 @@ async function authenticate(email, password) {
     try {
         // grab the user with the matching email
         const user = await User.findOne({email})
+        // if the user was not found
+        if (!user) {
+            throw new Error('Could not find user with that email')
+        }
         // if the password matches
         if (user.password === password) {
-            console.log('authenticated')
             // return the user
             return user
         }
