@@ -6,3 +6,5 @@
     * nginx config
     * upstart file
 * add error pages
+* a good window mock
+* use history api location rather than relying on other query-string package

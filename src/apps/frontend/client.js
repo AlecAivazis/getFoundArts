@@ -6,14 +6,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router} from 'react-router'
 import {Provider} from 'react-redux'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
 // local imports
 import routes from 'apps/frontend/routes'
 import {createStore} from 'apps/frontend/store'
+import history from './history'
 
-
-// use the browser's native history
-const history = createBrowserHistory()
 
 // grab the initial application state passed from the server
 const initialState = window.__INITIAL_STATE__
@@ -22,8 +19,6 @@ const store = createStore(initialState)
 
 // expose the store on the window for the authentication to later access
 window.moonluxStore = store
-// expose the history as a global variable
-window.history = history
 
 // render the routed application
 ReactDOM.render(

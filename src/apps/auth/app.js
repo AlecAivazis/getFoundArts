@@ -61,7 +61,7 @@ app.post('/login', jsonParser, (req, res) => {
                 // send the user authentication profile to the frontend
                 userInfo: auth.profileForUser(user),
                 // use the session value
-                redirectTo: redirectTo || '/',
+                redirectTo: redirectTo || req.headers['redirect-to'] || '/',
             }))
         })
         // if there was an error
@@ -77,14 +77,14 @@ app.post('/login', jsonParser, (req, res) => {
 
 
 // make sure we store the query parameter to handle the redirect
-app.get('/login', (req, res, next) => {
-    // grab the query parameters
-    const {redirectTo} = req.query
-    // store the redirect parameter in the session
-    req.session.redirectTo = redirectTo
-    // we are done here
-    next()
-})
+// app.get('/login', (req, res, next) => {
+//     // grab the query parameters
+//     const {redirectTo} = req.query
+//     // store the redirect parameter in the session
+//     req.session.redirectTo = redirectTo
+//     // we are done here
+//     next()
+// })
 
 
 // export the application

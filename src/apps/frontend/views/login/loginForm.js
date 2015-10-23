@@ -7,18 +7,19 @@ import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 import intersection from 'lodash/array/intersection'
 import flatten from 'lodash/array/flatten'
 import isEqual from 'lodash/lang/isEqual'
+import queryString from 'query-string'
 // local imports
 import LoginForm from 'apps/auth/forms/loginForm'
 import {setAuthenticationCheck} from 'core/auth/client'
 import loginAction from 'core/auth/actions/login'
+import history from 'apps/frontend/history'
 
 
 @radium
 class FormComponent extends React.Component {
 
-
     submitForm(formData) {
-
+        console.log(location)
         // post to the correct url
         fetch('/login', {
             method: 'POST',
@@ -26,6 +27,7 @@ class FormComponent extends React.Component {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
                 'csrf-token': cookies.get('csrfToken'),
+                'redirect-to': queryString.parse(location.search).redirectTo || '',
             },
             credentials: 'include',
             body: formData,
@@ -37,6 +39,7 @@ class FormComponent extends React.Component {
         }).then(({redirectTo, userInfo}) => {
             // save a reference to the redux store
             const store = window.moonluxStore
+            console.log(userInfo)
             // set the authentication handler
             setAuthenticationCheck((...roles) => {
                 // grab the auth data from the store
@@ -48,13 +51,9 @@ class FormComponent extends React.Component {
             store.dispatch(loginAction(userInfo))
 
             // if the response contains a redirect
-            if (redirectTo) {
-                console.log(`redirecting to ${redirectTo}`)
-
+            if (redirectTo && history) {
                 // perform the redirect
-                // window.location = redirectTo
-                window.history.pushState(null, redirectTo)
-                console.log(window.history)
+                history.pushState(null, redirectTo)
             }
         }).catch((error) => {
             console.log(`error: ${error}`)
