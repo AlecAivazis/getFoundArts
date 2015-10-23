@@ -42,7 +42,7 @@ function profileForUser(user) {
 
     return {
         userId: user.id,
-        roles: user.roles || [],
+        roles: user.roles || ['admin'],
     }
 }
 

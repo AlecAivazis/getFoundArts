@@ -32,9 +32,7 @@ app.all('*', (req, res) => {
             res.redirect(302, redirectLocation.pathname + redirectLocation.search)
         // if the location was found and is not a redirect
         } else if (renderProps) {
-            const store = createStore({
-                auth: auth && req.user ? auth.profileForUser(req.user) : null,
-            })
+            const store = createStore()
             // initial application state
             const initialState = JSON.stringify(store.getState())
             // initial component to render

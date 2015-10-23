@@ -29,9 +29,9 @@ function buildClosure() {
     /**
      * Check if the role is authenticated using the provided handler
      */
-    function checkRole(role) {
+    function checkRoles(role) {
         // if there is no handler specified
-        if (!typeof authHandler === 'undefined') {
+        if (typeof authHandler === 'undefined') {
             // the user is not logged in
             return false
         }
@@ -42,7 +42,7 @@ function buildClosure() {
 
     return {
         setAuthenticationCheck,
-        checkRole,
+        checkRoles,
     }
 }
 
