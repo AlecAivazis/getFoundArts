@@ -62,6 +62,7 @@
     "react-dom": "^0.14.0",
     "react-redux": "^3.0.1",
     "react-router": "^1.0.0-rc1",
+    "react-spinkit": "^1.1.4",
     "redis": "^2.2.3",
     "redux": "^3.0.2",
     "redux-responsive": "^0.1.0",

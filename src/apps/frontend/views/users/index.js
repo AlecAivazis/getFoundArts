@@ -1,6 +1,7 @@
 // third party imports
 import React from 'react'
 import Radium from 'radium'
+import Spinner from 'react-spinkit'
 // local imports
 
 @Radium
@@ -27,7 +28,7 @@ class Login extends React.Component {
         // render the root view
         return (
             <div style={styles.container}>
-                user list
+                <Spinner spinnerName='three-bounce' />
             </div>
         )
     }
@@ -39,9 +40,11 @@ const styles = {
         display: 'flex',
         backgroundColor: 'white',
         height: '100%',
-        padding: 80,
+        padding: '100px 80px 80px 80px',
         boxSizing: 'border-box',
-    }
+        justifyContent: 'center',
+        fontSize: '64px',
+    },
 }
 
 
