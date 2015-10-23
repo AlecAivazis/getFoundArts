@@ -58,6 +58,8 @@ app.post('/login', jsonParser, (req, res) => {
         .then(user => {
             // send a json redirect object
             res.send(JSON.stringify({
+                // send the user authentication profile to the frontend
+                userInfo: auth.profileForUser(user),
                 // use the session value
                 redirectTo: redirectTo || '/',
             }))

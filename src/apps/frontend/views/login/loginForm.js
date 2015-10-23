@@ -3,22 +3,22 @@ import React from 'react'
 import radium from 'radium'
 import fetch from 'isomorphic-fetch'
 import cookies from 'browser-cookies'
-// import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
-// form test imports
+import intersection from 'lodash/array/intersection'
+import flatten from 'lodash/array/flatten'
+import isEqual from 'lodash/lang/isEqual'
+// local imports
 import LoginForm from 'apps/auth/forms/loginForm'
+import {setAuthenticationCheck} from 'core/auth/client'
+import loginAction from 'core/auth/actions/login'
 
 
 @radium
 class FormComponent extends React.Component {
 
-    constructor(...args) {
-        // instantiate this
-        super(...args)
-    }
-
 
     submitForm(formData) {
+
         // post to the correct url
         fetch('/login', {
             method: 'POST',
@@ -34,15 +34,32 @@ class FormComponent extends React.Component {
             // interpret the response as json
             return response.json()
         // handle the response
-        }).then(({redirectTo}) => {
-            // console.log(redirectTo)
-            // if the response is a redirect
-            window.location = redirectTo
+        }).then(({redirectTo, userInfo}) => {
+            // save a reference to the redux store
+            const store = window.moonluxStore
+            // set the authentication handler
+            setAuthenticationCheck((...roles) => {
+                // grab the auth data from the store
+                const {auth} = typeof window !== 'undefined' ? store.getState() : {auth: {}}
+                // return true if the data is unchanged and the user has the required role
+                return isEqual(auth, userInfo) && intersection(auth.roles, flatten([...roles])).length > 0
+            })
+            // update the store with the users info
+            store.dispatch(loginAction(userInfo))
+
+            // if the response contains a redirect
+            if (redirectTo) {
+                console.log(`redirecting to ${redirectTo}`)
+
+                // perform the redirect
+                // window.location = redirectTo
+                window.history.pushState(null, redirectTo)
+                console.log(window.history)
+            }
         }).catch((error) => {
             console.log(`error: ${error}`)
         })
     }
-
 
 
     // render the component
@@ -65,7 +82,7 @@ class FormComponent extends React.Component {
                 <MoonluxForm
                     form={LoginForm} ref='form' {...unusedProps}
                     style={styles.form}
-                    onSubmit={this.submitForm}
+                    onSubmit={this.submitForm.bind(this)}
                     fieldStyle={styles.inputContainer}
                     labelStyle={styles.label}
                     inputStyle={styles.input}

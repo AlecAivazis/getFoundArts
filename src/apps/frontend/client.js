@@ -22,6 +22,8 @@ const store = createStore(initialState)
 
 // expose the store on the window for the authentication to later access
 window.moonluxStore = store
+// expose the history as a global variable
+window.history = history
 
 // render the routed application
 ReactDOM.render(

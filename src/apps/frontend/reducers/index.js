@@ -1,16 +1,12 @@
 // third party imports
 import {combineReducers} from 'redux'
-import {responsiveStateReducer} from 'redux-responsive'
+import {responsiveStateReducer as browser} from 'redux-responsive'
+// local imports
+import auth from 'core/auth/reducer'
 
 
 // export the reducers
 export default combineReducers({
-    browser: responsiveStateReducer,
-    auth: (state, action) => {
-        return {
-            roles: [
-                'admin'
-            ],
-        }
-    },
+    browser,
+    auth,
 })
