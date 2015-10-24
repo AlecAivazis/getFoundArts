@@ -51,8 +51,6 @@ app.post('/signup', jsonParser, (req, res) => {
 app.post('/login', jsonParser, (req, res) => {
     // grab the provided credentials from the request
     const {email, password} = req.body
-    // grab the used session values
-    const {redirectTo} = req.session
     // sign in the user with the credentials
     auth.login(res, email, password)
         .then(user => {
@@ -60,8 +58,6 @@ app.post('/login', jsonParser, (req, res) => {
             res.send(JSON.stringify({
                 // send the user authentication profile to the frontend
                 userInfo: auth.profileForUser(user),
-                // use the session value
-                redirectTo: redirectTo || req.headers['redirect-to'] || '/',
             }))
         })
         // if there was an error

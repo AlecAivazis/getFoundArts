@@ -28,8 +28,6 @@ class FormComponent extends React.Component {
 
 
     submitForm(formData) {
-        console.log('submitting form')
-        console.log(cookies.get('csrfToken'))
         // post to the correct url
         fetch('/signup', {
             method: 'POST',

@@ -1,14 +1,11 @@
 // react imports
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
-import fetch from 'isomorphic-fetch'
-import cookies from 'browser-cookies'
 // local imports
 import RootComponent from './views/root'
 import SplashPage from './views/splash'
 import Login from './views/login'
 import Users from './views/users'
-import validateHttpPromise from 'core/util/validateHttpPromise'
 import {checkRoles} from 'core/auth/client'
 
 

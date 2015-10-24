@@ -1,63 +1,25 @@
 // third party imports
 import React from 'react'
 import radium from 'radium'
-import fetch from 'isomorphic-fetch'
-import cookies from 'browser-cookies'
 import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
-import intersection from 'lodash/array/intersection'
-import flatten from 'lodash/array/flatten'
-import isEqual from 'lodash/lang/isEqual'
 import queryString from 'query-string'
 // local imports
 import LoginForm from 'apps/auth/forms/loginForm'
-import {setAuthenticationCheck} from 'core/auth/client'
 import loginAction from 'core/auth/actions/login'
-import history from 'apps/frontend/history'
 
 
 @radium
 class FormComponent extends React.Component {
 
-    submitForm(formData) {
-        console.log(location)
-        // post to the correct url
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'csrf-token': cookies.get('csrfToken'),
-                'redirect-to': queryString.parse(location.search).redirectTo || '',
-            },
-            credentials: 'include',
-            body: formData,
-        // if the request was made
-        }).then((response) => {
-            // interpret the response as json
-            return response.json()
-        // handle the response
-        }).then(({redirectTo, userInfo}) => {
-            // save a reference to the redux store
-            const store = window.moonluxStore
-            console.log(userInfo)
-            // set the authentication handler
-            setAuthenticationCheck((...roles) => {
-                // grab the auth data from the store
-                const {auth} = typeof window !== 'undefined' ? store.getState() : {auth: {}}
-                // return true if the data is unchanged and the user has the required role
-                return isEqual(auth, userInfo) && intersection(auth.roles, flatten([...roles])).length > 0
-            })
-            // update the store with the users info
-            store.dispatch(loginAction(userInfo))
-
-            // if the response contains a redirect
-            if (redirectTo && history) {
-                // perform the redirect
-                history.pushState(null, redirectTo)
-            }
-        }).catch((error) => {
-            console.log(`error: ${error}`)
-        })
+    submitForm({email, password}) {
+        // save a reference to the redux store
+        const store = window.moonluxStore
+        // log in the user with the form data
+        store.dispatch(loginAction({
+            email,
+            password,
+            redirectTo: queryString.parse(location.search).redirectTo || '/',
+        }))
     }
 
 
