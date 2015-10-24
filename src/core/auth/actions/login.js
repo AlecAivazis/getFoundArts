@@ -21,6 +21,83 @@ export const setAuthInfo = (userInfo) => {
     }
 }
 
+async function dispatchInfo(dispatch, authenticateHandler) {
+    // log in using the specified handler
+    const userInfo = await authenticateHandler()
+    // save a reference to the redux store
+    const store = window.moonluxStore
+    // add the validation callback
+    setAuthenticationCheck((...roles) => {
+        // grab the auth data from the store
+        const {auth} = typeof window !== 'undefined' ? store.getState() : {auth: {}}
+        // return true if the data is unchanged and the user has the required role
+        return isEqual(auth, userInfo) && intersection(auth.roles, flatten([...roles])).length > 0
+    })
+
+    // load the user info into the redux store
+    dispatch(setAuthInfo(userInfo))
+
+}
+
+
+async function authenticateUserInfo(dispatch, email = false, password = false) {
+    console.log('authenticating with information')
+    // fetch the authentication information
+    function authenticate() {
+        return fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'csrf-token': cookies.get('csrfToken'),
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                email,
+                password,
+            }),
+        // validate the request and then use the json result
+        }).then(validateHttpPromise).then((response) => {
+            return response.json()
+        })
+    }
+
+    // const {userInfo} = await authenticate()
+    // console.log(userInfo)
+    // dispatch the info that is a result of the handler
+    dispatchInfo(dispatch, authenticate)
+}
+
+
+async function authenticateLocalToken(dispatch, token) {
+    console.log('authenticating with a token')
+    // fetch the authentication information
+    function authenticate() {
+        return fetch('/api/authenticateAuthToken', {
+            method: 'POST',
+            headers: {
+                'csrf-token': cookies.get('csrfToken'),
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+        // validate the request and then use the json result
+        }).then(validateHttpPromise).then((response) => {
+            return response.json()
+        })
+    }
+
+    try {
+        const userInfo = await authenticate()
+        console.log(userInfo)
+
+    } catch (error) {
+        console.log(`error: ${error}`)
+    }
+
+    // dispatch the info that is a result of the handler
+    dispatchInfo(dispatch, authenticate)
+}
+
+
 /**
  * This middleware attempts to authenticate the user information based on a jwt or
  * email/password combo and protects the authentication data in a closure to detect tampering.
@@ -28,41 +105,14 @@ export const setAuthInfo = (userInfo) => {
 export default ({email, password, jwt, redirectTo}) => async function (dispatch) {
     // try to authenticate the provided information
     try {
-        // fetch the authentication information
-        function authenticate() {
-            return fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'csrf-token': cookies.get('csrfToken'),
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    jwt: jwt || false,
-                    email: email || false,
-                    password: password || false,
-                }),
-            // validate the request and then use the json result
-            }).then(validateHttpPromise).then((response) => {
-                return response.json()
-            })
+        // if using email authentication credentials
+        if (email) {
+            // authenticate and add the user information to the client
+            authenticateUserInfo(dispatch, email, password)
+        // otherwise if we are using the jwt as an authentication credential
+        } else if (jwt) {
+            authenticateLocalToken(dispatch)
         }
-
-        // log in using the specified data
-        const {userInfo} = await authenticate()
-        // save a reference to the redux store
-        const store = window.moonluxStore
-        // add the validation callback
-        setAuthenticationCheck((...roles) => {
-            // grab the auth data from the store
-            const {auth} = typeof window !== 'undefined' ? store.getState() : {auth: {}}
-            // return true if the data is unchanged and the user has the required role
-            return isEqual(auth, userInfo) && intersection(auth.roles, flatten([...roles])).length > 0
-        })
-
-        // load the user info into the redux store
-        dispatch(setAuthInfo(userInfo))
-
         // if the response contains a redirect
         if (history && redirectTo) {
             // perform the redirect
@@ -70,7 +120,11 @@ export default ({email, password, jwt, redirectTo}) => async function (dispatch)
         }
     // if there was a problem while logging in
     } catch (error) {
-        // redirect back to the login page
-        history.pushState(null, '/login')
+        console.log('there was an error logging in')
+        // if we were supposed to handle a redirect
+        if (typeof redirectTo === 'undefined') {
+            // redirect back to the login page
+            history.pushState(null, `/login?redirectTo=${redirectTo}`)
+        }
     }
 }

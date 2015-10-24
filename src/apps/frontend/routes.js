@@ -1,4 +1,4 @@
-// react imports
+// third party imports
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
 // local imports
@@ -7,10 +7,22 @@ import SplashPage from './views/splash'
 import Login from './views/login'
 import Users from './views/users'
 import {checkRoles} from 'core/auth/client'
+import loginAction from 'core/auth/actions/login'
 
 
 export default (
-    <Route path='/' component={RootComponent}>
+    <Route path='/'
+        component={RootComponent}
+        onEnter={(nextState, replaceState) => {
+            if (typeof document !== 'undefined' && typeof window !== 'undefined') {
+                // log in the user
+                window.moonluxStore.dispatch(loginAction({
+                    jwt: true,
+                }))
+            }
+
+        }
+    }>
         <IndexRoute
             component={SplashPage}
         />
