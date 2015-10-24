@@ -21,9 +21,15 @@ export const setAuthInfo = (userInfo) => {
     }
 }
 
-async function dispatchInfo(dispatch, authenticateHandler) {
+async function dispatchInfo(dispatch, authenticateHandler, redirectTo) {
     // log in using the specified handler
-    const userInfo = await authenticateHandler()
+    const {userInfo} = await authenticateHandler()
+    // if the info does not exist
+    if (typeof userInfo === 'undefined') {
+        // dont do anything else
+        return
+    }
+
     // save a reference to the redux store
     const store = window.moonluxStore
     // add the validation callback
@@ -36,12 +42,15 @@ async function dispatchInfo(dispatch, authenticateHandler) {
 
     // load the user info into the redux store
     dispatch(setAuthInfo(userInfo))
-
+    // if we are supposed to redirect
+    if (history && redirectTo) {
+        // perform the redirect
+        history.pushState(null, redirectTo)
+    }
 }
 
 
-async function authenticateUserInfo(dispatch, email = false, password = false) {
-    console.log('authenticating with information')
+async function authenticateUserInfo(dispatch, redirectTo, email = false, password = false) {
     // fetch the authentication information
     function authenticate() {
         return fetch('/login', {
@@ -61,15 +70,12 @@ async function authenticateUserInfo(dispatch, email = false, password = false) {
         })
     }
 
-    // const {userInfo} = await authenticate()
-    // console.log(userInfo)
     // dispatch the info that is a result of the handler
-    dispatchInfo(dispatch, authenticate)
+    dispatchInfo(dispatch, authenticate, redirectTo)
 }
 
 
-async function authenticateLocalToken(dispatch, token) {
-    console.log('authenticating with a token')
+async function authenticateLocalToken(dispatch, redirectTo) {
     // fetch the authentication information
     function authenticate() {
         return fetch('/api/authenticateAuthToken', {
@@ -85,16 +91,8 @@ async function authenticateLocalToken(dispatch, token) {
         })
     }
 
-    try {
-        const userInfo = await authenticate()
-        console.log(userInfo)
-
-    } catch (error) {
-        console.log(`error: ${error}`)
-    }
-
     // dispatch the info that is a result of the handler
-    dispatchInfo(dispatch, authenticate)
+    dispatchInfo(dispatch, authenticate, redirectTo)
 }
 
 
@@ -108,15 +106,10 @@ export default ({email, password, jwt, redirectTo}) => async function (dispatch)
         // if using email authentication credentials
         if (email) {
             // authenticate and add the user information to the client
-            authenticateUserInfo(dispatch, email, password)
+            authenticateUserInfo(dispatch, redirectTo, email, password)
         // otherwise if we are using the jwt as an authentication credential
         } else if (jwt) {
             authenticateLocalToken(dispatch)
-        }
-        // if the response contains a redirect
-        if (history && redirectTo) {
-            // perform the redirect
-            history.pushState(null, redirectTo)
         }
     // if there was a problem while logging in
     } catch (error) {

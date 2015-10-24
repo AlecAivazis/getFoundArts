@@ -1,6 +1,7 @@
 // third party imports
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
+import once from 'lodash/function/once'
 // local imports
 import RootComponent from './views/root'
 import SplashPage from './views/splash'
@@ -9,6 +10,11 @@ import Users from './views/users'
 import {checkRoles} from 'core/auth/client'
 import loginAction from 'core/auth/actions/login'
 
+const loadByToken = once(() => {
+    window.moonluxStore.dispatch(loginAction({
+        jwt: true,
+    }))
+})
 
 export default (
     <Route path='/'
@@ -16,11 +22,8 @@ export default (
         onEnter={(nextState, replaceState) => {
             if (typeof document !== 'undefined' && typeof window !== 'undefined') {
                 // log in the user
-                window.moonluxStore.dispatch(loginAction({
-                    jwt: true,
-                }))
+                loadByToken()
             }
-
         }
     }>
         <IndexRoute
