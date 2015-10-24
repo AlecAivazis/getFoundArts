@@ -64,7 +64,7 @@ export default ({email, password, jwt, redirectTo}) => async function (dispatch)
         dispatch(setAuthInfo(userInfo))
 
         // if the response contains a redirect
-        if (history) {
+        if (history && redirectTo) {
             // perform the redirect
             history.pushState(null, redirectTo)
         }
