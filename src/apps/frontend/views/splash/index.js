@@ -1,6 +1,5 @@
 // third party imports
 import React from 'react'
-import Autoprefixer from 'inline-style-prefixer'
 // local imports
 import SplashCategory from './splashCategory'
 import SignUpForm from './signupForm'
@@ -141,10 +140,10 @@ class Splash extends React.Component {
     }
 }
 
-const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
-const styles = prefixer.prefix({
+const styles = {
     header: {
         height: 400,
+        marginTop: 50,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -170,7 +169,7 @@ const styles = prefixer.prefix({
         padding: 50,
         marginBottom: 100,
     },
-})
+}
 
 
 export default Splash

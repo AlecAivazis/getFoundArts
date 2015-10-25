@@ -1,7 +1,6 @@
 // third party imports
 import React from 'react'
 import Spinner from 'react-spinkit'
-import Autoprefixer from 'inline-style-prefixer'
 // local imports
 
 class Login extends React.Component {
@@ -34,8 +33,7 @@ class Login extends React.Component {
 }
 
 
-const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
-const styles = prefixer.prefix({
+const styles = {
     container: {
         display: 'flex',
         backgroundColor: 'white',
@@ -45,7 +43,7 @@ const styles = prefixer.prefix({
         justifyContent: 'center',
         fontSize: '64px',
     },
-})
+}
 
 
 export default Login

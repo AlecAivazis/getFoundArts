@@ -1,6 +1,5 @@
 // third party imports
 import React from 'react'
-import Autoprefixer from 'inline-style-prefixer'
 import {Link} from 'react-router'
 // local imports
 import Branding from './branding'
@@ -30,8 +29,7 @@ class Header extends React.Component {
     }
 }
 
-const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
-const styles = prefixer.prefix({
+const styles = {
     header: {
         backgroundColor: 'white',
         padding: '10px 20px',
@@ -45,8 +43,9 @@ const styles = prefixer.prefix({
         top: 0,
         left: 0,
         right: 0,
+        height: 60,
     },
-})
+}
 
 
 export default Header

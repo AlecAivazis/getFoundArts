@@ -1,6 +1,5 @@
 // third party imports
 import React from 'react'
-import Autoprefixer from 'inline-style-prefixer'
 import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 import queryString from 'query-string'
 // local imports
@@ -55,8 +54,7 @@ class FormComponent extends React.Component {
 }
 
 
-const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
-const styles = prefixer.prefix({
+const styles = {
     container: {
         borderRadius: 2,
         boxShadow: `4px 4px 11px 0px rgba(219,216,216,.5)`,
@@ -101,7 +99,7 @@ const styles = prefixer.prefix({
     submitContainer: {
         marginRight: '10%',
     },
-})
+}
 
 
 export default FormComponent

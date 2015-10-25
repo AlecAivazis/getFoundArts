@@ -1,7 +1,6 @@
 // third party imports
 import React from 'react'
 import {connect} from 'react-redux'
-import Autoprefixer from 'inline-style-prefixer'
 // local imports
 import CategoryHeader from './categoryHeader'
 import BulletList from './bulletList'
@@ -180,8 +179,7 @@ const iconListBase = {
 }
 
 
-const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
-const styles = prefixer.prefix({
+const styles = {
     containerLeft: {
         ...containerLargeBase,
         flexDirection: 'row',
@@ -258,8 +256,7 @@ const styles = prefixer.prefix({
         position: 'relative',
         marginLeft: '2.14286em', // magic...
     },
-})
-
+}
 
 
 export default SplashCategory
