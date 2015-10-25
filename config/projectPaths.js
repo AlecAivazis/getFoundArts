@@ -5,10 +5,6 @@
 
 // node imports
 var path = require('path')
-var fs = require('fs')
-// third party imports
-var yaml = require('js-yaml')
-
 
 // project root directory
 var rootDir = path.join(__dirname, '..')

@@ -25,14 +25,14 @@ export const setAuthInfo = (userInfo) => {
  * This middleware attempts to authenticate the user information based on a jwt or
  * email/password combo and protects the authentication data in a closure to detect tampering.
  */
-export default ({email, password, jwt, redirectTo}) => async (dispatch) => {
+export default ({email, password, redirectTo}) => async (dispatch) => {
     // try to authenticate the provided information
     try {
 
         // grab the user info from the appropriate source
         const {userInfo} = email
-                            ? await authenticateUserInfo(dispatch, redirectTo, email, password)
-                            : await authenticateLocalToken(dispatch)
+                            ? await authenticateUserInfo(email, password)
+                            : await authenticateLocalToken()
 
         // if the info does not exist
         if (typeof userInfo === 'undefined') {
@@ -60,7 +60,6 @@ export default ({email, password, jwt, redirectTo}) => async (dispatch) => {
         }
     // if there was a problem while logging in
     } catch (error) {
-        console.log('there was an error logging in')
         // if we were supposed to handle a redirect
         if (typeof redirectTo === 'undefined') {
             // redirect back to the login page
@@ -70,7 +69,7 @@ export default ({email, password, jwt, redirectTo}) => async (dispatch) => {
 }
 
 
-const authenticateUserInfo = async (dispatch, redirectTo, email = false, password = false) => {
+const authenticateUserInfo = async (email = false, password = false) => {
     return fetch('/login', {
         method: 'POST',
         headers: {
@@ -89,7 +88,7 @@ const authenticateUserInfo = async (dispatch, redirectTo, email = false, passwor
 }
 
 
-const authenticateLocalToken = async (dispatch, redirectTo) => {
+const authenticateLocalToken = async () => {
     return fetch('/api/authenticateAuthToken', {
         method: 'POST',
         headers: {

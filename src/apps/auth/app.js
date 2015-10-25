@@ -17,6 +17,7 @@ const jsonParser = bodyParser.json()
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
+
 app.use(session({
     resave: true,
     saveUninitialized: true,
@@ -37,7 +38,7 @@ app.post('/signup', jsonParser, (req, res) => {
             if (error) {
                 res.status(400).send(error.message)
             }
-            res.send(`created user ${user}`)
+            res.send(`created user ${user.id}`)
         })
     // otherwise the form is not valid
     } else {
@@ -66,7 +67,7 @@ app.post('/login', jsonParser, (req, res) => {
             // redirect back to the login page
             res.send(JSON.stringify({
                 // use the session value
-                redirectTo: '/login',
+                error: error.message,
             }))
         })
 })

@@ -1,30 +1,10 @@
 // import the core database
 import database from 'core/database'
 import {Schema} from 'mongoose'
-// import the string and date types
-// import {STRING, TEXT} from 'sequelize'
 
-// // export the user model
-// export default database.define('User', {
-//     name: {
-//         type: STRING,
-//     },
-//     password: {
-//         type: STRING,
-//         defaultValue: 'password',
-//     },
-//     email: {
-//         type: STRING,
-//     },
-//     link: {
-//         type: STRING,
-//     },
-//     message: {
-//         type: TEXT,
-//         allowNull: true,
-//     },
-// })
-
+/**
+ * This schema describes the user information stored in the database.
+ */
 const User = new Schema({
     email: {
         type: String,
@@ -49,7 +29,7 @@ const User = new Schema({
     roles: {
         type: [String],
         default: ['artist'],
-    }
+    },
 })
 
 // export the model that we added to the database

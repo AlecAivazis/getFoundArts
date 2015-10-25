@@ -1,7 +1,6 @@
 // thirdparty imports
 import express from 'express'
 import bodyParser from 'body-parser'
-import {graphql} from 'graphql'
 import graphqlHTTP from 'express-graphql'
 // local imports
 import schema from './schema'
@@ -31,11 +30,18 @@ app.post('/authenticateAuthToken', textBodyParser, async function (req, res, nex
                 userInfo: auth.profileForUser(user),
             }))
         } else {
-            res.send('{"error" : "foo"}')
+            // send the error back to the
+            res.send(JSON.stringify({
+                error: 'No AuthToken found.',
+            }))
         }
-    } catch (err) {
-        res.status(400).send(err.message)
+    } catch (error) {
+        res.status(400).send(JSON.stringify({
+            error: 'Could not retrieve user with your token: ' + error.message,
+        }))
     }
+    // were done here
+    next()
 })
 
 

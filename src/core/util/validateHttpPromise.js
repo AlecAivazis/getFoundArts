@@ -1,4 +1,4 @@
-export default (response, resolve, reject) => {
+export default (response) => {
     // if the response code is in the 200s
     if (response.status >= 200 && response.status < 300) {
         // keep the reponse going

@@ -18,7 +18,7 @@ const userType = new GraphQLObjectType({
         id: {type: GraphQLInt},
         name: {type: GraphQLString},
         email: {type: GraphQLString},
-        roles: {type: new GraphQLList(GraphQLString)}
+        roles: {type: new GraphQLList(GraphQLString)},
     },
 })
 
@@ -30,7 +30,7 @@ const schema = new GraphQLSchema({
             user: {
                 type: userType,
                 args: {
-                    id: {type: GraphQLString}
+                    id: {type: GraphQLString},
                 },
                 resolve: async (_, args) => {
                     // grab the user out of the database from the id
@@ -48,13 +48,12 @@ const schema = new GraphQLSchema({
                     // grab the used args
                     const {role} = args
                     // the list of users to return
-                    let users = []
+                    let users
 
                     // if a role was requested
                     if (role) {
                         // grab users with the matching role
                         users = await User.find({roles: role})
-                        console.log(role, users)
                     // otherwise no role was defined
                     } else {
                         // grab all the users
@@ -67,7 +66,7 @@ const schema = new GraphQLSchema({
             },
 
         },
-    })
+    }),
 })
 
 export default schema

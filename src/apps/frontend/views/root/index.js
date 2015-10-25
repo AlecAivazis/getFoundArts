@@ -1,10 +1,8 @@
 // third party imports
 import React from 'react'
-import cookies from 'browser-cookies'
 // local imports
 import Header from './header'
 import Footer from './footer'
-import loginAction from 'core/auth/actions/login'
 
 
 class RootComponent extends React.Component {

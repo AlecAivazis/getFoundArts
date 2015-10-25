@@ -28,7 +28,6 @@
     "webpack-stream": "^2.1.0"
   },
   "dependencies": {
-    "babel-plugin-react-autoprefix": "^0.2.6",
     "babel-runtime": "^5.8.25",
     "body-parser": "^1.14.1",
     "browser-cookies": "^1.0.8",
@@ -43,21 +42,18 @@
     "express-session": "^1.11.3",
     "glob": "^5.0.14",
     "graphql": "^0.4.7",
-    "hiredis": "^0.4.1",
     "history": "^1.11.0",
+    "inline-style-prefixer": "^0.3.3",
     "isomorphic-fetch": "^2.1.1",
     "jade": "^1.11.0",
     "js-yaml": "^3.4.3",
     "jsonwebtoken": "^5.4.0",
-    "karma": "^0.13.11",
     "lodash": "^3.10.1",
     "mediaquery": "0.0.3",
     "moment": "^2.10.6",
     "mongoose": "^4.1.11",
     "morgan": "^1.6.1",
     "normalize.css": "^3.0.3",
-    "passport": "^0.3.0",
-    "passport-local": "^1.0.0",
     "query-string": "^3.0.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
@@ -68,9 +64,7 @@
     "redux": "^3.0.2",
     "redux-responsive": "^0.1.0",
     "redux-thunk": "^1.0.0",
-    "sequelize": "^3.12.0",
     "serve-static": "^1.10.0",
-    "sqlite3": "^3.1.0",
-    "universal-forms": "0.0.5"
+    "universal-forms": "^0.0.7"
   }
 }
