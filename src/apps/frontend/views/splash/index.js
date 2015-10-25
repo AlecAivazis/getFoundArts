@@ -129,7 +129,7 @@ class Splash extends React.Component {
                 })}
                 <section
                     onClick={this.showForm}
-                    style={[styles.formContainer, formToggleStyle]}
+                    style={{...styles.formContainer, ...formToggleStyle}}
                 >
                     <div>
                         Get Started
