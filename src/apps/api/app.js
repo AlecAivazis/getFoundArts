@@ -3,7 +3,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import graphqlHTTP from 'express-graphql'
 // local imports
-import schema from './schema'
+import schema from './graphqlSchema'
 import auth from 'core/auth'
 
 // create an express app
