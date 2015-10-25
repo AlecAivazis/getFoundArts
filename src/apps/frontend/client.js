@@ -6,6 +6,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router} from 'react-router'
 import {Provider} from 'react-redux'
+import Relay from 'relay'
 // local imports
 import routes from 'apps/frontend/routes'
 import {createStore} from 'apps/frontend/store'

@@ -15,6 +15,7 @@ const textBodyParser = bodyParser.text()
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     pretty: true,
+    graphiql: true,
 }))
 
 
