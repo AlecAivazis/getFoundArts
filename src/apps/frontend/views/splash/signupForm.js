@@ -58,6 +58,7 @@ class FormComponent extends React.Component {
                          fieldStyle={styles.inputContainer}
                          labelStyle={styles.label}
                          inputStyle={styles.input}
+                         resultAsString={true}
                          style={{...styles.form, ...style}} />
         )
     }
