@@ -1,9 +1,7 @@
 // third party imports
 import React from 'react'
-import radium from 'radium'
 
 
-@radium
 class CategoryHeader extends React.Component {
 
 

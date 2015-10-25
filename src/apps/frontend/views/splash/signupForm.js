@@ -1,15 +1,14 @@
 // third party imports
 import React from 'react'
-import radium from 'radium'
 import fetch from 'isomorphic-fetch'
 import cookies from 'browser-cookies'
+import Autoprefixer from 'inline-style-prefixer'
 // import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 // form test imports
 import SignUpForm from 'apps/auth/forms/signupForm'
 
 
-@radium
 class FormComponent extends React.Component {
 
     constructor(...args) {
@@ -65,7 +64,8 @@ class FormComponent extends React.Component {
 }
 
 
-const styles = {
+const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
+const styles = prefixer.prefix({
     form: {
         marginTop: 50,
         textAlign: 'right',
@@ -94,7 +94,7 @@ const styles = {
         resize: 'vertical',
         minHeight: 55,
     },
-}
+})
 
 
 export default FormComponent

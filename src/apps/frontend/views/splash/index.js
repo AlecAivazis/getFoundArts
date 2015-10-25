@@ -1,12 +1,12 @@
 // third party imports
 import React from 'react'
-import Radium from 'radium'
+import Autoprefixer from 'inline-style-prefixer'
 // local imports
 import SplashCategory from './splashCategory'
 import SignUpForm from './signupForm'
 
 
-@Radium
+
 class Splash extends React.Component {
 
     static propTypes = {}
@@ -141,8 +141,8 @@ class Splash extends React.Component {
     }
 }
 
-
-const styles = {
+const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
+const styles = prefixer.prefix({
     header: {
         height: 400,
         display: 'flex',
@@ -170,7 +170,7 @@ const styles = {
         padding: 50,
         marginBottom: 100,
     },
-}
+})
 
 
 export default Splash

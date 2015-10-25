@@ -1,11 +1,9 @@
 // third party imports
 import React from 'react'
-import radium from 'radium'
 // local imports
 import Icon from '../../components/misc/icon'
 
 
-@radium
 class Footer extends React.Component {
 
     // render the component

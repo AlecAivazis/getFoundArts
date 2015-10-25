@@ -1,9 +1,7 @@
 // third party imports
 import React from 'react'
 import {Link} from 'react-router'
-import radium from 'radium'
 
-@radium
 class GFALink extends React.Component {
 
     // render the component

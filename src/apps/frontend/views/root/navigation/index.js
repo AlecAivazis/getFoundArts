@@ -1,12 +1,10 @@
 // third party imports
 import React from 'react'
-import radium from 'radium'
 import omit from 'lodash/object/omit'
 // local imports
 import LinkList from './linkList'
 
 
-@radium
 class Navigation extends React.Component {
 
     // render the component

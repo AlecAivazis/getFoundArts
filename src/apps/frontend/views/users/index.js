@@ -1,10 +1,9 @@
 // third party imports
 import React from 'react'
-import Radium from 'radium'
 import Spinner from 'react-spinkit'
+import Autoprefixer from 'inline-style-prefixer'
 // local imports
 
-@Radium
 class Login extends React.Component {
 
     static propTypes = {}
@@ -35,7 +34,8 @@ class Login extends React.Component {
 }
 
 
-const styles = {
+const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
+const styles = prefixer.prefix({
     container: {
         display: 'flex',
         backgroundColor: 'white',
@@ -45,7 +45,7 @@ const styles = {
         justifyContent: 'center',
         fontSize: '64px',
     },
-}
+})
 
 
 export default Login

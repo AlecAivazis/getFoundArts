@@ -1,10 +1,9 @@
 // third party imports
 import React from 'react'
-import radium from 'radium'
 // local
 import Link from './navigation/link'
 
-@radium
+
 class Branding extends React.Component {
 
     // render the component

@@ -1,11 +1,10 @@
 // third party imports
 import React from 'react'
-import Radium from 'radium'
+import Autoprefixer from 'inline-style-prefixer'
 // local imports
 import colors from 'colors'
 import LoginForm from './loginForm'
 
-@Radium
 class Login extends React.Component {
 
     static propTypes = {}
@@ -36,7 +35,8 @@ class Login extends React.Component {
 }
 
 
-const styles = {
+const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
+const styles = prefixer.prefix({
     container: {
         width: '100%',
         height: '97%',
@@ -54,7 +54,7 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'center',
     },
-}
+})
 
 
 export default Login

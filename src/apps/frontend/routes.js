@@ -15,17 +15,17 @@ const loadByToken = once(() => {
         jwt: true,
     }))
 })
+        // onEnter={(nextState, replaceState) => {
+        //     if (typeof document !== 'undefined' && typeof window !== 'undefined') {
+        //         // log in the user
+        //         loadByToken()
+        //     }
+        // }
 
 export default (
     <Route path='/'
         component={RootComponent}
-        onEnter={(nextState, replaceState) => {
-            if (typeof document !== 'undefined' && typeof window !== 'undefined') {
-                // log in the user
-                loadByToken()
-            }
-        }
-    }>
+    >
         <IndexRoute
             component={SplashPage}
         />

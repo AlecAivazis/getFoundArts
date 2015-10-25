@@ -1,6 +1,6 @@
 // third party imports
 import React from 'react'
-import radium from 'radium'
+import Autoprefixer from 'inline-style-prefixer'
 import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 import queryString from 'query-string'
 // local imports
@@ -8,7 +8,6 @@ import LoginForm from 'apps/auth/forms/loginForm'
 import loginAction from 'core/auth/actions/login'
 
 
-@radium
 class FormComponent extends React.Component {
 
     submitForm({email, password}) {
@@ -55,7 +54,9 @@ class FormComponent extends React.Component {
     }
 }
 
-const styles = {
+
+const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
+const styles = prefixer.prefix({
     container: {
         borderRadius: 2,
         boxShadow: `4px 4px 11px 0px rgba(219,216,216,.5)`,
@@ -100,7 +101,7 @@ const styles = {
     submitContainer: {
         marginRight: '10%',
     },
-}
+})
 
 
 export default FormComponent
