@@ -46,6 +46,10 @@ const User = new Schema({
     message: {
         type: String,
     },
+    roles: {
+        type: [String],
+        default: ['artist'],
+    }
 })
 
 // export the model that we added to the database
