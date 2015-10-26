@@ -5,6 +5,7 @@ import fetch from 'isomorphic-fetch'
 import cookies from 'browser-cookies'
 // local imports
 import UserEntry from './UserEntry'
+import colors from 'colors'
 
 // the data requirements of the component
 const query = `

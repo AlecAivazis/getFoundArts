@@ -34,7 +34,7 @@ export default (
             component={Login}
         />
         <Route
-            path='users'
+            path='members'
             component={Users}
             onEnter={(nextState, replaceState) => {
                 // if the user does not have the right access role

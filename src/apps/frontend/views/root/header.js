@@ -21,7 +21,6 @@ class Header extends React.Component {
         // render the component
         return (
             <header style={header_style} {...unused_props}>
-                <Link to='/users'>Users</Link>
                 <Branding />
                 <Navigation/>
             </header>
