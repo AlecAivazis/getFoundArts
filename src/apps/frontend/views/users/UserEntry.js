@@ -16,21 +16,25 @@ class UserEntry extends React.Component {
         const {user, style, ...unusedProps} = this.props
         // render the component
         return (
-            <div style={{...style, ...styles.container}} {...unusedProps}>
-                <span style={styles.field}>
+            <tr style={{...style, ...styles.container}} {...unusedProps}>
+                <td style={styles.field}>
                     {user.name}
-                </span>
-                <span style={styles.field}>
+                </td>
+                <td style={styles.field}>
                     {user.email}
-                </span>
-            </div>
+                </td>
+                <td style={styles.field}>
+                    <a href={user.link} target='_blank'>
+                        {user.link}
+                    </a>
+                </td>
+            </tr>
         )
     }
 }
 
 const styles = {
     container: {
-        display: 'flex',
         fontSize: '24px',
         height: 35,
         alignItems: 'center',

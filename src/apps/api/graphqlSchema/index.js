@@ -21,6 +21,7 @@ const userType = new GraphQLObjectType({
         name: {type: GraphQLString},
         email: {type: GraphQLString},
         roles: {type: new GraphQLList(GraphQLString)},
+        link: {type: GraphQLString}
     },
 })
 

@@ -12,6 +12,7 @@ const query = `
         users(role: "artist") {
             name,
             email,
+            link,
         }
     }
 `
@@ -56,7 +57,25 @@ class Login extends React.Component {
 
 
     get userList() {
-        return this.state.users.map((user) => <UserEntry user={user} />)
+        return (
+            <table style={styles.table}>
+                <thead style={styles.tableHeader}>
+                    <tr>
+                        <th style={styles.tableHeaderElement}> name </th>
+                        <th style={styles.tableHeaderElement}> email </th>
+                        <th style={styles.tableHeaderElement}> link </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.users.map((user, index) =>
+                        <UserEntry
+                            key={index}
+                            user={user}
+                        />
+                    )}
+                </tbody>
+            </table>
+        )
     }
 
     get loadingSpinner() {
@@ -90,12 +109,22 @@ const styles = {
         padding: '100px 80px 80px 80px',
         boxSizing: 'border-box',
         justifyContent: 'flex-start',
+        alignItems: 'center',
         fontSize: '64px',
         flexDirection: 'column',
     },
     spinner: {
         textAlign: 'center',
     },
+    table: {
+        width: '100%',
+        textAlign: 'center',
+    },
+    tableHeaderElement: {
+        fontSize: '32px',
+        paddingBottom: 20,
+        textTransform: 'capitalize',
+    }
 }
 
 
