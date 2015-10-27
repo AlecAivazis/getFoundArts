@@ -41,7 +41,7 @@ const styles = {
     },
     field: {
         marginRight: 30,
-    }
+    },
 }
 
 

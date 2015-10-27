@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch'
 import cookies from 'browser-cookies'
 // local imports
 import UserEntry from './UserEntry'
-import colors from 'colors'
+
 
 // the data requirements of the component
 const query = `
@@ -50,7 +50,7 @@ class Login extends React.Component {
             }
             if (data) {
                 this.setState({
-                    users: data.users
+                    users: data.users,
                 })
             }
         })
@@ -125,7 +125,7 @@ const styles = {
         fontSize: '32px',
         paddingBottom: 20,
         textTransform: 'capitalize',
-    }
+    },
 }
 
 

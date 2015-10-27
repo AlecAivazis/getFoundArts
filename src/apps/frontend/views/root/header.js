@@ -1,6 +1,5 @@
 // third party imports
 import React from 'react'
-import {Link} from 'react-router'
 // local imports
 import Branding from './branding'
 import Navigation from './navigation'
