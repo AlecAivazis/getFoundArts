@@ -1,6 +1,5 @@
 // fix browser land
 import 'babel-core/polyfill'
-import 'normalize.css'
 // third party imports imports
 import React from 'react'
 import ReactDOM from 'react-dom'
