@@ -71,6 +71,7 @@ class Splash extends React.Component {
         }
         // bind various functions
         this.showForm = this.showForm.bind(this)
+        this.hideForm = this.hideForm.bind(this)
     }
 
 
@@ -85,6 +86,13 @@ class Splash extends React.Component {
                 this.refs.form.focus()
             })
         }
+    }
+
+
+    hideForm() {
+        this.setState({
+            formIsVisible: false,
+        })
     }
 
 
@@ -133,7 +141,7 @@ class Splash extends React.Component {
                     <div>
                         Get Started
                     </div>
-                    { this.state.formIsVisible ? <SignUpForm ref='form' /> : '' }
+                    { this.state.formIsVisible ? <SignUpForm ref='form' hideForm={this.hideForm}/> : '' }
                 </section>
             </section>
         )
