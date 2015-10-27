@@ -23,10 +23,10 @@ class Login extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {...unused_props} = this.props
+        const {style, ...unusedProps} = this.props
         // render the root view
         return (
-            <div style={styles.container}>
+            <div style={{...styles.container, ...style}}>
                 <LoginForm style={styles.loginForm}/>
             </div>
         )
@@ -46,7 +46,7 @@ const styles = {
     loginForm: {
         width: '60%',
         height: 350,
-        backgroundColor: 'white',
+        backgroundColor: colors.white,
         marginTop: 100,
         display: 'flex',
         flexDirection: 'column',

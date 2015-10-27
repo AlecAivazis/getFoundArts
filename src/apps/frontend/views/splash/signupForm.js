@@ -2,11 +2,10 @@
 import React from 'react'
 import fetch from 'isomorphic-fetch'
 import cookies from 'browser-cookies'
-import Autoprefixer from 'inline-style-prefixer'
-// import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
+// local imports
 import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
-// form test imports
 import SignUpForm from 'apps/auth/forms/signupForm'
+import colors from 'colors'
 
 
 class FormComponent extends React.Component {
@@ -53,20 +52,26 @@ class FormComponent extends React.Component {
         const {style, ...unusedProps} = this.props
         // render the new component
         return (
-            <MoonluxForm form={SignUpForm} ref='form' {...unusedProps}
-                         onSubmit={this.submitForm}
-                         fieldStyle={styles.inputContainer}
-                         labelStyle={styles.label}
-                         inputStyle={styles.input}
-                         resultAsString={true}
-                         style={{...styles.form, ...style}} />
+            <MoonluxForm
+                {...unusedProps}
+                ref='form'
+                form={SignUpForm}
+                onSubmit={this.submitForm}
+                fieldStyle={styles.inputContainer}
+                labelStyle={styles.label}
+                inputStyle={styles.input}
+                resultAsString={true}
+                style={{
+                    ...styles.form,
+                    ...style,
+                }}
+            />
         )
     }
 }
 
 
-const prefixer = new Autoprefixer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36')
-const styles = prefixer.prefix({
+const styles = {
     form: {
         marginTop: 50,
         textAlign: 'right',
@@ -89,13 +94,13 @@ const styles = prefixer.prefix({
     input: {
         display: 'inline-block',
         width: '60%',
-        border: '1px solid #C1C1C1',
+        border: `1px solid ${colors.formInputBorder}`,
         boxSizing: 'border-box',
         padding: 10,
         resize: 'vertical',
         minHeight: 55,
     },
-})
+}
 
 
 export default FormComponent

@@ -4,8 +4,9 @@ import {connect} from 'react-redux'
 // local imports
 import CategoryHeader from './categoryHeader'
 import BulletList from './bulletList'
-import UList from '../../../components/UList'
-import Icon from '../../../components/misc/icon'
+import UList from 'components/UList'
+import Icon from 'components/misc/icon'
+import colors from 'colors'
 
 
 @connect(({browser}) => ({browser}))
@@ -120,8 +121,8 @@ class SplashCategory extends React.Component {
 
 const containerBase = {
     boxSizing: 'border-box',
-    backgroundColor: '#FFFFFF',
-    color: '#212428',
+    backgroundColor: colors.white,
+    color: colors.splashCategoryText,
     display: 'flex',
 }
 

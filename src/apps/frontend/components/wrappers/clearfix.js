@@ -10,18 +10,22 @@ class Clearfix extends React.Component {
         const {style} = this.props
 
         // configure the before element
-        const before_style = {
+        const beforeStyle = {
             content: "' '",
             display: 'table',
         }
         // configure the after element
-        const after_style = {
-            ...{clear: 'both'},
-            ...before_style,
+        const afterStyle = {
+            clear: 'both',
+            ...beforeStyle,
         }
 
         return (
-            <BeforeAfterWrapper style={style} before={before_style} after={after_style}>
+            <BeforeAfterWrapper
+                style={style}
+                before={beforeStyle}
+                after={afterStyle}
+            >
                 {this.props.children}
             </BeforeAfterWrapper>
         )

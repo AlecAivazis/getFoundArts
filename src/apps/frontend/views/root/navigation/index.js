@@ -9,14 +9,12 @@ class Navigation extends React.Component {
 
     // render the component
     render() {
-        // grab the used props
-        const {...unused_props} = this.props
-
-        // render the component
         return (
-            <nav {...unused_props}>
-                <LinkList element_style={styles.links}
-                          last_element_style={omit(styles.links, 'paddingRight')}/>
+            <nav {...this.props}>
+                <LinkList
+                    elementStyle={styles.links}
+                    lastElementStyle={omit(styles.links, 'paddingRight')}
+                />
             </nav>
         )
     }
@@ -25,7 +23,7 @@ class Navigation extends React.Component {
 const styles = {
     links: {
         display: 'inline-block',
-        fontSize: '18px',
+        fontSize: 18,
         paddingRight: 20,
     },
 }

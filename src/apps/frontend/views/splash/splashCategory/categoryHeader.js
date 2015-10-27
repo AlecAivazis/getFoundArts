@@ -33,10 +33,10 @@ class CategoryHeader extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {title, subtitle, ...unused_props} = this.props
+        const {title, subtitle, ...unusedProps} = this.props
         // render the component
         return (
-            <header {...unused_props}>
+            <header {...unusedProps}>
                 <h1 style={styles.title}>
                     {title}
                 </h1>
@@ -55,6 +55,7 @@ const styles = {
         fontWeight: 'bold',
         marginBottom: 0,
     },
+
     subtitle: {
         marginTop: 10,
         fontSize: 24,

@@ -13,30 +13,31 @@ class Icon extends React.Component {
             onClick,
             size,
             name,
-            list_style,
+            listStyle,
             fontSize,
-        ...unused_props} = this.props
+            ...unusedProps,
+        } = this.props
 
         // build the icon style dynamically
-        const icon_style = {}
+        const iconStyle = {}
 
         // if they specified a click handler
         if (onClick) {
             // make sure it has the right cursor
-            icon_style.cursor = 'pointer'
+            iconStyle.cursor = 'pointer'
         }
-        // apply the specified icon_styles last
+        // apply the specified iconStyles last
         if (style) {
-            assign(icon_style, style)
+            assign(iconStyle, style)
         }
         // if they specified a color
         if (color) {
-            icon_style.color = color
+            iconStyle.color = color
         }
 
         // if a particular size was specified for the icon
         if (fontSize) {
-            icon_style.fontSize = fontSize
+            iconStyle.fontSize = fontSize
         }
 
         // the base icon class
@@ -49,16 +50,18 @@ class Icon extends React.Component {
             iconName += ` ${prefix}-${size}`
         }
         // if the icon is to be used as a list style
-        if (list_style) {
+        if (listStyle) {
             iconName += ` ${prefix}-li`
         }
 
         // render the icon
         return (
-            <i className={iconName}
-               style={icon_style}
-               onClick={onClick}
-               {...unused_props} />
+            <i
+                className={iconName}
+                style={iconStyle}
+                onClick={onClick}
+                {...unusedProps}
+            />
         )
     }
 }

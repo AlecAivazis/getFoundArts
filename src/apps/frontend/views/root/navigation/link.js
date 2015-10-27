@@ -7,17 +7,19 @@ class GFALink extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {style, ...unused_props} = this.props
-
-        // merge the styles
-        const link_style = {
-            ...styles.link,
-            ...style,
-        }
+        const {style, children, ...unusedProps} = this.props
 
         // render the component
         return (
-            <Link style={link_style} {...unused_props} />
+            <Link
+                style={{
+                    ...styles.link,
+                    ...style,
+                }}
+                {...unusedProps}
+            >
+                {children}
+            </Link>
         )
     }
 }

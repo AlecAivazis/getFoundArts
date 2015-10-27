@@ -1,38 +1,42 @@
 // third party imports
 import React from 'react'
 // local imports
-import Icon from '../../components/misc/icon'
+import Icon from 'components/misc/icon'
+import colors from 'colors'
 
 
 class Footer extends React.Component {
-
     // render the component
     render() {
         // pull out the used properties
-        const {style, ...unused_props} = this.props
-
-        // the footer style
-        const container_style = {
-            ...style,
-            ...styles.container,
-        }
+        const {style, ...unusedProps} = this.props
 
         // render the component
         return (
-            <footer style={container_style} {...unused_props}>
-                <Icon name='copyright' style={styles.copyright_icon}/>
+            <footer
+                style={{
+                    ...style,
+                    ...styles.container,
+                }}
+                {...unusedProps}
+            >
+                <Icon name='copyright' style={styles.copyrightIcon} />
                 2015 Get Found Arts All Right Reserved
             </footer>
         )
     }
 }
 
+
 const styles = {
     container: {
-        color: '#959699',
-        paddingLeft: 30,
+        color: colors.grey2,
+        backgroundColor: colors.grey3,
+        padding: 30,
     },
-    copyright_icon: {
+
+
+    copyrightIcon: {
         marginRight: 10,
     },
 }

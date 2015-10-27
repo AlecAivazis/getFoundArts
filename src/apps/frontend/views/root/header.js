@@ -3,6 +3,7 @@ import React from 'react'
 // local imports
 import Branding from './branding'
 import Navigation from './navigation'
+import colors from 'colors'
 
 
 class Header extends React.Component {
@@ -10,38 +11,33 @@ class Header extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {style, ...unused_props} = this.props
+        const {style, ...unusedProps} = this.props
 
-        // the style of the header element
-        const header_style = {
-            ...style,
-            ...styles.header,
-        }
         // render the component
         return (
-            <header style={header_style} {...unused_props}>
+            <header
+                style={{
+                    ...styles.header,
+                    ...style,
+                }}
+                {...unusedProps}
+            >
                 <Branding />
-                <Navigation/>
+                <Navigation />
             </header>
         )
     }
 }
 
+
 const styles = {
     header: {
-        backgroundColor: 'white',
+        backgroundColor: colors.white,
         padding: '10px 20px',
-        fontSize: '24px',
+        fontSize: 24,
         display: 'flex',
-        width: '100%',
-        boxSizing: 'border-box',
         alignItems: 'center',
         justifyContent: 'space-between',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 60,
     },
 }
 

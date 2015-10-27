@@ -5,6 +5,7 @@ import queryString from 'query-string'
 // local imports
 import LoginForm from 'apps/auth/forms/loginForm'
 import loginAction from 'core/auth/actions/login'
+import colors from 'colors'
 
 
 class FormComponent extends React.Component {
@@ -26,26 +27,28 @@ class FormComponent extends React.Component {
         // pull out the used properties
         const {style, ...unusedProps} = this.props
 
-        const container_style = {
-            ...style,
-            ...styles.container,
-        }
-
 
         // render the new component
         return (
-            <div style={container_style} {...unusedProps}>
+            <div
+                {...unusedProps}
+                style={{
+                    ...styles.container,
+                    ...style,
+                }}
+            >
                 <h1 style={styles.header}>
                     Please log in to view that page.
                 </h1>
                 <MoonluxForm
-                    form={LoginForm} ref='form' {...unusedProps}
+                    {...unusedProps}
+                    form={LoginForm}
+                    ref='form'
                     style={styles.form}
                     onSubmit={this.submitForm.bind(this)}
                     fieldStyle={styles.inputContainer}
                     labelStyle={styles.label}
                     inputStyle={styles.input}
-                    // action='/login'
                     submitContainerStyle={styles.submitContainer}
                 />
             </div>
@@ -57,7 +60,7 @@ class FormComponent extends React.Component {
 const styles = {
     container: {
         borderRadius: 2,
-        boxShadow: `4px 4px 11px 0px rgba(219,216,216,.5)`,
+        boxShadow: `4px 4px 11px 0px ${colors.loginFormContainerShadow}`,
         padding: 50,
         maxWidth: 650,
     },
@@ -76,7 +79,7 @@ const styles = {
         textTransform: 'capitalize',
         boxSizing: 'border-box',
         paddingRight: 30,
-        fontSize: '20px',
+        fontSize: 20,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
@@ -85,7 +88,7 @@ const styles = {
     input: {
         display: 'inline-block',
         width: '50%',
-        border: '1px solid #C1C1C1',
+        border: `1px solid ${colors.formInputBorder}`,
         boxSizing: 'border-box',
         padding: 10,
         resize: 'vertical',

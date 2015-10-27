@@ -6,11 +6,11 @@ class BeforeAfterWrapper extends React.Component {
     render () {
 
         // grab the wrapper element styles
-        const {before, after, style, ...unused_props} = this.props
+        const {before, after, style, ...unusedProps} = this.props
 
         // render the component
         return (
-            <span style={style} {...unused_props}>
+            <span style={style} {...unusedProps}>
                 <span style={before} />
                 {this.props.children}
                 <span style={after} />

@@ -5,6 +5,7 @@ import fetch from 'isomorphic-fetch'
 import cookies from 'browser-cookies'
 // local imports
 import UserEntry from './UserEntry'
+import colors from 'colors'
 
 
 // the data requirements of the component
@@ -86,9 +87,6 @@ class Login extends React.Component {
 
     // render the component
     render() {
-        // pull out the used properties
-        const {...unused_props} = this.props
-
         // if we have retrieved the users show them otherwise show a spinner
         const body = this.state.users ? this.userList : this.loadingSpinner
 
@@ -105,13 +103,13 @@ class Login extends React.Component {
 const styles = {
     container: {
         display: 'flex',
-        backgroundColor: 'white',
+        backgroundColor: colors.white,
         height: '100%',
         padding: '100px 80px 80px 80px',
         boxSizing: 'border-box',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        fontSize: '64px',
+        fontSize: 64,
         flexDirection: 'column',
     },
     spinner: {
@@ -122,7 +120,7 @@ const styles = {
         textAlign: 'center',
     },
     tableHeaderElement: {
-        fontSize: '32px',
+        fontSize: 32,
         paddingBottom: 20,
         textTransform: 'capitalize',
     },

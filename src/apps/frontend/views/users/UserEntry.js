@@ -35,7 +35,7 @@ class UserEntry extends React.Component {
 
 const styles = {
     container: {
-        fontSize: '24px',
+        fontSize: 24,
         height: 35,
         alignItems: 'center',
     },

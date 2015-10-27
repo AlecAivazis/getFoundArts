@@ -3,6 +3,7 @@ import React from 'react'
 // local imports
 import SplashCategory from './splashCategory'
 import SignUpForm from './signupForm'
+import colors from 'colors'
 
 
 
@@ -26,10 +27,10 @@ class Splash extends React.Component {
                 'Logo Design',
             ],
             icons: [
-                {name: 'vinyl', color: '#475F6F'},
-                {name: 'logo', color: '#418CDB', fontSize: '12vw'},
-                {name: 'shirt', color: '#54CF3C'},
-                {name: 'camera', color: '#e72154'},
+                {name: 'vinyl', color: colors.vinyl},
+                {name: 'logo', color: colors.logo, fontSize: '12vw'},
+                {name: 'shirt', color: colors.shirt},
+                {name: 'camera', color: colors.camera},
             ],
         },
         {
@@ -42,10 +43,10 @@ class Splash extends React.Component {
                 'Bring more viewers to your website and social platforms with additional visual content and marketing opportunities',
             ],
             icons: [
-                {name: 'vimeo', color: '#4B9FE7'},
-                {name: 'itunes', color: '#e72154', fontSize: '8.5vw'},
-                {name: 'soundcloud', color: '#F35D07'},
-                {name: 'spotify', color: '#56D34D', fontSize: '8.5vw'},
+                {name: 'vimeo', color: colors.vimeo},
+                {name: 'itunes', color: colors.itunes, fontSize: '8.5vw'},
+                {name: 'soundcloud', color: colors.soundcloud},
+                {name: 'spotify', color: colors.spotify, fontSize: '8.5vw'},
             ],
         },
         {
@@ -56,7 +57,7 @@ class Splash extends React.Component {
                 'Focus on your music while like-minded creatives handle aspects of your visual representation.',
             ],
             icons: [
-                {name: 'growth', color: '#4B63B0', fontSize: '12vw'},
+                {name: 'growth', color: colors.growth, fontSize: '12vw'},
             ],
         },
     ]
@@ -91,14 +92,20 @@ class Splash extends React.Component {
     // render the component
     render() {
         // pull out the used properties
-        const {...unusedProps} = this.props
+        const {style, ...unusedProps} = this.props
         // the list of categories
         const {categories} = this
         // the style of the form toggle button
         const formToggleStyle = !this.state.formIsVisible ? styles.formToggleOpen : {}
         // render the component
         return (
-            <section style={styles.container} {...unusedProps}>
+            <section
+                style={{
+                    ...styles.container,
+                    ...style,
+                }}
+                {...unusedProps}
+            >
                 <header style={styles.header}>
                     <img
                         src='/static/images/logo-charcoal.png'
@@ -116,58 +123,66 @@ class Splash extends React.Component {
                     }
                     // render a category component
                     return (
-                        <SplashCategory title={category.title}
-                                        subtitle={category.subtitle}
-                                        bullets={category.bullets}
-                                        icons={category.icons}
-                                        index={categoryIndex}
-                                        orientation={orientation}
-                                        key={index}
-                                        style={categoryStyle}/>
+                        <SplashCategory
+                            title={category.title}
+                            subtitle={category.subtitle}
+                            bullets={category.bullets}
+                            icons={category.icons}
+                            index={categoryIndex}
+                            orientation={orientation}
+                            key={index}
+                            style={categoryStyle}
+                        />
                     )
                 })}
                 <section
                     onClick={this.showForm}
-                    style={{...styles.formContainer, ...formToggleStyle}}
+                    style={{
+                        ...styles.formContainer,
+                        ...formToggleStyle,
+                    }}
                 >
                     <div>
                         Get Started
                     </div>
-                    { this.state.formIsVisible ? <SignUpForm ref='form' /> : '' }
+                    {this.state.formIsVisible && <SignUpForm ref='form' />}
                 </section>
             </section>
         )
     }
 }
 
+
 const styles = {
     header: {
         height: 400,
-        marginTop: 50,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         flexShrink: 0,
-        background: 'radial-gradient(ellipse at center, #fcfcfc 0%,#A8ACB2 100%) #fcfcfc',
+        background: `radial-gradient(ellipse at center, ${colors.gradientCenter} 0%,${colors.gradientEdge} 100%) ${colors.gradientCenter}`,
     },
+
     headerImage: {
         width: '60%',
         maxWidth: 600,
     },
+
     categoryBorder: {
-        borderBottom: '1px solid #C8C7C7',
+        borderBottom: `1px solid ${colors.categoryBorder}`,
     },
+
     formToggleOpen: {
         cursor: 'pointer',
     },
+
     formContainer: {
-        backgroundColor: '#E8EDF3',
-        borderTop: '1px solid #CBD0D7',
+        backgroundColor: colors.formContainerBackground,
+        borderTop: `1px solid ${colors.formContainerBorder}`,
         textAlign: 'center',
-        fontSize: '24px',
-        color: '#898989',
+        fontSize: 24,
+        color: colors.formContainerText,
         padding: 50,
-        marginBottom: 100,
     },
 }
 
