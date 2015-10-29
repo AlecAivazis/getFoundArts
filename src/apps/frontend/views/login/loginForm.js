@@ -93,6 +93,7 @@ const styles = {
         padding: 10,
         resize: 'vertical',
         minHeight: 55,
+        fontSize: 'medium',
     },
     header: {
         margin: '0 0 50px 0',

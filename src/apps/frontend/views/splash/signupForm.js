@@ -106,6 +106,7 @@ const styles = {
         padding: 10,
         resize: 'vertical',
         minHeight: 55,
+        fontSize: 'medium',
     },
 }
 
