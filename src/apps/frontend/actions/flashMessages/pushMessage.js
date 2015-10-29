@@ -1,5 +1,5 @@
 // local imports
-import FLASH_SUCCESS from 'components/flash/constants'
+import {FLASH_SUCCESS} from 'components/flash/constants'
 
 export const PUSH_MESSAGE = 'PUSH_MESSAGE'
 

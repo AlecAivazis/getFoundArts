@@ -4,3 +4,4 @@
 
 export const FLASH_SUCCESS = 'success'
 export const FLASH_ERROR = 'error'
+export const FLASH_ALERT = 'alert'

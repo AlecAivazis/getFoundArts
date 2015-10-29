@@ -1,13 +1,14 @@
 // third party imports
 import React from 'react'
 // local imports
+import colors from 'colors'
 import {
     FLASH_SUCCESS,
     FLASH_ERROR,
+    FLASH_ALERT,
 } from './constants'
 
 class FlashMessage extends React.Component {
-
 
     render() {
         // grab the used props
@@ -29,18 +30,29 @@ class FlashMessage extends React.Component {
 }
 
 const baseMessageStyle = {
-    padding: 10,
+    padding: 15,
+    fontWeight: 'bold',
+    borderRadius: 5,
+    marginBottom: 10,
+    boxShadow: `4px 4px 11px 0px ${colors.flashMessageContainerShadow}`,
 }
 
 const styles = {
     baseMessageStyle,
     [FLASH_SUCCESS]: {
         ...baseMessageStyle,
-        backgroundColor: 'green',
+        backgroundColor: colors.flashMessageSuccesBackground,
+        color: colors.flashMessageSuccesFontColor,
     },
     [FLASH_ERROR]: {
         ...baseMessageStyle,
-        backgroundColor: 'red',
+        backgroundColor: colors.flashMessageErrorBackground,
+        color: colors.flashMessageErrorFontColor,
+    },
+    [FLASH_ALERT]: {
+        ...baseMessageStyle,
+        backgroundColor: colors.flashMessageAlertBackground,
+        color: colors.flashMessageAlertFontColor,
     },
 }
 

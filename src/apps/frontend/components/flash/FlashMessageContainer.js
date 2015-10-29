@@ -94,6 +94,7 @@ const styles = {
         top: 20,
         right: 20,
         width: 300,
+        zIndex: 99,
     },
 }
 

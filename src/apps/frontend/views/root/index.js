@@ -15,7 +15,7 @@ class RootComponent extends React.Component {
         // render the component
         return (
             <div style={styles.container} {...unusedProps}>
-                <FlashMessageContainer/>
+                <FlashMessageContainer duration={7000} />
                 <Header />
                 <main style={styles.content}>
                     {children}
