@@ -3,6 +3,7 @@ import React from 'react'
 import Spinner from 'react-spinkit'
 import fetch from 'isomorphic-fetch'
 import cookies from 'browser-cookies'
+import Helmet from 'react-helmet'
 // local imports
 import UserEntry from './UserEntry'
 import colors from 'colors'
@@ -93,6 +94,7 @@ class Login extends React.Component {
         // render the list of users
         return (
             <div style={styles.container}>
+                <Helmet title='Member List | Get Found Arts' />
                 {body}
             </div>
         )

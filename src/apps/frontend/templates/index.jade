@@ -6,6 +6,7 @@ html
         script(src="https://use.fonticons.com/0a535eb1.js")
         script(type="application/javascript").
             window.__INITIAL_STATE__ = !{initialState};
+        title #{head.title}
     body
         #app !{renderedComponent}
         script(async, src="/static/client.js", type="text/javascript")

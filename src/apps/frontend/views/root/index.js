@@ -1,5 +1,6 @@
 // third party imports
 import React from 'react'
+import Helmet from 'react-helmet'
 // local imports
 import Header from './header'
 import Footer from './footer'
@@ -15,6 +16,7 @@ class RootComponent extends React.Component {
         // render the component
         return (
             <div style={styles.container} {...unusedProps}>
+                <Helmet title='Get Found Arts' />
                 <FlashMessageContainer duration={7000} />
                 <Header />
                 <main style={styles.content}>

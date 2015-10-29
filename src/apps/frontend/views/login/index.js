@@ -1,5 +1,6 @@
 // third party imports
 import React from 'react'
+import Helmet from 'react-helmet'
 // local imports
 import colors from 'colors'
 import LoginForm from './loginForm'
@@ -27,6 +28,7 @@ class Login extends React.Component {
         // render the root view
         return (
             <div style={{...styles.container, ...style}}>
+                <Helmet title='Login | Get Found Arts' />
                 <LoginForm style={styles.loginForm}/>
             </div>
         )

@@ -4,6 +4,7 @@ import React from 'react'
 import {renderToString} from 'react-dom/server'
 import {RoutingContext, match} from 'react-router'
 import {Provider} from 'react-redux'
+import Helmet from 'react-helmet'
 // local imports
 import {templatesDir} from 'config/projectPaths'
 import routes from './routes'
@@ -40,11 +41,16 @@ app.all('*', (req, res) => {
                     <RoutingContext {...renderProps} />
                 </Provider>
             )
+            // rewind the header to get the most up to date version
+            const head = Helmet.rewind() || {
+                title: 'Get Found Arts',
+            }
 
             // render the jade template with the component mounted
             res.render('index.jade', {
                 initialState,
                 renderedComponent: renderToString(initialComponent),
+                head,
             })
         // otherwise the location was not found
         } else {
