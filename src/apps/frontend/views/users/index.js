@@ -105,7 +105,6 @@ const styles = {
         display: 'flex',
         backgroundColor: colors.white,
         height: '100%',
-        padding: '100px 80px 80px 80px',
         boxSizing: 'border-box',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -118,6 +117,8 @@ const styles = {
     table: {
         width: '100%',
         textAlign: 'center',
+        marginTop: 30,
+        padding: '100px 80px 80px 80px',
     },
     tableHeaderElement: {
         fontSize: 32,

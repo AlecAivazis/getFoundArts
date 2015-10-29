@@ -33,6 +33,7 @@ const styles = {
         color: colors.grey2,
         backgroundColor: colors.grey3,
         padding: 30,
+        display: 'flex',
     },
 
 
