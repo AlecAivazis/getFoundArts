@@ -31,7 +31,6 @@ class FlashMessage extends React.Component {
 
 const baseMessageStyle = {
     padding: 15,
-    fontWeight: 'bold',
     borderRadius: 5,
     marginBottom: 10,
     boxShadow: `4px 4px 11px 0px ${colors.flashMessageContainerShadow}`,
