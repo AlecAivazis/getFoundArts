@@ -1,5 +1,5 @@
 // local imports
-import {POP_MESSAGE, PUSH_MESSAGE} from '../actions'
+import {POP_MESSAGE, PUSH_MESSAGE} from '../actions/flashMessages'
 
 
 /**

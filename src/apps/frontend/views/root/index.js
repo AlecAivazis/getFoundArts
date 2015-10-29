@@ -3,6 +3,7 @@ import React from 'react'
 // local imports
 import Header from './header'
 import Footer from './footer'
+import FlashMessageContainer from 'components/flash/FlashMessageContainer'
 
 
 class RootComponent extends React.Component {
@@ -14,6 +15,7 @@ class RootComponent extends React.Component {
         // render the component
         return (
             <div style={styles.container} {...unusedProps}>
+                <FlashMessageContainer/>
                 <Header />
                 <main style={styles.content}>
                     {children}

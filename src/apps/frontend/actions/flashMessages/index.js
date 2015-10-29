@@ -1,5 +1,5 @@
-import {PUSH_MESSAGE}, pushMessage from './pushMessage'
-import {POP_MESSAGE}, popMessage from './popMessage'
+import pushMessage, {PUSH_MESSAGE} from './pushMessage'
+import popMessage, {POP_MESSAGE} from './popMessage'
 
 export default {
     pushMessage,

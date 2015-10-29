@@ -10,23 +10,29 @@ import quickConnect from 'core/util/quickConnect'
 class FlashMessageContainer extends React.Component {
     render () {
         // grab the usud props
-        const {flashMessages, ...unusedProps} = this.props
+        const {style, flashMessages, ...unusedProps} = this.props
 
         return (
-            <UList {...unusedProps}>
-                {flashMessages.map((message) => <FlagMessage {...message} />)}
+            <UList
+                style={{
+                    ...styles.container,
+                    ...style,
+                }}
+                {...unusedProps}
+            >
+                {flashMessages.map((message) => <FlashMessage {...message} />)}
             </UList>
         )
     }
 }
 
-const style = {
+const styles = {
     container: {
         position: 'fixed',
         top: 20,
         right: 20,
         width: 300,
-    }
+    },
 }
 
 export default FlashMessageContainer
