@@ -15,3 +15,6 @@
     * load fixture (run script in fixture folder with same name)
     * add user/superuser
     * add change password
+* these things (and possibly more that i cant think of right now) should trigger flash messages:
+    - login form submits unauthorized login info
+    - signup form submits invalid fields

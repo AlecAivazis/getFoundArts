@@ -11,7 +11,7 @@ class Timer extends React.Component {
     static propTypes = {
         interval: React.PropTypes.number,
         tick: React.PropTypes.func.isRequired,
-        type: React.PropTypes.string,
+        type: React.PropTypes.oneOf(['single', 'repeated']),
     }
 
     componentDidMount() {
@@ -41,6 +41,7 @@ class Timer extends React.Component {
             clearTimeout(this.timeout)
         }
     }
+
 
     render() {
         return <div {...this.props} />
