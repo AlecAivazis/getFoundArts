@@ -11,3 +11,7 @@
 * do the equivalent of transitionTo for react-router instead of onEnter
 * persist auth info inside of cookie
 * figure out why there is a session id cookie being stored
+* Add tasks to gulp:
+    * load fixture (run script in fixture folder with same name)
+    * add user/superuser
+    * add change password
