@@ -73,17 +73,6 @@ app.post('/login', jsonParser, (req, res) => {
 })
 
 
-// make sure we store the query parameter to handle the redirect
-// app.get('/login', (req, res, next) => {
-//     // grab the query parameters
-//     const {redirectTo} = req.query
-//     // store the redirect parameter in the session
-//     req.session.redirectTo = redirectTo
-//     // we are done here
-//     next()
-// })
-
-
 // export the application
 export default app
 

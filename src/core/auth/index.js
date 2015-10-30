@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 // local imports
 import {secretKey} from 'config/settings'
 import User from './models/User' // TODO: bring this to global configuration
+import endpoints from './endpoints'
 
 
 /**
@@ -134,4 +135,5 @@ export default {
     requireAuthentication,
     profileForUser,
     userByToken,
+    endpoints,
 }
