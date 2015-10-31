@@ -15,7 +15,7 @@ setgid homepage
 
 # set the environment variables
 env HOME=/home/homepage
-env PROJECT_DIRECTORY=${HOME}/repository
+env PROJECT_DIRECTORY=/home/homepage/repository
 env NODE_ENV=production
 
 # navigate to the home directory and start the forever script
