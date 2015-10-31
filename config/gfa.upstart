@@ -22,7 +22,6 @@ env NODE_ENV=production
 script
     cd ${PROJECT_DIRECTORY}
     exec forever start \
-                -w \
                 -a \
                 -l ../logs/forever.log \
                 -o ../logs/forever.out.log \
