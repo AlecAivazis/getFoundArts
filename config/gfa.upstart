@@ -21,14 +21,7 @@ env NODE_ENV=production
 # navigate to the home directory and start the server in a forever daemon
 script
     cd ${PROJECT_DIRECTORY}
-    exec forever \
-            -a \
-            -w \
-            --watchDirectory build \
-            -l ../logs/forever.log \
-            -o ../logs/stdout.log \
-            -e ../logs/stderr.log \
-            start build/server.js
+    exec forever -a -w --watchDirectory build -l ../logs/forever.log -o ../logs/stdout.log -e ../logs/stderr.log start build/server.js
 end script
 
 
