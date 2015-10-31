@@ -1,27 +1,34 @@
 # the start up script for the getFoundArts application server
 
-description "getFoundArts daemon for Django project"
+description "getFoundArts daemon for homepage"
 
 start on (local-filesystems and net-device-up IFACE=eth0)
 stop on runlevel [!12345]
 
 # If the process quits unexpectadly trigger a respawn
 respawn
+respawn limit 5 30
 
 # set the user and group of the process to the user matching the project
-setuid getFoundArts
-setgid getFoundArts
+setuid homepage
+setgid homepage
 
-# navigate to the directory with the project
-chdir /home/projects/getFoundArts
+# set the environment variables
+env HOME=/home/homepage
+env PROJECT_DIRECTORY=${HOME}/repository
+env NODE_ENV=production
 
-# start the server
-exec gunicorn \
-    --name=getFoundArts \
-    --pythonpath=repository \
-    --bind=127.0.0.1:9000 \
-    conf.wsgi
-    #--config /etc/gunicorn.d/gunicorn.py \
+# navigate to the home directory and start the forever script
+script
+    cd ${PROJECT_DIRECTORY}
+    exec forever start \
+                -w \
+                -a \
+                -l ../logs/forever.log \
+                -o ../logs/forever.out.log \
+                -e ../logs/forever.err.log
+                build/server.js
+end script
 
 
 # end of file
