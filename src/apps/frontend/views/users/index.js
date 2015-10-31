@@ -4,9 +4,15 @@ import Spinner from 'react-spinkit'
 import fetch from 'isomorphic-fetch'
 import cookies from 'browser-cookies'
 import Helmet from 'react-helmet'
+import {connect} from 'react-redux'
+import reduxAlerts from 'redux-alerts'
 // local imports
 import UserEntry from './UserEntry'
 import colors from 'colors'
+
+// grab the used redux actions/creators
+const {pushAlert} = reduxAlerts.actions
+const {alert_error} = reduxAlerts.constants
 
 
 // the data requirements of the component
@@ -20,7 +26,7 @@ const query = `
     }
 `
 
-
+@connect()
 class Login extends React.Component {
 
     static propTypes = {}
@@ -48,7 +54,11 @@ class Login extends React.Component {
         .then(({data, error}) => {
             // if there was an error
             if (error) {
-                console.log(`there was an error: ${error}`)
+                // create an error alert message
+                this.props.dispatch(pushAlert({
+                    body: "Thanks for signing up! We'll be in contact soon.",
+                    status: alert_error,
+                }))
             }
             if (data) {
                 this.setState({

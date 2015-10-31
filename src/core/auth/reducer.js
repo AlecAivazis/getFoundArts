@@ -5,7 +5,6 @@ import {SET_AUTH_INFO} from './actions/login'
  * Reducer for managing user authentication information
  */
 export default (state = {}, action) => {
-    console.log(action)
     // grab the action type
     const {type, payload} = action
     // if we are setting the user info

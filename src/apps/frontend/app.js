@@ -21,7 +21,7 @@ app.set('views', templatesDir)
 
 
 // any url that hits this app
-app.all('*', (req, res, next) => {
+app.all('*', (req, res) => {
     // figure out the appropriate route
     match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
         // if there was an error

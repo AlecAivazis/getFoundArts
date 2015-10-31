@@ -39,7 +39,6 @@ export default (
             onEnter={(nextState, replaceState) => {
                 // if the user does not have the right access role
                 if (!checkRoles(['admin', 'artist'])) {
-                    console.log('you do not have the permission to view that page')
                     // redirect them to the login page
                     replaceState(null, `/login?redirectTo=${nextState.location.pathname}`)
                 }

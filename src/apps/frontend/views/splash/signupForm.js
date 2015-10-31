@@ -40,8 +40,7 @@ class FormComponent extends React.Component {
             // use the response as text
             return response.text()
         // handle the response
-        }).then((text) => {
-            console.log(text)
+        }).then(() => {
             // hide the form
             this.props.hideForm()
             // add the success message to the store
