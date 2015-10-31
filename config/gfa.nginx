@@ -1,4 +1,4 @@
-upstream getFoundArts_upstream {
+upstream getFoundArts_server {
     server 127.0.0.1:8000;
     keepalive 64;
 }
