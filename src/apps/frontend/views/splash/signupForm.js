@@ -6,8 +6,7 @@ import cookies from 'browser-cookies'
 import {UniversalFormComponent as MoonluxForm} from 'universal-forms'
 import SignUpForm from 'apps/auth/forms/signupForm'
 import colors from 'colors'
-import addFlashMessage from 'actions/flashMessages/pushMessage'
-
+import {actions as alertActions} from 'redux-alerts'
 
 class FormComponent extends React.Component {
 
@@ -46,7 +45,7 @@ class FormComponent extends React.Component {
             // hide the form
             this.props.hideForm()
             // add the success message to the store
-            window.moonluxStore.dispatch(addFlashMessage({
+            window.moonluxStore.dispatch(alertActions.pushAlert({
                 body: "Thanks for signing up! We'll be in contact soon.",
             }))
         })

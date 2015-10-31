@@ -27,11 +27,4 @@ export default {
     formInputBorder: '#C1C1C1',
     splashCategoryText: '#212428',
     loginFormContainerShadow: 'rgba(219,216,216,.5)',
-    flashMessageContainerShadow: '#ACA4A2',
-    flashMessageSuccesBackground: '#DDF0D4',
-    flashMessageSuccesFontColor: '#3C5F2D',
-    flashMessageErrorBackground: '#C6554B',
-    flashMessageErrorFontColor: '#5B2722',
-    flashMessageAlertBackground: '#ACCFE8',
-    flashMessageAlertFontColor: '#405877',
 }
