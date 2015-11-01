@@ -37,17 +37,13 @@ app.all('*', (req, res) => {
             const store = createStore()
             // initial application state
             const initialState = JSON.stringify(store.getState())
-            // rewind the header to get the most up to date version
-            const head = Helmet.rewind() || {
-                title: 'Get Found Arts',
-            }
-            // initial component to render
-            let initialComponent
+            // rendered app
+            let renderedComponent
 
             // if the location was found
             if (renderProps) {
                 // render the routed application
-                initialComponent = (
+                renderedComponent = renderToString(
                     <Provider store={store}>
                         <RoutingContext {...renderProps} />
                     </Provider>
@@ -57,7 +53,7 @@ app.all('*', (req, res) => {
                 // set response status to 404
                 res.status(404)
                 // render the 404 page
-                initialComponent = (
+                renderedComponent = renderToString(
                     <Provider store={store}>
                         <Root>
                             <NotFound />
@@ -66,10 +62,17 @@ app.all('*', (req, res) => {
                 )
             }
 
+            // rewind the header to get the most up to date version
+            // apparently this must come *after* the call to `renderToString`.
+            // see here: https://github.com/nfl/react-helmet#server-usage
+            const head = Helmet.rewind() || {
+                title: 'Get Found Arts',
+            }
+
             // render the jade template with the component mounted
             res.render('index.jade', {
                 initialState,
-                renderedComponent: renderToString(initialComponent),
+                renderedComponent,
                 head,
             })
         }
