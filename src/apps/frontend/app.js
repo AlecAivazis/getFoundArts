@@ -9,6 +9,8 @@ import Helmet from 'react-helmet'
 import {templatesDir} from 'config/projectPaths'
 import routes from './routes'
 import {createStore} from './store'
+import Root from 'views/root'
+import NotFound from 'views/notFound'
 
 
 // create the express app
@@ -31,17 +33,38 @@ app.all('*', (req, res) => {
         } else if (redirectLocation) {
             res.redirect(302, redirectLocation.pathname + redirectLocation.search)
         // if the location was found and is not a redirect
-        } else if (renderProps) {
+        } else {
             const store = createStore()
             // initial application state
             const initialState = JSON.stringify(store.getState())
-            // initial component to render
-            const initialComponent = (
-                <Provider store={store}>
-                    <RoutingContext {...renderProps} />
-                </Provider>
-            )
+            // rendered app
+            let renderedComponent
+
+            // if the location was found
+            if (renderProps) {
+                // render the routed application
+                renderedComponent = renderToString(
+                    <Provider store={store}>
+                        <RoutingContext {...renderProps} />
+                    </Provider>
+                )
+            // otherwise the location was not found
+            } else {
+                // set response status to 404
+                res.status(404)
+                // render the 404 page
+                renderedComponent = renderToString(
+                    <Provider store={store}>
+                        <Root>
+                            <NotFound />
+                        </Root>
+                    </Provider>
+                )
+            }
+
             // rewind the header to get the most up to date version
+            // apparently this must come *after* the call to `renderToString`.
+            // see here: https://github.com/nfl/react-helmet#server-usage
             const head = Helmet.rewind() || {
                 title: 'Get Found Arts',
             }
@@ -49,12 +72,9 @@ app.all('*', (req, res) => {
             // render the jade template with the component mounted
             res.render('index.jade', {
                 initialState,
-                renderedComponent: renderToString(initialComponent),
+                renderedComponent,
                 head,
             })
-        // otherwise the location was not found
-        } else {
-            res.status(404).send('Not found')
         }
     })
 })

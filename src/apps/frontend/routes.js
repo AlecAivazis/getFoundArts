@@ -2,10 +2,11 @@
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
 // local imports
-import RootComponent from './views/root'
-import SplashPage from './views/splash'
-import Login from './views/login'
-import Users from './views/users'
+import RootComponent from 'views/root'
+import SplashPage from 'views/splash'
+import Login from 'views/login'
+import Users from 'views/users'
+import NotFound from 'views/notFound'
 import {checkRoles} from 'core/auth/client'
 
 // import loginAction from 'core/auth/actions/login'
@@ -44,5 +45,6 @@ export default (
                 }
             }}
         />
+    <Route path='*' component={NotFound} />
     </Route>
 )
