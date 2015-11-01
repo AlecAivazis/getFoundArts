@@ -9,6 +9,8 @@ import Helmet from 'react-helmet'
 import {templatesDir} from 'config/projectPaths'
 import routes from './routes'
 import {createStore} from './store'
+import Root from 'views/root'
+import NotFound from 'views/notFound'
 
 
 // create the express app
@@ -31,19 +33,37 @@ app.all('*', (req, res) => {
         } else if (redirectLocation) {
             res.redirect(302, redirectLocation.pathname + redirectLocation.search)
         // if the location was found and is not a redirect
-        } else if (renderProps) {
+        } else {
             const store = createStore()
             // initial application state
             const initialState = JSON.stringify(store.getState())
-            // initial component to render
-            const initialComponent = (
-                <Provider store={store}>
-                    <RoutingContext {...renderProps} />
-                </Provider>
-            )
             // rewind the header to get the most up to date version
             const head = Helmet.rewind() || {
                 title: 'Get Found Arts',
+            }
+            // initial component to render
+            let initialComponent
+
+            // if the location was found
+            if (renderProps) {
+                // render the routed application
+                initialComponent = (
+                    <Provider store={store}>
+                        <RoutingContext {...renderProps} />
+                    </Provider>
+                )
+            // otherwise the location was not found
+            } else {
+                // set response status to 404
+                res.status(404)
+                // render the 404 page
+                initialComponent = (
+                    <Provider store={store}>
+                        <Root>
+                            <NotFound />
+                        </Root>
+                    </Provider>
+                )
             }
 
             // render the jade template with the component mounted
@@ -52,9 +72,6 @@ app.all('*', (req, res) => {
                 renderedComponent: renderToString(initialComponent),
                 head,
             })
-        // otherwise the location was not found
-        } else {
-            res.status(404).send('Not found')
         }
     })
 })
